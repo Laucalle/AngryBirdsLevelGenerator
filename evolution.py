@@ -4,6 +4,7 @@ import random
 import xml_helpers as xml
 import os
 
+
 class BlockGen:
     def __init__(self, type, pos, r):
         self.type = type
@@ -22,7 +23,9 @@ class LevelIndv:
     def calculateFitness(self, avg_vel):
         # This doesn't take into account pigs, since they are added later
         self.fitness = 1.0 / 3 * (
-                    sum(avg_vel) / len(self.blocks) + (math.sqrt(len(self.blocks) - cte.B) / (cte.MaxB - cte.B)))
+                sum(avg_vel) / len(self.blocks) +
+                (math.sqrt((len(self.blocks) - cte.B)*(len(self.blocks) - cte.B)) / (cte.MaxB - cte.B)))
+
 
 def initPopulation(number_of_individuals):
     population = []
@@ -30,9 +33,9 @@ def initPopulation(number_of_individuals):
         n_blocks = random.randint(cte.MinB, cte.MaxB)
         blocks = []
         for n in range(n_blocks):
-            block = BlockGen(type = random.randint(1, len(cte.blocks)),
+            block = BlockGen(type = random.randint(1, len(cte.blocks)-1),
                              pos = (random.uniform(cte.MinX, cte.MaxX), random.uniform(cte.MinB, cte.MaxB)),
-                             r = random.randint(0, len(cte.Rotation)))
+                             r = random.randint(0, len(cte.Rotation)-1))
             blocks.append(block)
         population.append(LevelIndv(blocks))
 
@@ -47,7 +50,7 @@ def initPopulation(number_of_individuals):
 def FitnessPopulation(population, game_path, write_path, read_path):
     # generate all xml
     for i in range(len(population)):
-        xml.writeXML( population[i], os.path.join(write_path,"level-"+str(i)+".xml"))
+        xml.writeXML(population[i], os.path.join(write_path, "level-"+str(i)+".xml"))
 
     # run game
     os.system(game_path)
@@ -58,8 +61,10 @@ def FitnessPopulation(population, game_path, write_path, read_path):
         # assign fitness
         population[i].calculateFitness(averageVelocity)
 
+
 def main():
     initPopulation(10)
+
 
 if __name__ == "__main__":
     main()
