@@ -39,11 +39,6 @@ def initPopulation(number_of_individuals):
             blocks.append(block)
         population.append(LevelIndv(blocks))
 
-    FitnessPopulation(population,
-                      game_path = os.path.join(os.path.dirname(os.getcwd()),'ablinux/ab_linux_build.x86_64'),
-                      write_path = os.path.join(os.path.dirname(os.getcwd()),'ablinux/ab_linux_build_Data/StreamingAssets/Levels'),
-                      read_path = os.path.join(os.path.dirname(os.getcwd()),'ablinux/ab_linux_build_Data/StreamingAssets/Output'))
-
     return population
 
 
@@ -61,10 +56,43 @@ def FitnessPopulation(population, game_path, write_path, read_path):
         # assign fitness
         population[i].calculateFitness(averageVelocity)
 
+def selectionTournament(population,n_tournaments):
+    parents = []
+    for i in range(n_tournaments):
+        candidate_1 = population[random.randint(0,len(population)-1)]
+        candidate_2 = population[random.randint(0,len(population)-1)]
+        parents.append(min(candidate_1, candidate_2, key=lambda x: x.fitness))
+
+        candidate_1 = population[random.randint(0,len(population)-1)]
+        candidate_2 = population[random.randint(0,len(population)-1)]
+        parents.append(min(candidate_1, candidate_2, key=lambda x: x.fitness))
+    return parents
 
 def main():
-    initPopulation(10)
+    population_size = 10
+    number_of_generations = 10
+    number_of_parents = math.floor(0.5*population_size)
 
+    population = initPopulation(population_size)
+
+    FitnessPopulation(population,
+                      game_path=os.path.join(os.path.dirname(os.getcwd()), 'ablinux/ab_linux_build.x86_64'),
+                      write_path=os.path.join(os.path.dirname(os.getcwd()),
+                                              'ablinux/ab_linux_build_Data/StreamingAssets/Levels'),
+                      read_path=os.path.join(os.path.dirname(os.getcwd()),
+                                             'ablinux/ab_linux_build_Data/StreamingAssets/Output'))
+
+    best_individual = min(population, key=lambda x: x.fitness)
+
+    for i in population:
+        print(i.fitness)
+    for generation in range(number_of_generations):
+        # Select parents
+        parents = selectionTournament(population, number_of_parents)
+    # generate children
+    # mutate children
+    # evaluate childres
+    # replace generation
 
 if __name__ == "__main__":
     main()
