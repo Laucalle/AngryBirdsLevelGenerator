@@ -21,11 +21,12 @@ B = 10
 MaxB = 20
 MinB = 5
 
-MaxX = 10
+MaxX = 5
 MinX = absolute_ground
-MaxY = 10
-MinY = -2
-Rotation = ["0","45", "90", "135"]
+MaxY = 1
+MinY = absolute_ground
+#Rotation = ["0","45", "90", "135"]
+Rotation = ["0", "90"]
 
 
 

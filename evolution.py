@@ -3,6 +3,8 @@ import constants as cte
 import random
 import xml_helpers as xml
 import os
+import numpy as np
+import SeparatingAxisTheorem as SAT
 
 
 class BlockGen:
@@ -13,6 +15,21 @@ class BlockGen:
         self.rot = r
         self.mat = 0
 
+    def corners(self):
+        dims = cte.blocks[str(self.type)]
+        sinA = math.sin(math.radians(int(cte.Rotation[self.rot])))
+        cosA = math.cos(math.radians(int(cte.Rotation[self.rot])))
+
+        p_1 = np.array([cosA*dims[0] - sinA*dims[1] + self.x, cosA*dims[1] - sinA*dims[0] + self.y])
+
+        p_2 = np.array([cosA*dims[0] - sinA*(-dims[1]) + self.x, cosA*(-dims[1]) - sinA*dims[0] + self.y])
+
+        p_3 = np.array([cosA*(-dims[0]) - sinA*(-dims[1]) + self.x, cosA*(-dims[1]) - sinA*(-dims[0]) + self.y])
+
+        p_4 = np.array([cosA*(-dims[0]) - sinA*dims[1] + self.x, cosA*dims[1] - sinA*(-dims[0]) + self.y])
+
+        return [p_1,p_2,p_3,p_4]
+
 
 class LevelIndv:
 
@@ -22,22 +39,38 @@ class LevelIndv:
 
     def calculateFitness(self, avg_vel):
         # This doesn't take into account pigs, since they are added later
-        self.fitness = 1.0 / 3 * (
-                sum(avg_vel) / len(self.blocks) +
+        if len(avg_vel)!=0 :
+            self.fitness = 1.0 / 3 * (
+                (sum(avg_vel) /  len(avg_vel) )*(len(self.blocks)/len(avg_vel)) +
                 (math.sqrt((len(self.blocks) - cte.B)*(len(self.blocks) - cte.B)) / (cte.MaxB - cte.B)))
+        else:
+            self.fitness = math.inf
+
+    def hasOverlapingBlocks(self):
+        for i in range(len(self.blocks)):
+            vertices0 = self.blocks[i].corners()
+            for j in range(0,len(self.blocks)):
+                vertices1 = self.blocks[j].corners()
+                if SAT.sat(vertices0, vertices1):
+                    return True
+        return False
 
 
 def initPopulation(number_of_individuals):
     population = []
     for i in range(number_of_individuals):
-        n_blocks = random.randint(cte.MinB, cte.MaxB)
-        blocks = []
-        for n in range(n_blocks):
-            block = BlockGen(type = random.randint(1, len(cte.blocks)-1),
-                             pos = (random.uniform(cte.MinX, cte.MaxX), random.uniform(cte.MinB, cte.MaxB)),
-                             r = random.randint(0, len(cte.Rotation)-1))
-            blocks.append(block)
-        population.append(LevelIndv(blocks))
+        overlap = True
+        while overlap:
+            n_blocks = random.randint(cte.MinB, cte.MaxB)
+            blocks = []
+            for n in range(n_blocks):
+                block = BlockGen(type = random.randint(1, len(cte.blocks)-1),
+                                 pos = (random.uniform(cte.MinX, cte.MaxX), random.uniform(cte.MinY, cte.MaxY)),
+                                 r = random.randint(0, len(cte.Rotation)-1))
+                blocks.append(block)
+            level = LevelIndv(blocks)
+            overlap = level.hasOverlapingBlocks()
+        population.append(level)
 
     return population
 
@@ -112,17 +145,27 @@ def mutationBlockProperties(population, n_mutations):
 
 
 def main():
-    game_path = os.path.join(os.path.dirname(os.getcwd()), 'ablinux/ab_linux_build.x86_64')
+    #game_path = os.path.join(os.path.dirname(os.getcwd()), 'ablinux/ab_linux_build.x86_64')
+    game_path = os.path.join(os.path.dirname(os.getcwd()), 'abwin/win_build.exe')
     write_path = os.path.join(os.path.dirname(os.getcwd()),
-                              'ablinux/ab_linux_build_Data/StreamingAssets/Levels')
+                              'abwin/win_build_Data/StreamingAssets/Levels')
+    #                          'ablinux/ab_linux_build_Data/StreamingAssets/Levels')
     read_path = os.path.join(os.path.dirname(os.getcwd()),
-                             'ablinux/ab_linux_build_Data/StreamingAssets/Output')
-    population_size = 10
-    number_of_generations = 10
+                             'abwin/win_build_Data/StreamingAssets/Output')
+    #                         'ablinux/ab_linux_build_Data/StreamingAssets/Output')
+    population_size = 1
+    number_of_generations = 1
     number_of_parents = math.floor(0.5*population_size)
     number_of_mutations = math.floor((number_of_parents//2)*0.3)
 
     population = initPopulation(population_size)
+
+    print("El primer individuo tiene bloques que se solapan " + str(population[0].hasOverlapingBlocks()))
+
+    for f in os.listdir(write_path):
+        os.remove(os.path.join(write_path,f))
+    for f in os.listdir(read_path):
+        os.remove(os.path.join(read_path,f))
 
     FitnessPopulation(population, game_path=game_path, write_path=write_path, read_path=read_path)
 
@@ -141,8 +184,8 @@ def main():
     best_individual = min(population, key=lambda x: x.fitness)
     print(best_individual.fitness)
 
-    xml.writeXML(best_individual, os.path.join(os.path.dirname(os.getcwd()),
-                              'ablinux2/WeirdAliens-Linux/WeirdAliens_Data/StreamingAssets/Levels/level-0.xml'))
+    #xml.writeXML(best_individual, os.path.join(os.path.dirname(os.getcwd()),
+    #                          'ablinux2/WeirdAliens-Linux/WeirdAliens_Data/StreamingAssets/Levels/level-0.xml'))
 
 if __name__ == "__main__":
     main()
