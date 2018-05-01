@@ -22,11 +22,12 @@ MaxB = 20
 MinB = 5
 
 MaxX = 5
-MinX = absolute_ground
-MaxY = 1
+MinX = 0
+MaxY = 0
 MinY = absolute_ground
-#Rotation = ["0","45", "90", "135"]
-Rotation = ["0", "90"]
+SmallestStep = 0.21
+Rotation = ["0","45", "90", "135"]
+#Rotation = ["0", "90"]
 
 
 
