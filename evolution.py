@@ -30,30 +30,50 @@ class BlockGen:
 
         return [p_1,p_2,p_3,p_4]
 
+    def toString(self):
+        return 'Type: {0} pos: ({1},{2}) rot:{3}'.format(str(self.type), str(self.x), str(self.y), str(self.rot))
 
 class LevelIndv:
 
     def __init__(self, blocks):
         self.blocks = blocks
         self.fitness = float("inf")
+        self.base_fitness = 0
 
     def calculateFitness(self, avg_vel):
         # This doesn't take into account pigs, since they are added later
         if len(avg_vel)!=0 :
-            self.fitness = sum(avg_vel) / len(avg_vel) + (len(self.blocks)-len(avg_vel))
+            self.fitness = sum(avg_vel) / len(avg_vel) + 100*(len(self.blocks)-len(avg_vel))
         else: # how do we penalize when all blocks are broken
             self.fitness =  100*(len(self.blocks)-len(avg_vel))
 
-    def NumberOverlapingBlocks(self):
-        n_overlaping=0
+    def calculatePreFitness(self):
+        self.fitness = 10*self.NumberOverlappingBlocks()
+        min_y = self.DistanceToGround()
+        self.fitness+= (10*min_y) if min_y>0.1 else 0
+
+    def updateBaseFitness(self, new_base):
+        if self.base_fitness != 0: # levels evaluated in game don't need  base
+            raw_fitness= self.fitness - self.base_fitness
+            self.base_fitness = new_base
+            self.fitness = raw_fitness+ self.base_fitness
+
+    def NumberOverlappingBlocks(self):
+        n_overlapping=0
         for i in range(len(self.blocks)):
             vertices0 = self.blocks[i].corners()
             for j in range(i+1,len(self.blocks)):
                 vertices1 = self.blocks[j].corners()
                 if SAT.sat(vertices0, vertices1):
-                    n_overlaping+=1
-        return n_overlaping
+                    n_overlapping+=1
+        return n_overlapping
 
+    def DistanceToGround(self):
+        return abs(cte.absolute_ground-min(self.blocks, key=lambda b: b.y).y)
+
+    def toString(self):
+        strblocks= '\n'.join([b.toString() for b in self.blocks])
+        return '\nFITNESS '+str(self.fitness)+'\n'+strblocks
 
 def initPopulation(number_of_individuals):
     population = []
@@ -151,15 +171,13 @@ def FitnessPopulation(population, game_path, write_path, read_path):
         # assign fitness
         population[i].calculateFitness(averageVelocity)
 
-# NOT WORKING YET
-def FitnessPopulationSkip(population, game_path, write_path, read_path):
+
+def FitnessPopulationSkip(population, game_path, write_path, read_path, max_evaluated):
     # generate all xml
     evaluated= []
     for i in range(len(population)):
         print("Calculating fitness of "+ str(i)+ "/"+str(len(population))+ " with size of " + str(len(population[i].blocks)) +"\r", end="")
-        population[i].fitness = 10*population[i].NumberOverlapingBlocks()
-        min_y = abs(cte.absolute_ground-min(population[i].blocks, key=lambda b: b.y).y)
-        population[i].fitness+= (10*min_y) if min_y>0.1 else 0
+        population[i].calculatePreFitness()
         if population[i].fitness == 0:
             xml.writeXML(population[i], os.path.join(write_path, "level-"+str(len(evaluated))+".xml"))
             evaluated.append(i)
@@ -169,7 +187,7 @@ def FitnessPopulationSkip(population, game_path, write_path, read_path):
         print( "Run Game" )
         os.system(game_path)
 
-    max_evaluated = 0
+
     # parse all xml
     for i in range(len(evaluated)):
         averageVelocity = xml.readXML(os.path.join(read_path,"level-"+str(i)+".xml"))
@@ -180,8 +198,10 @@ def FitnessPopulationSkip(population, game_path, write_path, read_path):
     # to make sure all levels not evaluated in game have worse fitness value
     for i in range(len(population)):
         if i not in evaluated:
+            population[i].base_fitness = max_evaluated
             population[i].fitness+=max_evaluated
 
+    return max_evaluated
 
 def selectionTournament(population,n_tournaments):
     parents = []
@@ -267,7 +287,7 @@ def main():
     # clean directory (input and output)
     cleanInputOutput(write_path,read_path)
 
-    FitnessPopulationSkip(population, game_path=game_path, write_path=write_path, read_path=read_path)
+    max_evaluated = FitnessPopulationSkip(population, game_path=game_path, write_path=write_path, read_path=read_path, max_evaluated=0)
 
     for generation in range(number_of_generations):
         print("Generation " + str(generation) + "/" + str(number_of_generations))
@@ -280,16 +300,24 @@ def main():
 
         cleanInputOutput(write_path, read_path)
         # evaluate children
-        FitnessPopulationSkip(children, game_path=game_path, write_path=write_path, read_path=read_path)
+        max_evaluated = FitnessPopulationSkip(children, game_path=game_path, write_path=write_path, read_path=read_path, max_evaluated=max_evaluated)
         # replace generation
-        population = sorted((children+parents), key=lambda x: x.fitness, reverse = True)[:population_size]
+        for i in population+children:
+            i.updateBaseFitness(max_evaluated)
+        population = sorted((children+parents), key=lambda x: x.fitness, reverse = False)[:population_size]
+
+        f = open(os.path.join(os.path.dirname(os.getcwd()), 'tfgLogs/log.txt'), 'a')
+        f.write("----------------------------------------------Generation " + str(generation) + "/" + str(number_of_generations)+ "----------------------------------------------")
+        for i in population:
+            f.write(i.toString())
+        f.close()
 
     best_individual = min(population, key=lambda x: x.fitness)
 
     print("DONE: best-> "+str(best_individual.fitness)+ " avg -> "+ str( sum(map(lambda x: x.fitness, population))/len(population) ) + " worst -> " + str(max(population, key=lambda x: x.fitness).fitness))
 
     xml.writeXML(best_individual, os.path.join(os.path.dirname(os.getcwd()),
-                              'abwin/level-0.xml'))
+                                               'abwin/level-0.xml'))
 
 if __name__ == "__main__":
     main()
