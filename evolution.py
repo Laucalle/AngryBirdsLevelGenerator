@@ -16,6 +16,7 @@ class BlockGen:
         self.mat = 0
 
     def corners(self):
+        """ computes and returns corners of the figure """ 
         dims = cte.blocks[str(self.type)]
         sinA = math.sin(math.radians(int(cte.Rotation[self.rot])))
         cosA = math.cos(math.radians(int(cte.Rotation[self.rot])))
