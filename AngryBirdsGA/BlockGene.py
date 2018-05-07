@@ -31,7 +31,7 @@ class BlockGene:
             p_4 = np.array([cosA*(-dims[0]) - sinA*dims[1] + self.x, cosA*dims[1] - sinA*(-dims[0]) + self.y])
             self._corners = [p_1,p_2,p_3,p_4]
 
-            return [p_1,p_2,p_3,p_4]
+            return self._corners
 
     def toString(self):
         return 'Type: {0} pos: ({1},{2}) rot:{3}'.format(str(self.type), str(self.x), str(self.y), str(self.rot))

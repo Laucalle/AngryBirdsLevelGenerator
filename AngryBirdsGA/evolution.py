@@ -3,53 +3,10 @@ import random
 import os
 from AngryBirdsGA import *
 from AngryBirdsGA.BlockGene import BlockGene
+from AngryBirdsGA.LevelIndividual import LevelIndividual
 import AngryBirdsGA.SeparatingAxisTheorem as SAT
 import AngryBirdsGA.XMLHelpers as xml
 import numpy as np
-
-class LevelIndividual:
-
-    def __init__(self, blocks):
-        self.blocks = blocks
-        self.fitness = float("inf")
-        self.base_fitness = 0
-
-    def calculateFitness(self, avg_vel):
-        # This doesn't take into account pigs, since they are added later
-        if len(avg_vel)!=0 :
-            self.fitness = sum(avg_vel) / len(avg_vel) + 100*(len(self.blocks)-len(avg_vel))
-        else: # how do we penalize when all blocks are broken
-            self.fitness =  100*(len(self.blocks)-len(avg_vel))
-
-    def calculatePreFitness(self):
-        self.fitness = 10*self.numberOverlappingBlocks()
-        min_y = self.distanceToGround()
-        self.fitness+= (10*min_y) if min_y>0.1 else 0
-
-    def updateBaseFitness(self, new_base):
-        if self.base_fitness > 0: # levels evaluated in game don't need  base
-            raw_fitness= self.fitness - self.base_fitness
-            self.base_fitness = new_base
-            self.fitness = raw_fitness+ new_base
-
-    def numberOverlappingBlocks(self):
-        n_overlapping=0
-        for i in range(len(self.blocks)):
-            vertices0 = self.blocks[i].corners()
-            for j in range(i+1,len(self.blocks)):
-                vertices1 = self.blocks[j].corners()
-                if SAT.sat(vertices0, vertices1):
-                    n_overlapping+=1
-        return n_overlapping
-
-    def distanceToGround(self):
-        return abs(ABSOLUTE_GROUND - min(self.blocks, key=lambda b: b.y).y)
-
-    def toString(self):
-        #strblocks= '\n'.join([b.toString() for b in self.blocks])
-        assert self.fitness > 0, "Fitness value is wrong: %r" % self.fitness
-        return '\nFITNESS '+str(self.fitness)+'( base '+str(self.base_fitness)+')\n'#+strblocks
-
 
 def initPopulation(number_of_individuals):
     population = []
@@ -293,7 +250,7 @@ def main():
             sum(map(lambda x: x.fitness, population)) / len(population)) + " worst -> " + str(
             max(population, key=lambda x: x.fitness).fitness))
 
-        f = open(os.path.join(os.path.dirname(os.getcwd()), 'tfgLogs/log.txt'), 'a')
+        f = open(os.path.join(os.path.dirname(project_root), 'tfgLogs/log.txt'), 'a')
         f.write("----------------------------------------------Generation " + str(generation) + "/" + str(number_of_generations)+ "----------------------------------------------")
         for i in population:
             f.write(i.toString())
@@ -303,7 +260,7 @@ def main():
 
     print("DONE: best-> "+str(best_individual.fitness)+ " avg -> "+ str( sum(map(lambda x: x.fitness, population))/len(population) ) + " worst -> " + str(max(population, key=lambda x: x.fitness).fitness))
 
-    xml.writeXML(best_individual, os.path.join(os.path.dirname(os.getcwd()),
+    xml.writeXML(best_individual, os.path.join(os.path.dirname(project_root),
                                                'abwin/level-0.xml'))
 
 if __name__ == "__main__":
