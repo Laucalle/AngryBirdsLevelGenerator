@@ -53,10 +53,10 @@ class LevelIndv:
         self.fitness+= (10*min_y) if min_y>0.1 else 0
 
     def updateBaseFitness(self, new_base):
-        if self.base_fitness != 0: # levels evaluated in game don't need  base
+        if self.base_fitness > 0: # levels evaluated in game don't need  base
             raw_fitness= self.fitness - self.base_fitness
             self.base_fitness = new_base
-            self.fitness = raw_fitness+ self.base_fitness
+            self.fitness = raw_fitness+ new_base
 
     def NumberOverlappingBlocks(self):
         n_overlapping=0
@@ -72,8 +72,10 @@ class LevelIndv:
         return abs(cte.absolute_ground-min(self.blocks, key=lambda b: b.y).y)
 
     def toString(self):
-        strblocks= '\n'.join([b.toString() for b in self.blocks])
-        return '\nFITNESS '+str(self.fitness)+'\n'+strblocks
+        #strblocks= '\n'.join([b.toString() for b in self.blocks])
+        assert self.fitness > 0, "Fitness value is wrong: %r" % self.fitness
+        return '\nFITNESS '+str(self.fitness)+'( base '+str(self.base_fitness)+')\n'#+strblocks
+
 
 def initPopulation(number_of_individuals):
     population = []
@@ -88,6 +90,7 @@ def initPopulation(number_of_individuals):
         population.append(LevelIndv(blocks))
 
     return population
+
 
 def initPopulationCheckOverlapping(number_of_individuals):
     population = []
@@ -203,6 +206,7 @@ def FitnessPopulationSkip(population, game_path, write_path, read_path, max_eval
 
     return max_evaluated
 
+
 def selectionTournament(population,n_tournaments):
     parents = []
     for i in range(n_tournaments):
@@ -262,11 +266,10 @@ def mutationBlockProperties(population, n_mutations):
             block.rot = random.randint(0, len(cte.Rotation)-1)
 
 
-def cleanInputOutput(input_path, output_path):
-    for f in os.listdir(input_path):
-        os.remove(os.path.join(input_path,f))
-    for f in os.listdir(output_path):
-        os.remove(os.path.join(output_path,f))
+def cleanDirectory(path):
+    for f in os.listdir(path):
+        os.remove(os.path.join(path,f))
+
 
 def main():
     #game_path = os.path.join(os.path.dirname(os.getcwd()), 'ablinux/ab_linux_build.x86_64')
@@ -277,6 +280,7 @@ def main():
     read_path = os.path.join(os.path.dirname(os.getcwd()),
                              'abwin/win_build_Data/StreamingAssets/Output')
     #                         'ablinux/ab_linux_build_Data/StreamingAssets/Output')
+    log_path = os.path.join(os.path.dirname(os.getcwd()), 'tfgLogs/log.txt')
     population_size = 100
     number_of_generations = 100
     number_of_parents = math.floor(0.5*population_size)
@@ -285,7 +289,10 @@ def main():
     population = initPopulationCheckOverlappingDiscretePos(population_size)
 
     # clean directory (input and output)
-    cleanInputOutput(write_path,read_path)
+    cleanDirectory(write_path)
+    cleanDirectory(read_path)
+    if os.path.isfile(log_path):
+        os.remove(log_path)
 
     max_evaluated = FitnessPopulationSkip(population, game_path=game_path, write_path=write_path, read_path=read_path, max_evaluated=0)
 
@@ -298,7 +305,8 @@ def main():
         # mutate children
         mutationBlockProperties(children,number_of_mutations)
 
-        cleanInputOutput(write_path, read_path)
+        cleanDirectory(write_path)
+        cleanDirectory(read_path)
         # evaluate children
         max_evaluated = FitnessPopulationSkip(children, game_path=game_path, write_path=write_path, read_path=read_path, max_evaluated=max_evaluated)
         # replace generation
