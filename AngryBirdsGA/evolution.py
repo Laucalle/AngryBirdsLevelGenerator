@@ -1,13 +1,13 @@
 import math
 import constants as cte
 import random
-import xml_helpers as xml
+import XmlHelpers as xml
 import os
 import numpy as np
 import SeparatingAxisTheorem as SAT
 
 
-class BlockGen:
+class BlockGene:
     def __init__(self, type, pos, r):
         self.type = type
         self.x = pos[0]
@@ -37,45 +37,45 @@ class BlockGen:
 class LevelIndividual:
 
     def __init__(self, blocks):
-        self.blocks = blocks
-        self.fitness = float("inf")
+        self._blocks = blocks
+        self._fitness = float("inf")
         self.base_fitness = 0
 
     def calculateFitness(self, avg_vel):
         # This doesn't take into account pigs, since they are added later
         if len(avg_vel)!=0 :
-            self.fitness = sum(avg_vel) / len(avg_vel) + 100*(len(self.blocks)-len(avg_vel))
-        else: # how do we penalize when all blocks are broken
-            self.fitness =  100*(len(self.blocks)-len(avg_vel))
+            self._fitness = sum(avg_vel) / len(avg_vel) + 100*(len(self._blocks)-len(avg_vel))
+        else: # how do we penalize when all _blocks are broken
+            self._fitness =  100*(len(self._blocks)-len(avg_vel))
 
     def calculatePreFitness(self):
-        self.fitness = 10*self.numberOverlappingBlocks()
+        self._fitness = 10*self.numberOverlappingBlocks()
         min_y = self.distanceToGround()
-        self.fitness+= (10*min_y) if min_y>0.1 else 0
+        self._fitness+= (10*min_y) if min_y>0.1 else 0
 
     def updateBaseFitness(self, new_base):
         if self.base_fitness > 0: # levels evaluated in game don't need  base
-            raw_fitness= self.fitness - self.base_fitness
+            raw_fitness= self._fitness - self.base_fitness
             self.base_fitness = new_base
-            self.fitness = raw_fitness+ new_base
+            self._fitness = raw_fitness+ new_base
 
     def numberOverlappingBlocks(self):
         n_overlapping=0
-        for i in range(len(self.blocks)):
-            vertices0 = self.blocks[i].corners()
-            for j in range(i+1,len(self.blocks)):
-                vertices1 = self.blocks[j].corners()
+        for i in range(len(self._blocks)):
+            vertices0 = self._blocks[i].corners()
+            for j in range(i+1,len(self._blocks)):
+                vertices1 = self._blocks[j].corners()
                 if SAT.sat(vertices0, vertices1):
                     n_overlapping+=1
         return n_overlapping
 
     def distanceToGround(self):
-        return abs(cte.absolute_ground-min(self.blocks, key=lambda b: b.y).y)
+        return abs(cte.absolute_ground-min(self._blocks, key=lambda b: b.y).y)
 
     def toString(self):
-        #strblocks= '\n'.join([b.toString() for b in self.blocks])
-        assert self.fitness > 0, "Fitness value is wrong: %r" % self.fitness
-        return '\nFITNESS '+str(self.fitness)+'( base '+str(self.base_fitness)+')\n'#+strblocks
+        #strblocks= '\n'.join([b.toString() for b in self._blocks])
+        assert self._fitness > 0, "Fitness value is wrong: %r" % self._fitness
+        return '\nFITNESS '+str(self._fitness)+'( base '+str(self.base_fitness)+')\n'#+strblocks
 
 
 def initPopulation(number_of_individuals):
@@ -84,7 +84,7 @@ def initPopulation(number_of_individuals):
         n_blocks = random.randint(cte.MinB, cte.MaxB)
         blocks = []
         for n in range(n_blocks):
-            block = BlockGen(type = random.randint(1, len(cte.blocks)-1),
+            block = BlockGene(type = random.randint(1, len(cte.blocks)-1),
                              pos = (random.uniform(cte.MinX, cte.MaxX), random.uniform(cte.MinY, cte.MaxY)),
                              r = random.randint(0, len(cte.Rotation)-1))
             blocks.append(block)
@@ -100,7 +100,7 @@ def initPopulationCheckOverlapping(number_of_individuals):
         blocks = []
         while len(blocks)<n_blocks:
             overlaps = False
-            block = BlockGen(type = random.randint(1, len(cte.blocks)-1),
+            block = BlockGene(type = random.randint(1, len(cte.blocks)-1),
                              pos = (random.uniform(cte.MinX, cte.MaxX), random.uniform(cte.MinY, cte.MaxY)),
                              r = random.randint(0, len(cte.Rotation)-1))
             vertices0 = block.corners()
@@ -122,7 +122,7 @@ def initPopulationFixedPos(number_of_individuals):
         n_blocks = random.randint(cte.MinB, cte.MaxB)
         blocks = []
         for n in range(n_blocks):
-            block = BlockGen(type = random.randint(1, len(cte.blocks)-1),
+            block = BlockGene(type = random.randint(1, len(cte.blocks)-1),
                              pos = (cte.MinX + ((cte.MaxX-cte.MinX)/5) * (n%5), cte.MinY + ((cte.MaxY-cte.MinY)/5) * (n // 5)),
                              r = random.randint(0, len(cte.Rotation)-1))
             blocks.append(block)
@@ -145,7 +145,7 @@ def initPopulationCheckOverlappingDiscretePos(number_of_individuals):
             overlaps = False
             x = random.randint(0, nx)
             y = random.randint(0, ny)
-            block = BlockGen(type = random.randint(1, len(cte.blocks)-1),
+            block = BlockGene(type = random.randint(1, len(cte.blocks)-1),
                              pos = (cte.MinX + cte.SmallestStep * x, cte.MinY + cte.SmallestStep * y),
                              r = random.randint(0, len(cte.Rotation)-1))
             vertices0 = block.corners()
@@ -182,7 +182,7 @@ def fitnessPopulationSkip(population, game_path, write_path, read_path, max_eval
     for i in range(len(population)):
         print("Calculating fitness of "+ str(i)+ "/"+str(len(population))+ " with size of " + str(len(population[i].blocks)) +"\r", end="")
         population[i].calculatePreFitness()
-        if population[i].fitness == 0:
+        if population[i]._fitness == 0:
             xml.writeXML(population[i], os.path.join(write_path, "level-"+str(len(evaluated))+".xml"))
             evaluated.append(i)
 
@@ -197,13 +197,13 @@ def fitnessPopulationSkip(population, game_path, write_path, read_path, max_eval
         averageVelocity = xml.readXML(os.path.join(read_path,"level-"+str(i)+".xml"))
         # assign fitness
         population[evaluated[i]].calculateFitness(averageVelocity)
-        max_evaluated = max(population[evaluated[i]].fitness, max_evaluated)
+        max_evaluated = max(population[evaluated[i]]._fitness, max_evaluated)
 
     # to make sure all levels not evaluated in game have worse fitness value
     for i in range(len(population)):
         if i not in evaluated:
             population[i].base_fitness = max_evaluated
-            population[i].fitness+=max_evaluated
+            population[i]._fitness+=max_evaluated
 
     return max_evaluated
 
@@ -213,11 +213,11 @@ def selectionTournament(population,n_tournaments):
     for i in range(n_tournaments):
         candidate_1 = population[random.randint(0,len(population)-1)]
         candidate_2 = population[random.randint(0,len(population)-1)]
-        parents.append(min(candidate_1, candidate_2, key=lambda x: x.fitness))
+        parents.append(min(candidate_1, candidate_2, key=lambda x: x._fitness))
 
         candidate_1 = population[random.randint(0,len(population)-1)]
         candidate_2 = population[random.randint(0,len(population)-1)]
-        parents.append(min(candidate_1, candidate_2, key=lambda x: x.fitness))
+        parents.append(min(candidate_1, candidate_2, key=lambda x: x._fitness))
     return parents
 
 
@@ -242,7 +242,7 @@ def mutationBlockNumber(population, n_mutations, max_difference):
             for _ in range(n_blocks):
                 x = random.randint(0, nx)
                 y = random.randint(0, ny)
-                block = BlockGen(type = random.randint(1, len(cte.blocks)-1),
+                block = BlockGene(type = random.randint(1, len(cte.blocks)-1),
                              pos = (cte.MinX + cte.SmallestStep * x, cte.MinY + cte.SmallestStep * y),
                              r = random.randint(0, len(cte.Rotation)-1))
                 indv_mut.blocks.append(block)
@@ -313,7 +313,7 @@ def main():
         # replace generation
         for i in population+children:
             i.updateBaseFitness(max_evaluated)
-        population = sorted((children+parents), key=lambda x: x.fitness, reverse = False)[:population_size]
+        population = sorted((children+parents), key=lambda x: x._fitness, reverse = False)[:population_size]
 
         f = open(os.path.join(os.path.dirname(os.getcwd()), 'tfgLogs/log.txt'), 'a')
         f.write("----------------------------------------------Generation " + str(generation) + "/" + str(number_of_generations)+ "----------------------------------------------")
@@ -321,9 +321,9 @@ def main():
             f.write(i.toString())
         f.close()
 
-    best_individual = min(population, key=lambda x: x.fitness)
+    best_individual = min(population, key=lambda x: x._fitness)
 
-    print("DONE: best-> "+str(best_individual.fitness)+ " avg -> "+ str( sum(map(lambda x: x.fitness, population))/len(population) ) + " worst -> " + str(max(population, key=lambda x: x.fitness).fitness))
+    print("DONE: best-> "+str(best_individual._fitness)+ " avg -> "+ str( sum(map(lambda x: x._fitness, population))/len(population) ) + " worst -> " + str(max(population, key=lambda x: x._fitness)._fitness))
 
     xml.writeXML(best_individual, os.path.join(os.path.dirname(os.getcwd()),
                                                'abwin/level-0.xml'))
