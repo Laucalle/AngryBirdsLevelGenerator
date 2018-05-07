@@ -218,3 +218,8 @@ TSWLatexianTemp*
 
 # expex forward references with \gathertags
 *-tags.tex
+
+.idea
+__pycache__
+
+:set_no_evil:
