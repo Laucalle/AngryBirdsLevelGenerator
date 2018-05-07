@@ -1,4 +1,7 @@
 import math
+from AngryBirdsGA import *
+import numpy as np
+
 
 class BlockGene:
     def __init__(self, type, pos, r):
@@ -15,9 +18,9 @@ class BlockGene:
         if self._corners:
             return self._corners
         else:
-            dims = cte.blocks[str(self.type)]
-            sinA = math.sin(math.radians(int(cte.Rotation[self.rot])))
-            cosA = math.cos(math.radians(int(cte.Rotation[self.rot])))
+            dims = blocks[str(self.type)]
+            sinA = math.sin(math.radians(int(Rotation[self.rot])))
+            cosA = math.cos(math.radians(int(Rotation[self.rot])))
             
             p_1 = np.array([cosA*dims[0] - sinA*dims[1] + self.x, cosA*dims[1] - sinA*dims[0] + self.y])
             
