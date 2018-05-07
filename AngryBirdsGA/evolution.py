@@ -1,10 +1,11 @@
 import math
-import constants as cte
 import random
-import xml_helpers as xml
 import os
+from AngryBirdsGA import *
+from AngryBirdsGA.BlockGene import BlockGene
+import AngryBirdsGA.SeparatingAxisTheorem as SAT
+import AngryBirdsGA.XMLHelpers as xml
 import numpy as np
-import SeparatingAxisTheorem as SAT
 
 class LevelIndividual:
 
@@ -42,7 +43,7 @@ class LevelIndividual:
         return n_overlapping
 
     def distanceToGround(self):
-        return abs(cte.absolute_ground-min(self.blocks, key=lambda b: b.y).y)
+        return abs(ABSOLUTE_GROUND - min(self.blocks, key=lambda b: b.y).y)
 
     def toString(self):
         #strblocks= '\n'.join([b.toString() for b in self.blocks])
@@ -53,12 +54,12 @@ class LevelIndividual:
 def initPopulation(number_of_individuals):
     population = []
     for i in range(number_of_individuals):
-        n_blocks = random.randint(cte.MinB, cte.MaxB)
+        n_blocks = random.randint(MIN_B, MAX_B)
         blocks = []
         for n in range(n_blocks):
-            block = BlockGen(type = random.randint(1, len(cte.blocks)-1),
-                             pos = (random.uniform(cte.MinX, cte.MaxX), random.uniform(cte.MinY, cte.MaxY)),
-                             r = random.randint(0, len(cte.Rotation)-1))
+            block = BlockGene(type = random.randint(1, len(blocks)-1),
+                              pos = (random.uniform(MIN_X, MAX_X), random.uniform(MIN_Y, MAX_Y)),
+                              r = random.randint(0, len(ROTATION) - 1))
             blocks.append(block)
         population.append(LevelIndividual(blocks))
 
@@ -68,13 +69,13 @@ def initPopulation(number_of_individuals):
 def initPopulationCheckOverlapping(number_of_individuals):
     population = []
     for i in range(number_of_individuals):
-        n_blocks = random.randint(cte.MinB, cte.MaxB)
+        n_blocks = random.randint(MIN_B, MAX_B)
         blocks = []
         while len(blocks)<n_blocks:
             overlaps = False
-            block = BlockGen(type = random.randint(1, len(cte.blocks)-1),
-                             pos = (random.uniform(cte.MinX, cte.MaxX), random.uniform(cte.MinY, cte.MaxY)),
-                             r = random.randint(0, len(cte.Rotation)-1))
+            block = BlockGene(type = random.randint(1, len(blocks)-1),
+                              pos = (random.uniform(MIN_X, MAX_X), random.uniform(MIN_Y, MAX_Y)),
+                              r = random.randint(0, len(ROTATION) - 1))
             vertices0 = block.corners()
             b=0
             while (not overlaps) and b <len(blocks):
@@ -91,12 +92,12 @@ def initPopulationCheckOverlapping(number_of_individuals):
 def initPopulationFixedPos(number_of_individuals):
     population = []
     for i in range(number_of_individuals):
-        n_blocks = random.randint(cte.MinB, cte.MaxB)
+        n_blocks = random.randint(MIN_B, MAX_B)
         blocks = []
         for n in range(n_blocks):
-            block = BlockGen(type = random.randint(1, len(cte.blocks)-1),
-                             pos = (cte.MinX + ((cte.MaxX-cte.MinX)/5) * (n%5), cte.MinY + ((cte.MaxY-cte.MinY)/5) * (n // 5)),
-                             r = random.randint(0, len(cte.Rotation)-1))
+            block = BlockGene(type = random.randint(1, len(blocks)-1),
+                              pos = (MIN_X + ((MAX_X - MIN_X) / 5) * (n % 5), MIN_Y + ((MAX_Y - MIN_Y) / 5) * (n // 5)),
+                              r = random.randint(0, len(ROTATION) - 1))
             blocks.append(block)
         population.append(LevelIndividual(blocks))
 
@@ -105,21 +106,21 @@ def initPopulationFixedPos(number_of_individuals):
 
 def initPopulationCheckOverlappingDiscretePos(number_of_individuals):
     population = []
-    ny = math.floor((cte.MaxY - cte.MinY)/cte.SmallestStep)
-    nx = math.floor((cte.MaxX - cte.MinX)/cte.SmallestStep)
+    ny = math.floor((MAX_Y - MIN_Y) / SMALLEST_STEP)
+    nx = math.floor((MAX_X - MIN_X) / SMALLEST_STEP)
 
     print("Initializing population 0/" + str(number_of_individuals) + "\r", end="", flush=True)
     for i in range(number_of_individuals):
-        n_blocks = random.randint(cte.MinB, cte.MaxB)
+        n_blocks = random.randint(MIN_B, MAX_B)
         blocks = []
         print("Initializing population " + str(i) + "/" + str(number_of_individuals)+ "\r", end="", flush=True)
         while len(blocks)<n_blocks:
             overlaps = False
             x = random.randint(0, nx)
             y = random.randint(0, ny)
-            block = BlockGen(type = random.randint(1, len(cte.blocks)-1),
-                             pos = (cte.MinX + cte.SmallestStep * x, cte.MinY + cte.SmallestStep * y),
-                             r = random.randint(0, len(cte.Rotation)-1))
+            block = BlockGene(type = random.randint(1, len(BLOCKS)-1),
+                              pos = (MIN_X + SMALLEST_STEP * x, MIN_Y + SMALLEST_STEP * y),
+                              r = random.randint(0, len(ROTATION) - 1))
             vertices0 = block.corners()
             b=0
             while (not overlaps) and b <len(blocks):
@@ -196,7 +197,7 @@ def selectionTournament(population,n_tournaments):
 def crossSample(parents):
     children = []
     for i in range(0,len(parents), 2):
-        child_n_blocks = min(len(parents[i].blocks) + len(parents[i+1].blocks)//2, cte.MaxB)
+        child_n_blocks = min(len(parents[i].blocks) + len(parents[i+1].blocks) // 2, MAX_B)
         child_blocks = random.sample(parents[i].blocks+parents[i+1].blocks, child_n_blocks)
         children.append(LevelIndividual(child_blocks))
     return children
@@ -209,14 +210,14 @@ def mutationBlockNumber(population, n_mutations, max_difference):
 
         if(n_blocks>0):
 
-            ny = math.floor((cte.MaxY - cte.MinY) / cte.SmallestStep)
-            nx = math.floor((cte.MaxX - cte.MinX) / cte.SmallestStep)
+            ny = math.floor((MAX_Y - MIN_Y) / SMALLEST_STEP)
+            nx = math.floor((MAX_X - MIN_X) / SMALLEST_STEP)
             for _ in range(n_blocks):
                 x = random.randint(0, nx)
                 y = random.randint(0, ny)
-                block = BlockGen(type = random.randint(1, len(cte.blocks)-1),
-                             pos = (cte.MinX + cte.SmallestStep * x, cte.MinY + cte.SmallestStep * y),
-                             r = random.randint(0, len(cte.Rotation)-1))
+                block = BlockGene(type = random.randint(1, len(BLOCKS) - 1),
+                                  pos = (MIN_X + SMALLEST_STEP * x, MIN_Y + SMALLEST_STEP * y),
+                                  r = random.randint(0, len(ROTATION) - 1))
                 indv_mut.blocks.append(block)
         else:
             for _ in range(-n_blocks):
@@ -230,13 +231,13 @@ def mutationBlockProperties(population, n_mutations):
         p = random.randint(0,3)
         block = indv_mut.blocks[random.randint(0, len(indv_mut.blocks) - 1)]
         if(p == 0):
-            block.type = random.randint(1, len(cte.blocks)-1)
+            block.type = random.randint(1, len(BLOCKS) - 1)
         elif(p == 1):
-            block.x = random.uniform(cte.MinX, cte.MaxX)
+            block.x = random.uniform(MIN_X, MAX_X)
         elif(p == 2):
-            block.y = random.uniform(cte.MinB, cte.MaxB)
+            block.y = random.uniform(MIN_B, MAX_B)
         elif(p == 3):
-            block.rot = random.randint(0, len(cte.Rotation)-1)
+            block.rot = random.randint(0, len(ROTATION) - 1)
 
 
 def cleanDirectory(path):
@@ -246,14 +247,15 @@ def cleanDirectory(path):
 
 def main():
     #game_path = os.path.join(os.path.dirname(os.getcwd()), 'ablinux/ab_linux_build.x86_64')
-    game_path = os.path.join(os.path.dirname(os.getcwd()), 'abwin/win_build.exe')
-    write_path = os.path.join(os.path.dirname(os.getcwd()),
+    project_root = os.path.dirname(os.getcwd())
+    game_path = os.path.join(os.path.dirname(project_root), 'abwin/win_build.exe')
+    write_path = os.path.join(os.path.dirname(project_root),
                               'abwin/win_build_Data/StreamingAssets/Levels')
     #                          'ablinux/ab_linux_build_Data/StreamingAssets/Levels')
-    read_path = os.path.join(os.path.dirname(os.getcwd()),
+    read_path = os.path.join(os.path.dirname(project_root),
                              'abwin/win_build_Data/StreamingAssets/Output')
     #                         'ablinux/ab_linux_build_Data/StreamingAssets/Output')
-    log_path = os.path.join(os.path.dirname(os.getcwd()), 'tfgLogs/log.txt')
+    log_path = os.path.join(os.path.dirname(project_root), 'tfgLogs/log.txt')
     population_size = 100
     number_of_generations = 100
     number_of_parents = math.floor(0.5*population_size)
@@ -286,6 +288,10 @@ def main():
         for i in population+children:
             i.updateBaseFitness(max_evaluated)
         population = sorted((children+parents), key=lambda x: x.fitness, reverse = False)[:population_size]
+
+        print("DONE: best-> " + str(population[0].fitness) + " avg -> " + str(
+            sum(map(lambda x: x.fitness, population)) / len(population)) + " worst -> " + str(
+            max(population, key=lambda x: x.fitness).fitness))
 
         f = open(os.path.join(os.path.dirname(os.getcwd()), 'tfgLogs/log.txt'), 'a')
         f.write("----------------------------------------------Generation " + str(generation) + "/" + str(number_of_generations)+ "----------------------------------------------")

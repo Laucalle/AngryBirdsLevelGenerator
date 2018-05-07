@@ -1,6 +1,5 @@
-import constants
-
 import xml.etree.ElementTree as ET
+from AngryBirdsGA import *
 
 def initXMLLevel():
     root = ET.Element("Level")
@@ -31,39 +30,38 @@ def initXMLLevel():
     #    e.set('y', str(b.y))
     #    e.set('rotation', str(b.rot))
 
-    string_xml = ET.tostring(root, encoding='unicode', method='xml')
-    return string_xml.replace('>', '>\n')
-
-
-string_xml = initXMLLevel()
+    s_xml = ET.tostring(root, encoding='unicode', method='xml')
+    return s_xml.replace('>', '>\n')
 
 
 def writeXML(individual, filename):
-    if string_xml == "":
-        initXMLLevel()
+    global STRING_XML
+    if STRING_XML == "":
+        STRING_XML = initXMLLevel()
+
     f = open(filename, "w")
-    index = string_xml.find('Camera')
+    index = STRING_XML.find('Camera')
     final_xml = []
     final_xml.append('<?xml version="1.0" encoding="utf-8"?>')
-    final_xml.append(string_xml[:index+len('Camera')])
+    final_xml.append(STRING_XML[:index + len('Camera')])
     final_xml.append(' x="0" y="0" minWidth="20" maxWidth="25" ')
     prev_index = index+len('Camera')
-    index = string_xml.find('GameObjects')
-    final_xml.append(string_xml[prev_index:index+len('GameObjects')])
+    index = STRING_XML.find('GameObjects')
+    final_xml.append(STRING_XML[prev_index:index + len('GameObjects')])
     final_xml.append('>\n')
     i = 0
     for b in individual.blocks:
-        final_xml.append('<' + constants.getTag(b.type) +
-                         ' type="' + constants.block_names[str(b.type)] + '"' +
-                         ' material="'+ constants.materials[b.mat] + '"' +
+        final_xml.append('<' + getTag(b.type) +
+                         ' type="' + BLOCK_NAMES[str(b.type)] + '"' +
+                         ' material="' + MATERIALS[b.mat] + '"' +
                          ' x="' + str(b.x) + '"' +
                          ' y="' + str(b.y) + '"' +
-                         ' rotation="' + constants.Rotation[b.rot] + '"' +
+                         ' rotation="' + ROTATION[b.rot] + '"' +
                          ' id="' + str(i) + '"/>\n')
         i+=1
 
     final_xml.append('</GameObjects>\n')
-    final_xml.append(string_xml[index+len('<GameObjects\>'):])
+    final_xml.append(STRING_XML[index + len('<GameObjects\>'):])
 
     f.write(''.join(final_xml))
 

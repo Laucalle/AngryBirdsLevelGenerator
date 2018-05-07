@@ -18,9 +18,9 @@ class BlockGene:
         if self._corners:
             return self._corners
         else:
-            dims = blocks[str(self.type)]
-            sinA = math.sin(math.radians(int(Rotation[self.rot])))
-            cosA = math.cos(math.radians(int(Rotation[self.rot])))
+            dims = BLOCKS[str(self.type)]
+            sinA = math.sin(math.radians(int(ROTATION[self.rot])))
+            cosA = math.cos(math.radians(int(ROTATION[self.rot])))
             
             p_1 = np.array([cosA*dims[0] - sinA*dims[1] + self.x, cosA*dims[1] - sinA*dims[0] + self.y])
             
@@ -29,7 +29,8 @@ class BlockGene:
             p_3 = np.array([cosA*(-dims[0]) - sinA*(-dims[1]) + self.x, cosA*(-dims[1]) - sinA*(-dims[0]) + self.y])
             
             p_4 = np.array([cosA*(-dims[0]) - sinA*dims[1] + self.x, cosA*dims[1] - sinA*(-dims[0]) + self.y])
-            
+            self._corners = [p_1,p_2,p_3,p_4]
+
             return [p_1,p_2,p_3,p_4]
 
     def toString(self):
