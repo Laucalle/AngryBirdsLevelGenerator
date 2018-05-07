@@ -34,7 +34,7 @@ class BlockGen:
     def toString(self):
         return 'Type: {0} pos: ({1},{2}) rot:{3}'.format(str(self.type), str(self.x), str(self.y), str(self.rot))
 
-class LevelIndv:
+class LevelIndividual:
 
     def __init__(self, blocks):
         self.blocks = blocks
@@ -49,8 +49,8 @@ class LevelIndv:
             self.fitness =  100*(len(self.blocks)-len(avg_vel))
 
     def calculatePreFitness(self):
-        self.fitness = 10*self.NumberOverlappingBlocks()
-        min_y = self.DistanceToGround()
+        self.fitness = 10*self.numberOverlappingBlocks()
+        min_y = self.distanceToGround()
         self.fitness+= (10*min_y) if min_y>0.1 else 0
 
     def updateBaseFitness(self, new_base):
@@ -59,7 +59,7 @@ class LevelIndv:
             self.base_fitness = new_base
             self.fitness = raw_fitness+ new_base
 
-    def NumberOverlappingBlocks(self):
+    def numberOverlappingBlocks(self):
         n_overlapping=0
         for i in range(len(self.blocks)):
             vertices0 = self.blocks[i].corners()
@@ -69,7 +69,7 @@ class LevelIndv:
                     n_overlapping+=1
         return n_overlapping
 
-    def DistanceToGround(self):
+    def distanceToGround(self):
         return abs(cte.absolute_ground-min(self.blocks, key=lambda b: b.y).y)
 
     def toString(self):
@@ -88,7 +88,7 @@ def initPopulation(number_of_individuals):
                              pos = (random.uniform(cte.MinX, cte.MaxX), random.uniform(cte.MinY, cte.MaxY)),
                              r = random.randint(0, len(cte.Rotation)-1))
             blocks.append(block)
-        population.append(LevelIndv(blocks))
+        population.append(LevelIndividual(blocks))
 
     return population
 
@@ -111,7 +111,7 @@ def initPopulationCheckOverlapping(number_of_individuals):
                 b=b+1
             if not overlaps:
                 blocks.append(block)
-        population.append(LevelIndv(blocks))
+        population.append(LevelIndividual(blocks))
 
     return population
 
@@ -126,7 +126,7 @@ def initPopulationFixedPos(number_of_individuals):
                              pos = (cte.MinX + ((cte.MaxX-cte.MinX)/5) * (n%5), cte.MinY + ((cte.MaxY-cte.MinY)/5) * (n // 5)),
                              r = random.randint(0, len(cte.Rotation)-1))
             blocks.append(block)
-        population.append(LevelIndv(blocks))
+        population.append(LevelIndividual(blocks))
 
     return population
 
@@ -156,12 +156,12 @@ def initPopulationCheckOverlappingDiscretePos(number_of_individuals):
                 b=b+1
             if not overlaps:
                 blocks.append(block)
-        population.append(LevelIndv(blocks))
+        population.append(LevelIndividual(blocks))
     print("Initializing population completed")
     return population
 
 
-def FitnessPopulation(population, game_path, write_path, read_path):
+def fitnessPopulation(population, game_path, write_path, read_path):
     # generate all xml
     for i in range(len(population)):
         xml.writeXML(population[i], os.path.join(write_path, "level-"+str(i)+".xml"))
@@ -176,7 +176,7 @@ def FitnessPopulation(population, game_path, write_path, read_path):
         population[i].calculateFitness(averageVelocity)
 
 
-def FitnessPopulationSkip(population, game_path, write_path, read_path, max_evaluated):
+def fitnessPopulationSkip(population, game_path, write_path, read_path, max_evaluated):
     # generate all xml
     evaluated= []
     for i in range(len(population)):
@@ -226,7 +226,7 @@ def crossSample(parents):
     for i in range(0,len(parents), 2):
         child_n_blocks = min(len(parents[i].blocks) + len(parents[i+1].blocks)//2, cte.MaxB)
         child_blocks = random.sample(parents[i].blocks+parents[i+1].blocks, child_n_blocks)
-        children.append(LevelIndv(child_blocks))
+        children.append(LevelIndividual(child_blocks))
     return children
 
 
@@ -295,7 +295,7 @@ def main():
     if os.path.isfile(log_path):
         os.remove(log_path)
 
-    max_evaluated = FitnessPopulationSkip(population, game_path=game_path, write_path=write_path, read_path=read_path, max_evaluated=0)
+    max_evaluated = fitnessPopulationSkip(population, game_path=game_path, write_path=write_path, read_path=read_path, max_evaluated=0)
 
     for generation in range(number_of_generations):
         print("Generation " + str(generation) + "/" + str(number_of_generations))
@@ -309,7 +309,7 @@ def main():
         cleanDirectory(write_path)
         cleanDirectory(read_path)
         # evaluate children
-        max_evaluated = FitnessPopulationSkip(children, game_path=game_path, write_path=write_path, read_path=read_path, max_evaluated=max_evaluated)
+        max_evaluated = fitnessPopulationSkip(children, game_path=game_path, write_path=write_path, read_path=read_path, max_evaluated=max_evaluated)
         # replace generation
         for i in population+children:
             i.updateBaseFitness(max_evaluated)
