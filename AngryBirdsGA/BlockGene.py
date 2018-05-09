@@ -12,6 +12,11 @@ class BlockGene:
         self.mat = 0
         self._corners = None
 
+    def __eq__(self, other):
+
+        return self.type == other.type and self.x == other.x and self.y == other.y and \
+               self.rot == other.rot and self.mat == other.mat
+
     def corners(self):
         """ computes and returns corners of the figure """
 
