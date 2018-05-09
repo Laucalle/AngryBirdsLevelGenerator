@@ -18,17 +18,14 @@ class BlockGene:
         if self._corners:
             return self._corners
         else:
-            dims = BLOCKS[str(self.type)]
+            dims = [BLOCKS[str(self.type)][0]/2, BLOCKS[str(self.type)][1]/2]
             sinA = math.sin(math.radians(int(ROTATION[self.rot])))
             cosA = math.cos(math.radians(int(ROTATION[self.rot])))
             
-            p_1 = np.array([cosA*dims[0] - sinA*dims[1] + self.x, cosA*dims[1] - sinA*dims[0] + self.y])
-            
-            p_2 = np.array([cosA*dims[0] - sinA*(-dims[1]) + self.x, cosA*(-dims[1]) - sinA*dims[0] + self.y])
-            
-            p_3 = np.array([cosA*(-dims[0]) - sinA*(-dims[1]) + self.x, cosA*(-dims[1]) - sinA*(-dims[0]) + self.y])
-            
-            p_4 = np.array([cosA*(-dims[0]) - sinA*dims[1] + self.x, cosA*dims[1] - sinA*(-dims[0]) + self.y])
+            p_1 = np.array([cosA*(+dims[0]) - sinA*(+dims[1]) + self.x, cosA*(+dims[1]) + sinA*(+dims[0]) + self.y])
+            p_2 = np.array([cosA*(+dims[0]) - sinA*(-dims[1]) + self.x, cosA*(-dims[1]) + sinA*(+dims[0]) + self.y])
+            p_3 = np.array([cosA*(-dims[0]) - sinA*(-dims[1]) + self.x, cosA*(-dims[1]) + sinA*(-dims[0]) + self.y])
+            p_4 = np.array([cosA*(-dims[0]) - sinA*(+dims[1]) + self.x, cosA*(+dims[1]) + sinA*(-dims[0]) + self.y])
             self._corners = [p_1,p_2,p_3,p_4]
 
             return self._corners
