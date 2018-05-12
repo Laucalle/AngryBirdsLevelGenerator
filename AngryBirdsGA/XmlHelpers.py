@@ -50,7 +50,7 @@ def writeXML(individual, filename):
     final_xml.append(STRING_XML[prev_index:index + len('GameObjects')])
     final_xml.append('>\n')
     i = 0
-    for b in individual.blocks:
+    for b in individual.blocks():
         final_xml.append('<' + getTag(b.type) +
                          ' type="' + BLOCK_NAMES[str(b.type)] + '"' +
                          ' material="' + MATERIALS[b.mat] + '"' +

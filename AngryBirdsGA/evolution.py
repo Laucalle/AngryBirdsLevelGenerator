@@ -27,21 +27,12 @@ def initPopulationCheckOverlapping(number_of_individuals):
     population = []
     for i in range(number_of_individuals):
         n_blocks = random.randint(MIN_B, MAX_B)
-        blocks = []
-        while len(blocks)<n_blocks:
-            overlaps = False
-            block = BlockGene(type = random.randint(1, len(blocks)-1),
+        population.append(LevelIndividual([]))
+        while len(population[len(population)-1].blocks())<n_blocks:
+            block = BlockGene(type = random.randint(1, len(BLOCKS)-1),
                               pos = (random.uniform(MIN_X, MAX_X), random.uniform(MIN_Y, MAX_Y)),
                               r = random.randint(0, len(ROTATION) - 1))
-            vertices0 = block.corners()
-            b=0
-            while (not overlaps) and b <len(blocks):
-                vertices1 = blocks[b].corners()
-                overlaps =  SAT.sat(vertices0,vertices1)
-                b=b+1
-            if not overlaps:
-                blocks.append(block)
-        population.append(LevelIndividual(blocks))
+            population[len(population)].tryAppendBlock(block)
 
     return population
 
@@ -69,24 +60,16 @@ def initPopulationCheckOverlappingDiscretePos(number_of_individuals):
     print("Initializing population 0/" + str(number_of_individuals) + "\r", end="", flush=True)
     for i in range(number_of_individuals):
         n_blocks = random.randint(MIN_B, MAX_B)
-        blocks = []
+        population.append(LevelIndividual([]))
         print("Initializing population " + str(i) + "/" + str(number_of_individuals)+ "\r", end="", flush=True)
-        while len(blocks)<n_blocks:
-            overlaps = False
+        while len(population[len(population)-1].blocks())<n_blocks:
             x = random.randint(0, nx)
             y = random.randint(0, ny)
             block = BlockGene(type = random.randint(1, len(BLOCKS)-1),
                               pos = (MIN_X + SMALLEST_STEP * x, MIN_Y + SMALLEST_STEP * y),
                               r = random.randint(0, len(ROTATION) - 1))
-            vertices0 = block.corners()
-            b=0
-            while (not overlaps) and b <len(blocks):
-                vertices1 = blocks[b].corners()
-                overlaps =  SAT.sat(vertices0,vertices1)
-                b=b+1
-            if not overlaps:
-                blocks.append(block)
-        population.append(LevelIndividual(blocks))
+            population[len(population)-1].tryAppendBlock(block)
+
     print("Initializing population completed")
     return population
 
@@ -108,12 +91,13 @@ def fitnessPopulation(population, game_path, write_path, read_path):
 
 def fitnessPopulationSkip(population, game_path, write_path, read_path, max_evaluated):
     # generate all xml
+    fill = len(str(len(population)))
     evaluated= []
     for i in range(len(population)):
-        print("Calculating fitness of "+ str(i)+ "/"+str(len(population))+ " with size of " + str(len(population[i].blocks)) +"\r", end="")
+        print("Calculating fitness of "+ str(i)+ "/"+str(len(population))+ " with size of " + str(len(population[i].blocks())) +"\r", end="")
         population[i].calculatePreFitness()
         if population[i].fitness == 0:
-            xml.writeXML(population[i], os.path.join(write_path, "level-"+str(len(evaluated))+".xml"))
+            xml.writeXML(population[i], os.path.join(write_path, "level-"+str(len(evaluated)).zfill(fill)+".xml"))
             evaluated.append(i)
 
     # run game
@@ -126,6 +110,7 @@ def fitnessPopulationSkip(population, game_path, write_path, read_path, max_eval
     for i in range(len(evaluated)):
         averageVelocity = xml.readXML(os.path.join(read_path,"level-"+str(i)+".xml"))
         # assign fitness
+        assert len(averageVelocity) <= len(population[evaluated[i]].blocks()), "Level %r has recorded %r blocks in game while having %r" % (i, len(averageVelocity), len(population[evaluated[i]].blocks()))
         population[evaluated[i]].calculateFitness(averageVelocity)
         max_evaluated = max(population[evaluated[i]].fitness, max_evaluated)
 
@@ -154,14 +139,14 @@ def selectionTournament(population,n_tournaments):
 def crossSample(parents):
     children = []
     for i in range(0,len(parents), 2):
-        child_n_blocks = min(len(parents[i].blocks) + len(parents[i+1].blocks) // 2, MAX_B)
-        child_blocks = random.sample(parents[i].blocks+parents[i+1].blocks, child_n_blocks)
+        child_n_blocks = min(len(parents[i].blocks()) + len(parents[i+1].blocks()) // 2, MAX_B)
+        child_blocks = random.sample(parents[i].blocks()+parents[i+1].blocks(), child_n_blocks)
         children.append(LevelIndividual(child_blocks))
     return children
 
 
 def mutationBlockNumber(population, n_mutations, max_difference):
-    for _ in range(n_mutations):
+    for a in range(n_mutations):
         n_blocks = random.randint(-max_difference, max_difference)
         indv_mut = population[random.randint(0, len(population)-1)]
 
@@ -169,32 +154,36 @@ def mutationBlockNumber(population, n_mutations, max_difference):
 
             ny = math.floor((MAX_Y - MIN_Y) / SMALLEST_STEP)
             nx = math.floor((MAX_X - MIN_X) / SMALLEST_STEP)
-            for _ in range(n_blocks):
+            for b in range(n_blocks):
                 x = random.randint(0, nx)
                 y = random.randint(0, ny)
                 block = BlockGene(type = random.randint(1, len(BLOCKS) - 1),
                                   pos = (MIN_X + SMALLEST_STEP * x, MIN_Y + SMALLEST_STEP * y),
                                   r = random.randint(0, len(ROTATION) - 1))
-                indv_mut.blocks.append(block)
+                indv_mut.appendBlock(block)
         else:
-            for _ in range(-n_blocks):
-                block = indv_mut.blocks[random.randint(0,len(indv_mut.blocks)-1)]
-                indv_mut.blocks.remove(block)
+            for b in range(-n_blocks):
+                indv_mut.removeBlock(random.randint(0,len(indv_mut.blocks())-1))
 
 
 def mutationBlockProperties(population, n_mutations):
     for _ in range(n_mutations):
         indv_mut = population[random.randint(0, len(population) - 1)]
         p = random.randint(0,3)
-        block = indv_mut.blocks[random.randint(0, len(indv_mut.blocks) - 1)]
-        if(p == 0):
+        block_i = random.randint(0, len(indv_mut.blocks()) - 1)
+        block = BlockGene(type=indv_mut.blocks()[block_i].type,
+                          pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].x),
+                          r=indv_mut.blocks()[block_i].rot)
+        if p == 0:
             block.type = random.randint(1, len(BLOCKS) - 1)
-        elif(p == 1):
+        elif p == 1:
             block.x = random.uniform(MIN_X, MAX_X)
-        elif(p == 2):
+        elif p == 2:
             block.y = random.uniform(MIN_B, MAX_B)
-        elif(p == 3):
+        elif p == 3:
             block.rot = random.randint(0, len(ROTATION) - 1)
+
+        indv_mut.updateBlock(block_i,block)
 
 
 def cleanDirectory(path):
@@ -252,8 +241,8 @@ def main():
 
         f = open(os.path.join(os.path.dirname(project_root), 'tfgLogs/log.txt'), 'a')
         f.write("----------------------------------------------Generation " + str(generation) + "/" + str(number_of_generations)+ "----------------------------------------------")
-        for i in population:
-            f.write(i.toString())
+        for level in population:
+            f.write(level.toString())
         f.close()
 
     best_individual = min(population, key=lambda x: x.fitness)

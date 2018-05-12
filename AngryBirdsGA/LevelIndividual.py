@@ -39,7 +39,7 @@ class LevelIndividual:
         if len(avg_vel)!=0 :
             self.fitness = sum(avg_vel) / len(avg_vel) + 100*(len(self._blocks)-len(avg_vel))
         else: # how do we penalize when all blocks are broken
-            self.fitness =  100*(len(self._blocks)-len(avg_vel))
+            self.fitness =  100*(len(self._blocks))
 
     def calculatePreFitness(self):
         self.fitness = 10*self.numberOverlappingBlocks()
@@ -75,5 +75,4 @@ class LevelIndividual:
 
     def toString(self):
         #strblocks= '\n'.join([b.toString() for b in self._blocks])
-        assert self.fitness > 0, "Fitness value is wrong: %r" % self.fitness
         return '\nFITNESS '+str(self.fitness)+'( base '+str(self.base_fitness)+')\n'#+strblocks
