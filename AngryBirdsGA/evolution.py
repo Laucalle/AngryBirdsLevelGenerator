@@ -7,6 +7,7 @@ from AngryBirdsGA.LevelIndividual import LevelIndividual
 import AngryBirdsGA.SeparatingAxisTheorem as SAT
 import AngryBirdsGA.XMLHelpers as xml
 import numpy as np
+from collections import Counter
 
 def initPopulation(number_of_individuals):
     population = []
@@ -110,7 +111,6 @@ def fitnessPopulationSkip(population, game_path, write_path, read_path, max_eval
     for i in range(len(evaluated)):
         averageVelocity = xml.readXML(os.path.join(read_path,"level-"+str(i)+".xml"))
         # assign fitness
-        assert len(averageVelocity) <= len(population[evaluated[i]].blocks()), "Level %r has recorded %r blocks in game while having %r" % (i, len(averageVelocity), len(population[evaluated[i]].blocks()))
         population[evaluated[i]].calculateFitness(averageVelocity)
         max_evaluated = max(population[evaluated[i]].fitness, max_evaluated)
 
@@ -190,6 +190,14 @@ def cleanDirectory(path):
     for f in os.listdir(path):
         os.remove(os.path.join(path,f))
 
+def informationEntropy(population, prec):
+    c = Counter([round(p.fitness,prec) for p in population])
+    k = 1
+    for i in range(prec):
+        k/=10
+    k = round((max(population, key=lambda x: x.fitness).fitness - min(population, key=lambda x: x.fitness).fitness)/k)
+    h = - sum( [(f/k)*math.log(f/k,2) for e,f in c.most_common()])
+    return h
 
 def main():
     #game_path = os.path.join(os.path.dirname(os.getcwd()), 'ablinux/ab_linux_build.x86_64')
@@ -235,7 +243,7 @@ def main():
             i.updateBaseFitness(max_evaluated)
         population = sorted((children+parents), key=lambda x: x.fitness, reverse = False)[:population_size]
 
-        print("DONE: best-> " + str(population[0].fitness) + " avg -> " + str(
+        print("ENTROPY " + str(informationEntropy(population, 4)) + " best-> " + str(population[0].fitness) + " avg -> " + str(
             sum(map(lambda x: x.fitness, population)) / len(population)) + " worst -> " + str(
             max(population, key=lambda x: x.fitness).fitness))
 
