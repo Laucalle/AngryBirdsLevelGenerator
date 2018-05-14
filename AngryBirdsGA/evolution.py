@@ -195,7 +195,8 @@ def informationEntropy(population, prec):
     k = 1
     for i in range(prec):
         k/=10
-    k = round((max(population, key=lambda x: x.fitness).fitness - min(population, key=lambda x: x.fitness).fitness)/k)
+    #k = round((max(population, key=lambda x: x.fitness).fitness - min(population, key=lambda x: x.fitness).fitness)/k)
+    k = len(population)
     h = - sum( [(f/k)*math.log(f/k,2) for e,f in c.most_common()])
     return h
 
