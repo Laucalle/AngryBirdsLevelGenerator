@@ -9,6 +9,56 @@ import AngryBirdsGA.XMLHelpers as xml
 import numpy as np
 from collections import Counter
 
+class Evolution:
+
+    def __init__(self):
+        self.population = []
+        self.initialization = None
+        self.fitness = None
+        self.selection = None
+        self.cross = None
+        self.mutation = None
+        self.replacement = None
+
+    def registerInitialization(self,initialization):
+         self.initialization = initialization
+
+    def registerFitness(self, fitness):
+        self.fitness = fitness
+
+    def registerSelection(self, selection):
+        self.selection = selection
+
+    def registerCross(self, cross):
+        self.cross = cross
+
+    def registerMutation(self, mutation):
+        self.mutation = mutation
+
+    def registerReplacement(self, replacement):
+        self.replacement = replacement
+
+    def initEvolution(self, population_size, fitness_params ):
+        assert self.fitness is not None, "Fitness function required"
+        assert self.initialization is not None, "Initialization function required"
+        self.population = self.initialization(population_size)
+        return self.fitness(self.population, *fitness_params)
+
+    def runGeneration(self, fitness_params, selection_params, mutation_params, replacement_params):
+        assert self.population is not [], "Before executing a generation you need to initialize the evolution"
+        assert self.selection is not None, "Selection function required"
+        assert self.mutation is not None, "Mutation function required"
+        assert self.replacement is not None, "Replacement function required"
+        assert self.cross is not None, "Cross function required"
+        parents = self.selection(self.population, *selection_params)
+        children = self.cross(parents)
+        self.mutation(children,*mutation_params)
+        fit_out = self.fitness(children, *fitness_params)
+        self.population = self.replacement(children, parents, *replacement_params)
+
+        return self.population, fit_out
+
+
 def initPopulation(number_of_individuals):
     population = []
 
@@ -189,7 +239,7 @@ def informationEntropy(population, prec):
     h = - sum( [(f/k)*math.log(f/k,2) for e,f in c.most_common()])
     return h
 
-def main():
+def main1():
     #game_path = os.path.join(os.path.dirname(os.getcwd()), 'ablinux/ab_linux_build.x86_64')
     project_root = os.path.dirname(os.getcwd())
     game_path = os.path.join(os.path.dirname(project_root), 'abwin/win_build.exe')
@@ -249,6 +299,54 @@ def main():
 
     xml.writeXML(best_individual, os.path.join(os.path.dirname(project_root),
                                                'abwin/level-0.xml'))
+
+def main():
+    population_size = 10
+    number_of_generations = 100
+    number_of_parents = math.floor(0.5 * population_size)
+    number_of_mutations = math.floor((number_of_parents // 2) * 0.3)
+
+    project_root = os.path.dirname(os.getcwd())
+    game_path = os.path.join(os.path.dirname(project_root), 'abwin/win_build.exe')
+    write_path = os.path.join(os.path.dirname(project_root),'abwin/win_build_Data/StreamingAssets/Levels')
+    read_path = os.path.join(os.path.dirname(project_root),'abwin/win_build_Data/StreamingAssets/Output')
+    log_path = os.path.join(os.path.dirname(project_root), 'tfgLogs/log.txt')
+
+
+
+    evolution = Evolution()
+    evolution.registerInitialization(initialization=initPopulationCheckOverlappingDiscretePos)
+    evolution.registerFitness(fitness=fitnessPopulationSkip)
+    evolution.registerCross(cross=crossSampleNoDuplicate)
+    evolution.registerMutation(mutation=mutationBlockProperties)
+    evolution.registerReplacement(replacement= lambda x,y,n: sorted((x+y), key=lambda a: a.fitness, reverse = False)[:n])
+    evolution.registerSelection(selection=selectionTournamentNoRepetition)
+
+    max_evaluated = evolution.initEvolution(population_size= population_size, fitness_params=[game_path, write_path, read_path, 0])
+
+    cleanDirectory(write_path)
+    cleanDirectory(read_path)
+    if os.path.isfile(log_path):
+        os.remove(log_path)
+
+    for generation in range(number_of_generations):
+        population, max_evaluated = evolution.runGeneration(fitness_params=[game_path, write_path, read_path, max_evaluated],
+                                                            mutation_params=[number_of_mutations],
+                                                            selection_params=[number_of_parents],
+                                                            replacement_params=[population_size])
+        cleanDirectory(write_path)
+        cleanDirectory(read_path)
+        print("ENTROPY " + str(informationEntropy(population, 4)) + " best-> " + str(
+            population[0].fitness) + " avg -> " + str(
+            sum(map(lambda x: x.fitness, population)) / len(population)) + " worst -> " + str(
+            max(population, key=lambda x: x.fitness).fitness))
+
+        f = open(os.path.join(os.path.dirname(project_root), 'tfgLogs/log.txt'), 'a')
+        f.write("----------------------------------------------Generation " + str(generation) + "/" + str(
+            number_of_generations) + "----------------------------------------------")
+        for level in population:
+            f.write(level.toString())
+        f.close()
 
 if __name__ == "__main__":
     main()
