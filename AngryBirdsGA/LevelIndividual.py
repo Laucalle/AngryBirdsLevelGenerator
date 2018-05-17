@@ -1,5 +1,8 @@
+import random
+from math import floor
 from AngryBirdsGA import *
 import AngryBirdsGA.SeparatingAxisTheorem as SAT
+from AngryBirdsGA.BlockGene import BlockGene
 
 class LevelIndividual:
 
@@ -8,6 +11,50 @@ class LevelIndividual:
         self.fitness = float("inf")
         self.base_fitness = 0
         self.n_overlapping = self._initOverlappingBlocks()
+
+        self._broken_blocks_penalty = 100
+        self._overlapping_penalty = 10
+        self._distance_penalty = 10
+        self._distance_threshold = 0.1
+
+    def _initRandomBlock(self):
+        return BlockGene(type=random.randint(1, len(BLOCKS) - 1),
+                         pos=(random.uniform(MIN_X, MAX_X), random.uniform(MIN_Y, MAX_Y)),
+                         r=random.randint(0, len(ROTATION) - 1))
+
+    def _initDiscreteBlock(self):
+        ny = floor((MAX_Y - MIN_Y) / SMALLEST_STEP)
+        nx = floor((MAX_X - MIN_X) / SMALLEST_STEP)
+        x = random.randint(0, nx)
+        y = random.randint(0, ny)
+        return BlockGene(type = random.randint(1, len(BLOCKS)-1),
+                         pos = (MIN_X + SMALLEST_STEP * x, MIN_Y + SMALLEST_STEP * y),
+                         r = random.randint(0, len(ROTATION) - 1))
+
+    def initRandom(self, n_blocks):
+        for n in range(n_blocks):
+            block = self._initRandomBlock()
+            self.appendBlock(block)
+        return self
+
+    def initNoOverlapping(self,n_blocks):
+        while len(self._blocks) < n_blocks:
+            block = self._initRandomBlock()
+            self.tryAppendBlock(block)
+        return self
+
+    def initDiscrete(self,n_blocks):
+        for n in range(n_blocks):
+            block = self._initDiscreteBlock()
+            self.appendBlock(block)
+        return self
+
+    def initDiscreteNoOverlapping(self,n_blocks):
+        while len(self._blocks) < n_blocks:
+            block = self._initDiscreteBlock()
+            self.tryAppendBlock(block)
+        return self
+
 
     def appendBlock(self, block):
         self._blocks.append(block)
@@ -37,14 +84,14 @@ class LevelIndividual:
     def calculateFitness(self, avg_vel):
         # This doesn't take into account pigs, since they are added later
         if len(avg_vel)!=0 :
-            self.fitness = sum(avg_vel) / len(avg_vel) + 100*(len(self._blocks)-len(avg_vel))
+            self.fitness = sum(avg_vel) / len(avg_vel) + self._broken_blocks_penalty*(len(self._blocks)-len(avg_vel))
         else: # how do we penalize when all blocks are broken
-            self.fitness =  100*(len(self._blocks))
+            self.fitness =  self._broken_blocks_penalty*(len(self._blocks))
 
     def calculatePreFitness(self):
-        self.fitness = 10*self.numberOverlappingBlocks()
+        self.fitness = self._overlapping_penalty * self.numberOverlappingBlocks()
         min_y = self.distanceToGround()
-        self.fitness+= (10*min_y) if min_y>0.1 else 0
+        self.fitness+= (self._distance_penalty * min_y) if min_y > self._distance_threshold else 0
 
     def updateBaseFitness(self, new_base):
         if self.base_fitness > 0: # levels evaluated in game don't need  base

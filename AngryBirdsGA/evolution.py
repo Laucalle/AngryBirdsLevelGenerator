@@ -11,65 +11,34 @@ from collections import Counter
 
 def initPopulation(number_of_individuals):
     population = []
+
     for i in range(number_of_individuals):
-        n_blocks = random.randint(MIN_B, MAX_B)
-        blocks = []
-        for n in range(n_blocks):
-            block = BlockGene(type = random.randint(1, len(blocks)-1),
-                              pos = (random.uniform(MIN_X, MAX_X), random.uniform(MIN_Y, MAX_Y)),
-                              r = random.randint(0, len(ROTATION) - 1))
-            blocks.append(block)
-        population.append(LevelIndividual(blocks))
+        population.append(LevelIndividual([]).initRandom(n_blocks=random.randint(MIN_B, MAX_B)))
 
     return population
-
 
 def initPopulationCheckOverlapping(number_of_individuals):
     population = []
+
     for i in range(number_of_individuals):
-        n_blocks = random.randint(MIN_B, MAX_B)
-        population.append(LevelIndividual([]))
-        while len(population[len(population)-1].blocks())<n_blocks:
-            block = BlockGene(type = random.randint(1, len(BLOCKS)-1),
-                              pos = (random.uniform(MIN_X, MAX_X), random.uniform(MIN_Y, MAX_Y)),
-                              r = random.randint(0, len(ROTATION) - 1))
-            population[len(population)].tryAppendBlock(block)
+        population.append(LevelIndividual([]).initNoOverlapping(n_blocks=random.randint(MIN_B, MAX_B)))
 
     return population
-
 
 def initPopulationFixedPos(number_of_individuals):
     population = []
     for i in range(number_of_individuals):
-        n_blocks = random.randint(MIN_B, MAX_B)
-        blocks = []
-        for n in range(n_blocks):
-            block = BlockGene(type = random.randint(1, len(blocks)-1),
-                              pos = (MIN_X + ((MAX_X - MIN_X) / 5) * (n % 5), MIN_Y + ((MAX_Y - MIN_Y) / 5) * (n // 5)),
-                              r = random.randint(0, len(ROTATION) - 1))
-            blocks.append(block)
-        population.append(LevelIndividual(blocks))
+        population.append(LevelIndividual([]).initDiscrete(n_blocks = random.randint(MIN_B, MAX_B)))
 
     return population
 
-
 def initPopulationCheckOverlappingDiscretePos(number_of_individuals):
     population = []
-    ny = math.floor((MAX_Y - MIN_Y) / SMALLEST_STEP)
-    nx = math.floor((MAX_X - MIN_X) / SMALLEST_STEP)
 
     print("Initializing population 0/" + str(number_of_individuals) + "\r", end="", flush=True)
     for i in range(number_of_individuals):
-        n_blocks = random.randint(MIN_B, MAX_B)
-        population.append(LevelIndividual([]))
         print("Initializing population " + str(i) + "/" + str(number_of_individuals)+ "\r", end="", flush=True)
-        while len(population[len(population)-1].blocks())<n_blocks:
-            x = random.randint(0, nx)
-            y = random.randint(0, ny)
-            block = BlockGene(type = random.randint(1, len(BLOCKS)-1),
-                              pos = (MIN_X + SMALLEST_STEP * x, MIN_Y + SMALLEST_STEP * y),
-                              r = random.randint(0, len(ROTATION) - 1))
-            population[len(population)-1].tryAppendBlock(block)
+        population.append(LevelIndividual([]).initDiscreteNoOverlapping(n_blocks = random.randint(MIN_B, MAX_B)))
 
     print("Initializing population completed")
     return population
@@ -88,7 +57,6 @@ def fitnessPopulation(population, game_path, write_path, read_path):
         averageVelocity = xml.readXML(os.path.join(read_path,"level-"+str(i)+".xml"))
         # assign fitness
         population[i].calculateFitness(averageVelocity)
-
 
 def fitnessPopulationSkip(population, game_path, write_path, read_path, max_evaluated):
     # generate all xml
@@ -135,12 +103,34 @@ def selectionTournament(population,n_tournaments):
         parents.append(min(candidate_1, candidate_2, key=lambda x: x.fitness))
     return parents
 
+def selectionTournamentNoRepetition(population,n_tournaments):
+    parents = []
+    for i in range(n_tournaments):
+        candidate_1, candidate_2  = random.sample(population,2)
+        parents.append(min(candidate_1, candidate_2, key=lambda x: x.fitness))
+
+        candidate_1, candidate_2  = random.sample(population,2)
+        parents.append(min(candidate_1, candidate_2, key=lambda x: x.fitness))
+    return parents
+
 
 def crossSample(parents):
     children = []
     for i in range(0,len(parents), 2):
         child_n_blocks = min(len(parents[i].blocks()) + len(parents[i+1].blocks()) // 2, MAX_B)
         child_blocks = random.sample(parents[i].blocks()+parents[i+1].blocks(), child_n_blocks)
+        children.append(LevelIndividual(child_blocks))
+    return children
+
+def crossSampleNoDuplicate(parents):
+    children = []
+    for i in range(0,len(parents), 2):
+        common = []
+        #fast way of have unique elements in a list of unhashable objects. If x is not in common, append evaluates and returns None, which evaluates false
+        merged = [x for x in parents[i].blocks()+parents[i+1].blocks() if x not in common and (common.append(x) or True)]
+        child_n_blocks = min(len(merged),min(len(parents[i].blocks()) + len(parents[i+1].blocks()) // 2, MAX_B))
+        assert len(merged)>=child_n_blocks, "Lenght is %r but the mean is %r" % (len(merged),child_n_blocks)
+        child_blocks = random.sample(merged, child_n_blocks)
         children.append(LevelIndividual(child_blocks))
     return children
 
@@ -164,7 +154,6 @@ def mutationBlockNumber(population, n_mutations, max_difference):
         else:
             for b in range(-n_blocks):
                 indv_mut.removeBlock(random.randint(0,len(indv_mut.blocks())-1))
-
 
 def mutationBlockProperties(population, n_mutations):
     for _ in range(n_mutations):
@@ -229,9 +218,9 @@ def main():
     for generation in range(number_of_generations):
         print("Generation " + str(generation) + "/" + str(number_of_generations))
         # Select parents
-        parents = selectionTournament(population, number_of_parents)
+        parents = selectionTournamentNoRepetition(population, number_of_parents)
         # generate children
-        children = crossSample(parents)
+        children = crossSampleNoDuplicate(parents)
         # mutate children
         mutationBlockProperties(children,number_of_mutations)
 

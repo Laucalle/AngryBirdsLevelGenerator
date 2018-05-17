@@ -53,5 +53,29 @@ class TestLevelIndividual(unittest.TestCase):
         self.individual2.appendBlock(BlockGene(type=13, pos=[0.5, 1.5], r=2))
         self.assertEqual(self.individual2.numberOverlappingBlocks(), 8)
 
+    def test_init_random_len(self):
+        individual = LevelIndividual([]).initRandom(8)
+        self.assertTrue(len(individual.blocks()) == 8)
+
+    def test_init_discrete_len(self):
+        individual = LevelIndividual([]).initDiscrete(8)
+        self.assertTrue(len(individual.blocks()) == 8)
+
+    def test_init_no_overlapping_len(self):
+        individual = LevelIndividual([]).initNoOverlapping(8)
+        self.assertTrue(len(individual.blocks()) == 8)
+
+    def test_init_discrete_no_overlapping_len(self):
+        individual = LevelIndividual([]).initDiscreteNoOverlapping(8)
+        self.assertTrue(len(individual.blocks()) == 8)
+
+    def test_init_no_overlapping(self):
+        individual = LevelIndividual([]).initNoOverlapping(8)
+        self.assertTrue(individual.numberOverlappingBlocks() == 0)
+
+    def test_init_discrete_no_overlapping(self):
+        individual = LevelIndividual([]).initDiscreteNoOverlapping(8)
+        self.assertTrue(individual.numberOverlappingBlocks() == 0)
+
 if __name__ == '__main__':
     unittest.main()
