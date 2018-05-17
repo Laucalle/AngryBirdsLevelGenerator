@@ -54,7 +54,7 @@ class Evolution:
         children = self.cross(parents)
         self.mutation(children,*mutation_params)
         fit_out = self.fitness(children, *fitness_params)
-        self.population = self.replacement(children, parents, *replacement_params)
+        self.population = self.replacement(children, self.population, *replacement_params)
 
         return self.population, fit_out
 
@@ -176,10 +176,10 @@ def crossSampleNoDuplicate(parents):
     children = []
     for i in range(0,len(parents), 2):
         common = []
-        #fast way of have unique elements in a list of unhashable objects. If x is not in common, append evaluates and returns None, which evaluates false
+        #fast way of have unique elements in a list of un-hashable objects. If x is not in common, append evaluates and returns None, which evaluates false
         merged = [x for x in parents[i].blocks()+parents[i+1].blocks() if x not in common and (common.append(x) or True)]
         child_n_blocks = min(len(merged),min(len(parents[i].blocks()) + len(parents[i+1].blocks()) // 2, MAX_B))
-        assert len(merged)>=child_n_blocks, "Lenght is %r but the mean is %r" % (len(merged),child_n_blocks)
+        assert len(merged)>=child_n_blocks, "Length is %r but the mean is %r" % (len(merged),child_n_blocks)
         child_blocks = random.sample(merged, child_n_blocks)
         children.append(LevelIndividual(child_blocks))
     return children
@@ -224,6 +224,9 @@ def mutationBlockProperties(population, n_mutations):
 
         indv_mut.updateBlock(block_i,block)
 
+
+def elitistReplacement(old, new, n_new):
+    return sorted((old + new), key=lambda a: a.fitness, reverse=False)[:n_new]
 
 def cleanDirectory(path):
     for f in os.listdir(path):
@@ -319,7 +322,7 @@ def main():
     evolution.registerFitness(fitness=fitnessPopulationSkip)
     evolution.registerCross(cross=crossSampleNoDuplicate)
     evolution.registerMutation(mutation=mutationBlockProperties)
-    evolution.registerReplacement(replacement= lambda x,y,n: sorted((x+y), key=lambda a: a.fitness, reverse = False)[:n])
+    evolution.registerReplacement(replacement= elitistReplacement)
     evolution.registerSelection(selection=selectionTournamentNoRepetition)
 
     max_evaluated = evolution.initEvolution(population_size= population_size, fitness_params=[game_path, write_path, read_path, 0])
