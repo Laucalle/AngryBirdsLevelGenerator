@@ -7,13 +7,13 @@ from math import sin, cos, radians
 
 class TestLevelIndividual(unittest.TestCase):
     def setUp(self):
-        self.block1 = BlockGene( type=1, pos=[0,0], r=0)
-        self.block2 = BlockGene( type=2, pos=[0,0], r=1)
+        self.block1 = BlockGene( type=0, pos=[0,0], r=0)
+        self.block2 = BlockGene( type=1, pos=[0,0], r=1)
         self.individual = LevelIndividual([self.block1])
-        self.blocklist1 = [BlockGene(type=1, pos=[0,0], r=0),
-                           BlockGene(type=1, pos=[0.42,0.42], r=0),
-                           BlockGene(type=1, pos=[0.42,2.5], r=0),
-                           BlockGene(type=13, pos=[0.5,1.5], r=0)]
+        self.blocklist1 = [BlockGene(type=0, pos=[0,0], r=0),
+                           BlockGene(type=0, pos=[0.42,0.42], r=0),
+                           BlockGene(type=0, pos=[0.42,2.5], r=0),
+                           BlockGene(type=7, pos=[0.5,1.5], r=2)]
         self.individual2 = LevelIndividual(self.blocklist1)
 
     def test_should_initialize_individual_OK(self):
@@ -35,14 +35,14 @@ class TestLevelIndividual(unittest.TestCase):
         self.assertTrue(not self.individual.tryAppendBlock(self.block2) and self.individual.blocks() == [self.block1])
 
     def test_try_append_block_success(self):
-        block = BlockGene( type=1, pos=[2,2], r=0)
+        block = BlockGene( type=0, pos=[2,2], r=0)
         self.assertTrue(self.individual.tryAppendBlock(block) and self.individual.blocks() == [self.block1, block])
 
     def test_overlapping_blocks(self):
         self.assertEqual(self.individual2.numberOverlappingBlocks(), 6)
 
     def test_overlapping_blocks_update(self):
-        self.individual2.updateBlock(3,BlockGene(type=5, pos =[0.5,1.5], r=0))
+        self.individual2.updateBlock(3,BlockGene(type=4, pos =[0.5,1.5], r=0))
         self.assertEqual(self.individual2.numberOverlappingBlocks(), 2)
 
     def test_overlapping_blocks_remove(self):
@@ -50,7 +50,7 @@ class TestLevelIndividual(unittest.TestCase):
         self.assertEqual(self.individual2.numberOverlappingBlocks(), 2)
 
     def test_overlapping_blocks_append(self):
-        self.individual2.appendBlock(BlockGene(type=13, pos=[0.5, 1.5], r=2))
+        self.individual2.appendBlock(BlockGene(type=7, pos=[0.5, 1.5], r=0))
         self.assertEqual(self.individual2.numberOverlappingBlocks(), 8)
 
     def test_init_random_len(self):

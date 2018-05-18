@@ -75,7 +75,7 @@ def initPopulationCheckOverlapping(number_of_individuals):
 
     return population
 
-def initPopulationFixedPos(number_of_individuals):
+def initPopulationDiscretePos(number_of_individuals):
     population = []
     for i in range(number_of_individuals):
         population.append(LevelIndividual([]).initDiscrete(n_blocks = random.randint(MIN_B, MAX_B)))
@@ -206,21 +206,16 @@ def mutationBlockNumber(population, n_mutations, max_difference):
                 indv_mut.removeBlock(random.randint(0,len(indv_mut.blocks())-1))
 
 def mutationBlockProperties(population, n_mutations):
-    for _ in range(n_mutations):
-        indv_mut = population[random.randint(0, len(population) - 1)]
-        p = random.randint(0,3)
+    sample = random.sample(population, len(population))
+    for indv_mut in sample:
         block_i = random.randint(0, len(indv_mut.blocks()) - 1)
         block = BlockGene(type=indv_mut.blocks()[block_i].type,
                           pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].x),
                           r=indv_mut.blocks()[block_i].rot)
-        if p == 0:
-            block.type = random.randint(1, len(BLOCKS) - 1)
-        elif p == 1:
-            block.x = random.uniform(MIN_X, MAX_X)
-        elif p == 2:
-            block.y = random.uniform(MIN_B, MAX_B)
-        elif p == 3:
-            block.rot = random.randint(0, len(ROTATION) - 1)
+        block.type = (block.type+random.randint(-1, 1))%len(BLOCKS)
+        block.x = block.x+random.uniform(-1,1)
+        block.y = block.y+random.uniform(-1,1)
+        block.rot = (block.rot+random.randint(-1, 1))%len(ROTATION)
 
         indv_mut.updateBlock(block_i,block)
 
@@ -304,7 +299,7 @@ def main1():
                                                'abwin/level-0.xml'))
 
 def main():
-    population_size = 10
+    population_size = 100
     number_of_generations = 100
     number_of_parents = math.floor(0.5 * population_size)
     number_of_mutations = math.floor((number_of_parents // 2) * 0.3)
@@ -318,7 +313,7 @@ def main():
 
 
     evolution = Evolution()
-    evolution.registerInitialization(initialization=initPopulationCheckOverlappingDiscretePos)
+    evolution.registerInitialization(initialization=initPopulationDiscretePos)
     evolution.registerFitness(fitness=fitnessPopulationSkip)
     evolution.registerCross(cross=crossSampleNoDuplicate)
     evolution.registerMutation(mutation=mutationBlockProperties)
@@ -339,10 +334,11 @@ def main():
                                                             replacement_params=[population_size])
         cleanDirectory(write_path)
         cleanDirectory(read_path)
-        print("ENTROPY " + str(informationEntropy(population, 4)) + " best-> " + str(
-            population[0].fitness) + " avg -> " + str(
-            sum(map(lambda x: x.fitness, population)) / len(population)) + " worst -> " + str(
-            max(population, key=lambda x: x.fitness).fitness))
+        print("G: " + str(generation) +\
+              " ENTROPY " + str(informationEntropy(population, 4)) +\
+              " best-> " + str(population[0].fitness) +\
+              " avg -> " + str(sum(map(lambda x: x.fitness, population)) / len(population)) +\
+              " worst -> " + str(max(population, key=lambda x: x.fitness).fitness))
 
         f = open(os.path.join(os.path.dirname(project_root), 'tfgLogs/log.txt'), 'a')
         f.write("----------------------------------------------Generation " + str(generation) + "/" + str(
@@ -350,6 +346,9 @@ def main():
         for level in population:
             f.write(level.toString())
         f.close()
+
+    xml.writeXML(best_individual, os.path.join(os.path.dirname(project_root),
+                                               'abwin/level-0.xml'))
 
 if __name__ == "__main__":
     main()

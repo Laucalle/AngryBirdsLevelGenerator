@@ -1,8 +1,18 @@
 [
-  "test_operators.py::TestOperator::test_cross",
-  "test_operators.py::TestOperator::test_fitness",
-  "test_operators.py::TestOperator::test_merge_blocks",
-  "test_operators.py::TestOperator::test_mutation",
-  "test_operators.py::TestOperator::test_replacement",
-  "test_operators.py::TestOperator::test_selection"
+  "test_levelindividual.py::TestLevelIndividual::test_append_block",
+  "test_levelindividual.py::TestLevelIndividual::test_init_discrete_len",
+  "test_levelindividual.py::TestLevelIndividual::test_init_discrete_no_overlapping",
+  "test_levelindividual.py::TestLevelIndividual::test_init_discrete_no_overlapping_len",
+  "test_levelindividual.py::TestLevelIndividual::test_init_no_overlapping",
+  "test_levelindividual.py::TestLevelIndividual::test_init_no_overlapping_len",
+  "test_levelindividual.py::TestLevelIndividual::test_init_random_len",
+  "test_levelindividual.py::TestLevelIndividual::test_overlapping_blocks",
+  "test_levelindividual.py::TestLevelIndividual::test_overlapping_blocks_append",
+  "test_levelindividual.py::TestLevelIndividual::test_overlapping_blocks_remove",
+  "test_levelindividual.py::TestLevelIndividual::test_overlapping_blocks_update",
+  "test_levelindividual.py::TestLevelIndividual::test_remove_block",
+  "test_levelindividual.py::TestLevelIndividual::test_should_initialize_individual_OK",
+  "test_levelindividual.py::TestLevelIndividual::test_try_append_block_error",
+  "test_levelindividual.py::TestLevelIndividual::test_try_append_block_success",
+  "test_levelindividual.py::TestLevelIndividual::test_update_block"
 ]

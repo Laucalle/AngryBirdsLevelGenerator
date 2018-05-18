@@ -1,17 +1,15 @@
-blocks = {'1':[0.84,0.84], '2':[0.85,0.43], '3':[0.43,0.85], '4':[0.43,0.43],
-          '5':[0.22,0.22], '6':[0.43,0.22], '7':[0.22,0.43], '8':[0.85,0.22],
-          '9':[0.22,0.85], '10':[1.68,0.22], '11':[0.22,1.68],
-          '12':[2.06,0.22], '13':[0.22,2.06]}
+blocks = {'0':[0.84,0.84], '1':[0.85,0.43], '2':[0.43,0.43],
+          '3':[0.22,0.22], '4':[0.43,0.22], '5':[0.85,0.22],
+          '6':[1.68,0.22], '7':[2.06,0.22]}
 # additional objects number and size
 additional_object_sizes = {'1':[0.82,0.82],'2':[0.82,0.82],'3':[0.8,0.8],'4':[0.45,0.45]}
 # additional objects number and name
 additional_objects = {'1':"TriangleHole", '2':"Triangle", '3':"Circle", '4':"CircleSmall"}
 # blocks number and name
 # (blocks 3, 7, 9, 11 and 13) are their respective block names rotated 90 derees clockwise
-block_names = {'1':"SquareHole", '2':"RectFat", '3':"RectFat", '4':"SquareSmall",
-               '5':"SquareTiny", '6':"RectTiny", '7':"RectTiny", '8':"RectSmall",
-               '9':"RectSmall",'10':"RectMedium",'11':"RectMedium",
-               '12':"RectBig",'13':"RectBig"}
+block_names = {'0':"SquareHole", '1':"RectFat", '2':"SquareSmall",
+               '3':"SquareTiny", '4':"RectTiny", '5':"RectSmall",
+               '6':"RectMedium", '7':"RectBig"}
 
 materials = ["wood", "stone", "ice"]
 
