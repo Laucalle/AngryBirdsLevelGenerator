@@ -32,8 +32,11 @@ class Evolution:
     def registerCross(self, cross):
         self.cross = cross
 
-    def registerMutation(self, mutation):
-        self.mutation = mutation
+    def registerFirstMutation(self, mutation):
+        self.mutation = [mutation]
+
+    def registerNewMutation(self, mutation):
+        self.mutation.append(mutation)
 
     def registerReplacement(self, replacement):
         self.replacement = replacement
@@ -47,12 +50,13 @@ class Evolution:
     def runGeneration(self, fitness_params, selection_params, mutation_params, replacement_params):
         assert self.population is not [], "Before executing a generation you need to initialize the evolution"
         assert self.selection is not None, "Selection function required"
-        assert self.mutation is not None, "Mutation function required"
+        assert self.mutation is not None, "Mutation(s) function required"
         assert self.replacement is not None, "Replacement function required"
         assert self.cross is not None, "Cross function required"
         parents = self.selection(self.population, *selection_params)
         children = self.cross(parents)
-        self.mutation(children,*mutation_params)
+        for  mut,params in zip(self.mutation,mutation_params):
+            mut(children,*params)
         fit_out = self.fitness(children, *fitness_params)
         self.population = self.replacement(children, self.population, *replacement_params)
 
@@ -205,27 +209,53 @@ def mutationBlockNumber(population, n_mutations, max_difference):
             for b in range(-n_blocks):
                 indv_mut.removeBlock(random.randint(0,len(indv_mut.blocks())-1))
 
-def mutationBlockProperties(population, n_mutations):
-    sample = random.sample(population, len(population))
+def mutationBlockType(population, percentage_mutations):
+    sample = random.sample(population, min(math.floor(len(population) * percentage_mutations), len(population)))
     for indv_mut in sample:
         block_i = random.randint(0, len(indv_mut.blocks()) - 1)
         block = BlockGene(type=indv_mut.blocks()[block_i].type,
                           pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].x),
                           r=indv_mut.blocks()[block_i].rot)
-        block.type = (block.type+random.randint(-1, 1))%len(BLOCKS)
-        block.x = block.x+random.uniform(-1,1)
-        block.y = block.y+random.uniform(-1,1)
-        block.rot = (block.rot+random.randint(-1, 1))%len(ROTATION)
+        block.type = (block.type+random.choice([-1, 1]))%len(BLOCKS)
 
         indv_mut.updateBlock(block_i,block)
 
+def mutationBlockPositionX(population, percentage_mutations):
+    sample = random.sample(population, min(math.floor(len(population) * percentage_mutations), len(population)))
+    for indv_mut in sample:
+        block_i = random.randint(0, len(indv_mut.blocks()) - 1)
+        block = BlockGene(type=indv_mut.blocks()[block_i].type,
+                          pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].x),
+                          r=indv_mut.blocks()[block_i].rot)
+        block.x = block.x+random.choice([random.uniform(-1,-0.01),random.uniform(0.01,1)])
+
+        indv_mut.updateBlock(block_i,block)
+
+def mutationBlockPositionY(population, percentage_mutations):
+    sample = random.sample(population, min(math.floor(len(population) * percentage_mutations), len(population)))
+    for indv_mut in sample:
+        block_i = random.randint(0, len(indv_mut.blocks()) - 1)
+        block = BlockGene(type=indv_mut.blocks()[block_i].type,
+                          pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].x),
+                          r=indv_mut.blocks()[block_i].rot)
+        block.y = block.y+random.choice([random.uniform(-1,-0.01),random.uniform(0.01,1)])
+
+        indv_mut.updateBlock(block_i,block)
+
+def mutationBlockRotation(population, percentage_mutations):
+    sample = random.sample(population,min(math.floor(len(population)*percentage_mutations), len(population)))
+    for indv_mut in sample:
+        block_i = random.randint(0, len(indv_mut.blocks()) - 1)
+        block = BlockGene(type=indv_mut.blocks()[block_i].type,
+                          pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].x),
+                          r=indv_mut.blocks()[block_i].rot)
+        block.rot = (block.rot+random.choice([-1, 1]))%len(ROTATION)
+
+        indv_mut.updateBlock(block_i,block)
 
 def elitistReplacement(old, new, n_new):
     return sorted((old + new), key=lambda a: a.fitness, reverse=False)[:n_new]
 
-def cleanDirectory(path):
-    for f in os.listdir(path):
-        os.remove(os.path.join(path,f))
 
 def informationEntropy(population, prec):
     c = Counter([round(p.fitness,prec) for p in population])
@@ -270,7 +300,7 @@ def main1():
         # generate children
         children = crossSampleNoDuplicate(parents)
         # mutate children
-        mutationBlockProperties(children,number_of_mutations)
+        #mutationBlockProperties(children,number_of_mutations)
 
         cleanDirectory(write_path)
         cleanDirectory(read_path)
@@ -298,57 +328,4 @@ def main1():
     xml.writeXML(best_individual, os.path.join(os.path.dirname(project_root),
                                                'abwin/level-0.xml'))
 
-def main():
-    population_size = 100
-    number_of_generations = 100
-    number_of_parents = math.floor(0.5 * population_size)
-    number_of_mutations = math.floor((number_of_parents // 2) * 0.3)
 
-    project_root = os.path.dirname(os.getcwd())
-    game_path = os.path.join(os.path.dirname(project_root), 'abwin/win_build.exe')
-    write_path = os.path.join(os.path.dirname(project_root),'abwin/win_build_Data/StreamingAssets/Levels')
-    read_path = os.path.join(os.path.dirname(project_root),'abwin/win_build_Data/StreamingAssets/Output')
-    log_path = os.path.join(os.path.dirname(project_root), 'tfgLogs/log.txt')
-
-
-
-    evolution = Evolution()
-    evolution.registerInitialization(initialization=initPopulationDiscretePos)
-    evolution.registerFitness(fitness=fitnessPopulationSkip)
-    evolution.registerCross(cross=crossSampleNoDuplicate)
-    evolution.registerMutation(mutation=mutationBlockProperties)
-    evolution.registerReplacement(replacement= elitistReplacement)
-    evolution.registerSelection(selection=selectionTournamentNoRepetition)
-
-    max_evaluated = evolution.initEvolution(population_size= population_size, fitness_params=[game_path, write_path, read_path, 0])
-
-    cleanDirectory(write_path)
-    cleanDirectory(read_path)
-    if os.path.isfile(log_path):
-        os.remove(log_path)
-
-    for generation in range(number_of_generations):
-        population, max_evaluated = evolution.runGeneration(fitness_params=[game_path, write_path, read_path, max_evaluated],
-                                                            mutation_params=[number_of_mutations],
-                                                            selection_params=[number_of_parents],
-                                                            replacement_params=[population_size])
-        cleanDirectory(write_path)
-        cleanDirectory(read_path)
-        print("G: " + str(generation) +\
-              " ENTROPY " + str(informationEntropy(population, 4)) +\
-              " best-> " + str(population[0].fitness) +\
-              " avg -> " + str(sum(map(lambda x: x.fitness, population)) / len(population)) +\
-              " worst -> " + str(max(population, key=lambda x: x.fitness).fitness))
-
-        f = open(os.path.join(os.path.dirname(project_root), 'tfgLogs/log.txt'), 'a')
-        f.write("----------------------------------------------Generation " + str(generation) + "/" + str(
-            number_of_generations) + "----------------------------------------------")
-        for level in population:
-            f.write(level.toString())
-        f.close()
-
-    xml.writeXML(best_individual, os.path.join(os.path.dirname(project_root),
-                                               'abwin/level-0.xml'))
-
-if __name__ == "__main__":
-    main()

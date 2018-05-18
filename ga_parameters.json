@@ -1,0 +1,14 @@
+{
+"population_size": 100,
+"number_of_generations" : 100,
+"percent_of_parents" : 0.5,
+"percent_of_mutations_type" : 0.5,
+"percent_of_mutations_rotation" : 0.5,
+"percent_of_mutations_x" : 0.5,
+"percent_of_mutations_y" : 1,
+"game_path": "abwin/win_build.exe",
+"write_path": "abwin/win_build_Data/StreamingAssets/Levels",
+"read_path": "abwin/win_build_Data/StreamingAssets/Output",
+"log_dir": "logs",
+"log_base_name": "base"
+}
