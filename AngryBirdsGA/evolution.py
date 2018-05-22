@@ -1,5 +1,4 @@
 import math
-import random
 import os
 from AngryBirdsGA import *
 from AngryBirdsGA.BlockGene import BlockGene
@@ -58,6 +57,7 @@ class Evolution:
         for  mut,params in zip(self.mutation,mutation_params):
             mut(children,*params)
         fit_out = self.fitness(children, *fitness_params)
+        print([x.fitness for x in sorted(children,key=lambda c: c.fitness)])
         self.population = self.replacement(children, self.population, *replacement_params)
 
         return self.population, fit_out
@@ -67,7 +67,7 @@ def initPopulation(number_of_individuals):
     population = []
 
     for i in range(number_of_individuals):
-        population.append(LevelIndividual([]).initRandom(n_blocks=random.randint(MIN_B, MAX_B)))
+        population.append(LevelIndividual([]).initRandom(n_blocks=Random.randint(MIN_B, MAX_B)))
 
     return population
 
@@ -75,14 +75,14 @@ def initPopulationCheckOverlapping(number_of_individuals):
     population = []
 
     for i in range(number_of_individuals):
-        population.append(LevelIndividual([]).initNoOverlapping(n_blocks=random.randint(MIN_B, MAX_B)))
+        population.append(LevelIndividual([]).initNoOverlapping(n_blocks=Random.randint(MIN_B, MAX_B)))
 
     return population
 
 def initPopulationDiscretePos(number_of_individuals):
     population = []
     for i in range(number_of_individuals):
-        population.append(LevelIndividual([]).initDiscrete(n_blocks = random.randint(MIN_B, MAX_B)))
+        population.append(LevelIndividual([]).initDiscrete(n_blocks = Random.randint(MIN_B, MAX_B)))
 
     return population
 
@@ -92,7 +92,7 @@ def initPopulationCheckOverlappingDiscretePos(number_of_individuals):
     print("Initializing population 0/" + str(number_of_individuals) + "\r", end="", flush=True)
     for i in range(number_of_individuals):
         print("Initializing population " + str(i) + "/" + str(number_of_individuals)+ "\r", end="", flush=True)
-        population.append(LevelIndividual([]).initDiscreteNoOverlapping(n_blocks = random.randint(MIN_B, MAX_B)))
+        population.append(LevelIndividual([]).initDiscreteNoOverlapping(n_blocks = Random.randint(MIN_B, MAX_B)))
 
     print("Initializing population completed")
     return population
@@ -141,6 +141,8 @@ def fitnessPopulationSkip(population, game_path, write_path, read_path, max_eval
         if i not in evaluated:
             population[i].base_fitness = max_evaluated
             population[i].fitness+=max_evaluated
+        else:
+            population[i].base_fitness = -1 # mark in game evaluated levels
 
     return max_evaluated
 
@@ -148,22 +150,22 @@ def fitnessPopulationSkip(population, game_path, write_path, read_path, max_eval
 def selectionTournament(population,n_tournaments):
     parents = []
     for i in range(n_tournaments):
-        candidate_1 = population[random.randint(0,len(population)-1)]
-        candidate_2 = population[random.randint(0,len(population)-1)]
+        candidate_1 = population[Random.randint(0,len(population)-1)]
+        candidate_2 = population[Random.randint(0,len(population)-1)]
         parents.append(min(candidate_1, candidate_2, key=lambda x: x.fitness))
 
-        candidate_1 = population[random.randint(0,len(population)-1)]
-        candidate_2 = population[random.randint(0,len(population)-1)]
+        candidate_1 = population[Random.randint(0,len(population)-1)]
+        candidate_2 = population[Random.randint(0,len(population)-1)]
         parents.append(min(candidate_1, candidate_2, key=lambda x: x.fitness))
     return parents
 
-def selectionTournamentNoRepetition(population,n_tournaments):
+def selectionTournamentNoRepetition(population,percentage_parents):
     parents = []
-    for i in range(n_tournaments):
-        candidate_1, candidate_2  = random.sample(population,2)
+    for i in range(int(len(population) * percentage_parents)):
+        candidate_1, candidate_2  = Random.sample(population,2)
         parents.append(min(candidate_1, candidate_2, key=lambda x: x.fitness))
 
-        candidate_1, candidate_2  = random.sample(population,2)
+        candidate_1, candidate_2  = Random.sample(population,2)
         parents.append(min(candidate_1, candidate_2, key=lambda x: x.fitness))
     return parents
 
@@ -172,7 +174,7 @@ def crossSample(parents):
     children = []
     for i in range(0,len(parents), 2):
         child_n_blocks = min(len(parents[i].blocks()) + len(parents[i+1].blocks()) // 2, MAX_B)
-        child_blocks = random.sample(parents[i].blocks()+parents[i+1].blocks(), child_n_blocks)
+        child_blocks = Random.sample(parents[i].blocks()+parents[i+1].blocks(), child_n_blocks)
         children.append(LevelIndividual(child_blocks))
     return children
 
@@ -184,72 +186,72 @@ def crossSampleNoDuplicate(parents):
         merged = [x for x in parents[i].blocks()+parents[i+1].blocks() if x not in common and (common.append(x) or True)]
         child_n_blocks = min(len(merged),min(len(parents[i].blocks()) + len(parents[i+1].blocks()) // 2, MAX_B))
         assert len(merged)>=child_n_blocks, "Length is %r but the mean is %r" % (len(merged),child_n_blocks)
-        child_blocks = random.sample(merged, child_n_blocks)
+        child_blocks = Random.sample(merged, child_n_blocks)
         children.append(LevelIndividual(child_blocks))
     return children
 
 
 def mutationBlockNumber(population, n_mutations, max_difference):
     for a in range(n_mutations):
-        n_blocks = random.randint(-max_difference, max_difference)
-        indv_mut = population[random.randint(0, len(population)-1)]
+        n_blocks = Random.randint(-max_difference, max_difference)
+        indv_mut = population[Random.randint(0, len(population)-1)]
 
         if(n_blocks>0):
 
             ny = math.floor((MAX_Y - MIN_Y) / SMALLEST_STEP)
             nx = math.floor((MAX_X - MIN_X) / SMALLEST_STEP)
             for b in range(n_blocks):
-                x = random.randint(0, nx)
-                y = random.randint(0, ny)
-                block = BlockGene(type = random.randint(1, len(BLOCKS) - 1),
+                x = Random.randint(0, nx)
+                y = Random.randint(0, ny)
+                block = BlockGene(type = Random.randint(1, len(BLOCKS) - 1),
                                   pos = (MIN_X + SMALLEST_STEP * x, MIN_Y + SMALLEST_STEP * y),
-                                  r = random.randint(0, len(ROTATION) - 1))
+                                  r = Random.randint(0, len(ROTATION) - 1))
                 indv_mut.appendBlock(block)
         else:
             for b in range(-n_blocks):
-                indv_mut.removeBlock(random.randint(0,len(indv_mut.blocks())-1))
+                indv_mut.removeBlock(Random.randint(0,len(indv_mut.blocks())-1))
 
 def mutationBlockType(population, percentage_mutations):
-    sample = random.sample(population, min(math.floor(len(population) * percentage_mutations), len(population)))
+    sample = Random.sample(population, min(math.floor(len(population) * percentage_mutations), len(population)))
     for indv_mut in sample:
-        block_i = random.randint(0, len(indv_mut.blocks()) - 1)
+        block_i = Random.randint(0, len(indv_mut.blocks()) - 1)
         block = BlockGene(type=indv_mut.blocks()[block_i].type,
-                          pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].x),
+                          pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].y),
                           r=indv_mut.blocks()[block_i].rot)
-        block.type = (block.type+random.choice([-1, 1]))%len(BLOCKS)
+        block.type = (block.type+Random.choice([-1, 1]))%len(BLOCKS)
 
         indv_mut.updateBlock(block_i,block)
 
 def mutationBlockPositionX(population, percentage_mutations):
-    sample = random.sample(population, min(math.floor(len(population) * percentage_mutations), len(population)))
+    sample = Random.sample(population, min(math.floor(len(population) * percentage_mutations), len(population)))
     for indv_mut in sample:
-        block_i = random.randint(0, len(indv_mut.blocks()) - 1)
+        block_i = Random.randint(0, len(indv_mut.blocks()) - 1)
         block = BlockGene(type=indv_mut.blocks()[block_i].type,
-                          pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].x),
+                          pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].y),
                           r=indv_mut.blocks()[block_i].rot)
-        block.x = block.x+random.choice([random.uniform(-1,-0.01),random.uniform(0.01,1)])
+        block.x = block.x+Random.choice([Random.uniform(-1,-0.01),Random.uniform(0.01,1)])
 
         indv_mut.updateBlock(block_i,block)
 
 def mutationBlockPositionY(population, percentage_mutations):
-    sample = random.sample(population, min(math.floor(len(population) * percentage_mutations), len(population)))
+    sample = Random.sample(population, min(math.floor(len(population) * percentage_mutations), len(population)))
     for indv_mut in sample:
-        block_i = random.randint(0, len(indv_mut.blocks()) - 1)
+        block_i = Random.randint(0, len(indv_mut.blocks()) - 1)
         block = BlockGene(type=indv_mut.blocks()[block_i].type,
-                          pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].x),
+                          pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].y),
                           r=indv_mut.blocks()[block_i].rot)
-        block.y = block.y+random.choice([random.uniform(-1,-0.01),random.uniform(0.01,1)])
+        block.y = block.y+Random.choice([Random.uniform(-1,-0.01),Random.uniform(0.01,1)])
 
         indv_mut.updateBlock(block_i,block)
 
 def mutationBlockRotation(population, percentage_mutations):
-    sample = random.sample(population,min(math.floor(len(population)*percentage_mutations), len(population)))
+    sample = Random.sample(population,min(math.floor(len(population)*percentage_mutations), len(population)))
     for indv_mut in sample:
-        block_i = random.randint(0, len(indv_mut.blocks()) - 1)
+        block_i = Random.randint(0, len(indv_mut.blocks()) - 1)
         block = BlockGene(type=indv_mut.blocks()[block_i].type,
-                          pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].x),
+                          pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].y),
                           r=indv_mut.blocks()[block_i].rot)
-        block.rot = (block.rot+random.choice([-1, 1]))%len(ROTATION)
+        block.rot = (block.rot+Random.choice([-1, 1]))%len(ROTATION)
 
         indv_mut.updateBlock(block_i,block)
 
@@ -286,8 +288,8 @@ def main1():
     population = initPopulationCheckOverlappingDiscretePos(population_size)
 
     # clean directory (input and output)
-    cleanDirectory(write_path)
-    cleanDirectory(read_path)
+    #cleanDirectory(write_path)
+    #cleanDirectory(read_path)
     if os.path.isfile(log_path):
         os.remove(log_path)
 

@@ -1,3 +1,10 @@
+import random
+import time
+
+Random = random.Random(time.time())
+
+def random_set_seed(x):
+    return random.Random(x)
 
 STRING_XML =""
 

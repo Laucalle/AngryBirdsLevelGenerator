@@ -1,4 +1,3 @@
-import random
 from math import floor
 from AngryBirdsGA import *
 import AngryBirdsGA.SeparatingAxisTheorem as SAT
@@ -18,18 +17,18 @@ class LevelIndividual:
         self._distance_threshold = 0.1
 
     def _initRandomBlock(self):
-        return BlockGene(type=random.randint(1, len(BLOCKS) - 1),
-                         pos=(random.uniform(MIN_X, MAX_X), random.uniform(MIN_Y, MAX_Y)),
-                         r=random.randint(0, len(ROTATION) - 1))
+        return BlockGene(type=Random.randint(1, len(BLOCKS) - 1),
+                         pos=(Random.uniform(MIN_X, MAX_X), Random.uniform(MIN_Y, MAX_Y)),
+                         r=Random.randint(0, len(ROTATION) - 1))
 
     def _initDiscreteBlock(self):
         ny = floor((MAX_Y - MIN_Y) / SMALLEST_STEP)
         nx = floor((MAX_X - MIN_X) / SMALLEST_STEP)
-        x = random.randint(0, nx)
-        y = random.randint(0, ny)
-        return BlockGene(type = random.randint(1, len(BLOCKS)-1),
+        x = Random.randint(0, nx)
+        y = Random.randint(0, ny)
+        return BlockGene(type = Random.randint(1, len(BLOCKS)-1),
                          pos = (MIN_X + SMALLEST_STEP * x, MIN_Y + SMALLEST_STEP * y),
-                         r = random.randint(0, len(ROTATION) - 1))
+                         r = Random.randint(0, len(ROTATION) - 1))
 
     def initRandom(self, n_blocks):
         for n in range(n_blocks):
@@ -94,7 +93,7 @@ class LevelIndividual:
         self.fitness+= (self._distance_penalty * min_y) if min_y > self._distance_threshold else 0
 
     def updateBaseFitness(self, new_base):
-        if self.base_fitness > 0: # levels evaluated in game don't need  base
+        if self.base_fitness >= 0: # levels evaluated in game don't need  base
             raw_fitness= self.fitness - self.base_fitness
             self.base_fitness = new_base
             self.fitness = raw_fitness+ new_base

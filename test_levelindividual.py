@@ -77,5 +77,21 @@ class TestLevelIndividual(unittest.TestCase):
         individual = LevelIndividual([]).initDiscreteNoOverlapping(8)
         self.assertTrue(individual.numberOverlappingBlocks() == 0)
 
+    def test_weird_case(self):
+        individual = LevelIndividual([BlockGene(type=6, pos=[1.47,-2.88],r=1),
+                           BlockGene(type=3, pos=[0.0,-2.88], r=1),
+                           BlockGene(type=4, pos=[2.31,-0.5699999999999998], r=3),
+                           BlockGene(type=5, pos=[4.62,-1.41], r=3),
+                           BlockGene(type=5, pos=[1.26,-0.5699999999999998], r=1),
+                           BlockGene(type=2, pos=[0.0,-0.7799999999999998], r=3),
+                           BlockGene(type=3, pos=[4.41,-2.25], r=2),
+                           BlockGene(type=5, pos=[2.31,-3.09], r=0)])
+
+        print(individual.numberOverlappingBlocks())
+        individual.calculatePreFitness()
+        print(individual.fitness)
+        individual.calculateFitness([22.38628,12.7887])
+        print(individual.fitness)
+
 if __name__ == '__main__':
     unittest.main()

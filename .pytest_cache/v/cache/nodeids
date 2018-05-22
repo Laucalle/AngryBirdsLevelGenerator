@@ -14,5 +14,6 @@
   "test_levelindividual.py::TestLevelIndividual::test_should_initialize_individual_OK",
   "test_levelindividual.py::TestLevelIndividual::test_try_append_block_error",
   "test_levelindividual.py::TestLevelIndividual::test_try_append_block_success",
-  "test_levelindividual.py::TestLevelIndividual::test_update_block"
+  "test_levelindividual.py::TestLevelIndividual::test_update_block",
+  "test_levelindividual.py::TestLevelIndividual::test_weird_case"
 ]

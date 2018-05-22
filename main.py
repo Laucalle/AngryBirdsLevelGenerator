@@ -13,7 +13,8 @@ def cleanDirectory(path):
 def main():
     timestamp = datetime.datetime.today()
     init = time.time()
-    project_root = os.path.dirname(os.getcwd())
+    ea.Random = ea.random_set_seed(1526992711.6456888)
+    project_root = os.getcwd()
     config_file = open(os.path.join(project_root, sys.argv[1]), 'r')
     config_param = json.load(config_file)
     population_size = config_param['population_size']
@@ -63,10 +64,12 @@ def main():
             "avg" : (sum(map(lambda x: x.fitness, population)) / len(population)),
             "worst" : max(population, key=lambda x: x.fitness).fitness
         }
+        print(log_object[str(generation).zfill(fill)])
 
     end = time.time()
     final_log = {'config': config_param,
                  'execution_time': (end - init),
+                 'seed': init,
                  'execution':log_object}
     f = open(os.path.join(project_root, log_path + "/" + log_base_name + timestamp.strftime("_%y%m%d_%H%M%S") + ".json"), 'w')
     json.dump(final_log, f , indent=2)
