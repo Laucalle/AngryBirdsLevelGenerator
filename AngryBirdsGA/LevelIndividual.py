@@ -7,7 +7,7 @@ class LevelIndividual:
 
     def __init__(self, blocks):
         self._blocks = blocks
-        self.fitness = float("inf")
+        self.fitness = None
         self.base_fitness = 0
         self.n_overlapping = self._initOverlappingBlocks()
 
@@ -83,6 +83,8 @@ class LevelIndividual:
     def calculateFitness(self, avg_vel):
         # This doesn't take into account pigs, since they are added later
         if len(avg_vel)!=0 :
+            #assert sum(avg_vel) / len(avg_vel) > 0, "Negative velocity %r" % avg_vel
+            #assert self._broken_blocks_penalty*(len(self._blocks)-len(avg_vel))>= 0, "More blocks than expected, %r expected %r" % (len(self._blocks),len(avg_vel))
             self.fitness = sum(avg_vel) / len(avg_vel) + self._broken_blocks_penalty*(len(self._blocks)-len(avg_vel))
         else: # how do we penalize when all blocks are broken
             self.fitness =  self._broken_blocks_penalty*(len(self._blocks))

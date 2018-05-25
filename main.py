@@ -13,7 +13,7 @@ def cleanDirectory(path):
 def main():
     timestamp = datetime.datetime.today()
     init = time.time()
-    ea.Random = ea.random_set_seed(1526992711.6456888)
+    #ea.Random = ea.random_set_seed(1526992711.6456888)
     project_root = os.getcwd()
     config_file = open(os.path.join(project_root, sys.argv[1]), 'r')
     config_param = json.load(config_file)
@@ -51,6 +51,8 @@ def main():
     cleanDirectory(read_path)
     log_object = {}
     fill = len(str(number_of_generations))
+    same_generation_strike = 0
+    last_generation_worst = None
     for generation in range(number_of_generations):
         population, max_evaluated = evolution.runGeneration(fitness_params=[game_path, write_path, read_path, max_evaluated],
                                                             mutation_params=number_of_mutations,
@@ -65,11 +67,19 @@ def main():
             "worst" : max(population, key=lambda x: x.fitness).fitness
         }
         print(log_object[str(generation).zfill(fill)])
+        if max(population, key=lambda x: x.fitness).fitness == last_generation_worst:
+            same_generation_strike+=1
+        else:
+            same_generation_strike = 0
+        if same_generation_strike>10:
+            break
 
+        last_generation_worst = max(population, key=lambda x: x.fitness).fitness
+        xml.writeXML(population[0], os.path.join(project_root, log_path + "/level-0-" +
+                                                     timestamp.strftime("%y%m%d_%H%M%S") + ".xml"))
     end = time.time()
     final_log = {'config': config_param,
                  'execution_time': (end - init),
-                 'seed': init,
                  'execution':log_object}
     f = open(os.path.join(project_root, log_path + "/" + log_base_name + timestamp.strftime("_%y%m%d_%H%M%S") + ".json"), 'w')
     json.dump(final_log, f , indent=2)

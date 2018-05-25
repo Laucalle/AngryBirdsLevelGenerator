@@ -1,6 +1,6 @@
 {
 "population_size": 100,
-"number_of_generations" : 100,
+"number_of_generations" : 1000,
 "percent_of_parents" : 0.5,
 "percent_of_mutations_type" : 0.5,
 "percent_of_mutations_rotation" : 0.5,
@@ -10,5 +10,5 @@
 "write_path": "abwin/win_build_Data/StreamingAssets/Levels",
 "read_path": "abwin/win_build_Data/StreamingAssets/Output",
 "log_dir": "logs",
-"log_base_name": "base"
+"log_base_name": "base_large"
 }

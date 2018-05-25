@@ -1,0 +1,67 @@
+{
+  "config": {
+    "population_size": 100,
+    "number_of_generations": 1000,
+    "percent_of_parents": 0.5,
+    "percent_of_mutations_type": 0.5,
+    "percent_of_mutations_rotation": 0.5,
+    "percent_of_mutations_x": 0.5,
+    "percent_of_mutations_y": 1,
+    "game_path": "abwin/win_build.exe",
+    "write_path": "abwin/win_build_Data/StreamingAssets/Levels",
+    "read_path": "abwin/win_build_Data/StreamingAssets/Output",
+    "log_dir": "logs",
+    "log_base_name": "base_large"
+  },
+  "execution_time": 44.32054567337036,
+  "execution": {
+    "0000": {
+      "entropy": 4.446790220747581,
+      "best": 313.00518877178916,
+      "avg": 384.72466455126175,
+      "worst": 455.10518877178913
+    },
+    "0001": {
+      "entropy": 4.197324804905695,
+      "best": 313.00518877178916,
+      "avg": 369.23007595827386,
+      "worst": 413.00518877178916
+    },
+    "0002": {
+      "entropy": 4.139873238791005,
+      "best": 313.00518877178916,
+      "avg": 361.07791779677314,
+      "worst": 393.00518877178916
+    },
+    "0003": {
+      "entropy": 3.9140688436516844,
+      "best": 313.00518877178916,
+      "avg": 355.1795951365491,
+      "worst": 375.34958147270424
+    },
+    "0004": {
+      "entropy": 3.8357615490684767,
+      "best": 313.00518877178916,
+      "avg": 350.32884886445913,
+      "worst": 373.00518877178916
+    },
+    "0005": {
+      "entropy": 4.172295242481699,
+      "best": 313.00518877178916,
+      "avg": 346.1088922543684,
+      "worst": 373.00518877178916
+    },
+    "0006": {
+      "entropy": 4.172295242481699,
+      "best": 313.00518877178916,
+      "avg": 346.1088922543684,
+      "worst": 373.00518877178916
+    },
+    "0007": {
+      "entropy": 4.172295242481699,
+      "best": 313.00518877178916,
+      "avg": 346.1088922543684,
+      "worst": 373.00518877178916
+    }
+  }
+}
