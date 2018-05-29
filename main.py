@@ -32,20 +32,12 @@ def main():
     log_base_name = config_param['log_base_name']
 
 
-    evolution = ea.Evolution()
-    evolution.registerInitialization(initialization=ea.initPopulationDiscretePos)
-    evolution.registerFitness(fitness=ea.fitnessPopulationSkip)
-    evolution.registerCross(cross=ea.crossSampleNoDuplicate)
+    evolution = ea.Evolution(game_path=game_path, write_path=write_path,read_path=read_path)
 
-    evolution.registerFirstMutation(mutation=ea.mutationBlockType)
-    evolution.registerNewMutation(mutation=ea.mutationBlockRotation)
-    evolution.registerNewMutation(mutation=ea.mutationBlockPositionX)
-    evolution.registerNewMutation(mutation=ea.mutationBlockPositionY)
-
-    evolution.registerReplacement(replacement= ea.elitistReplacement)
-    evolution.registerSelection(selection=ea.selectionTournamentNoRepetition)
-
-    max_evaluated = evolution.initEvolution(population_size= population_size, fitness_params=[game_path, write_path, read_path, 0])
+    worst_evaluated = 0
+    worst_evaluated = evolution.initEvolution(population_size= population_size,
+                                            initialization_method=ea.LevelIndividual.initDiscrete,
+                                            fitness_params=[worst_evaluated])
 
     cleanDirectory(write_path)
     cleanDirectory(read_path)
@@ -54,7 +46,7 @@ def main():
     same_generation_strike = 0
     last_generation_worst = None
     for generation in range(number_of_generations):
-        population, max_evaluated = evolution.runGeneration(fitness_params=[game_path, write_path, read_path, max_evaluated],
+        population, max_evaluated = evolution.runGeneration(fitness_params=[worst_evaluated],
                                                             mutation_params=number_of_mutations,
                                                             selection_params=[number_of_parents],
                                                             replacement_params=[population_size])
