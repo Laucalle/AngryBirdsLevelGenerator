@@ -66,6 +66,18 @@ class TestOperator(unittest.TestCase):
 
         self.assertEqual([self.population_mock_1[0], self.population_mock_1[1]], result, "Selection tournament correct")
 
+    def test_cross_common(self):
+        common = [BlockGene(type=1, pos=[0,0], r=0),
+                  BlockGene(type=1, pos=[0.42,0.42], r=0),
+                  BlockGene(type=1, pos=[0.42,2.5], r=0)]
+        uncommon = [BlockGene(type=7, pos=[0.5,1.5], r=2),
+                    BlockGene(type=7, pos=[0.8,2.0], r=2)]
+
+        with mock.patch('random.shuffle', lambda x: uncommon):
+            result = self.evolution.crossMaintainCommon([self.individual_1, self.individual_2])
+
+        self.assertTrue(np.all(np.asarray([x for x in result[0].blocks() if x in common+uncommon[:1]]))
+                        and np.all(np.asarray([x for x in result[1].blocks() if x in common+uncommon[1:]])))
 
 if __name__ == '__main__':
     unittest.main()

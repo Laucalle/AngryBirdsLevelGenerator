@@ -87,6 +87,18 @@ class Evolution:
             children.append(LevelIndividual(child_blocks))
         return children
 
+    def crossMaintainCommon(self, parents):
+        children = []
+        for i in range(0, len(parents), 2):
+            common = [x for x in parents[i].blocks() if x in parents[i + 1].blocks()]
+            uncommon = random.shuffle([x for x in parents[i].blocks()+ parents[i+1].blocks() if x not in common ])
+            child_1 = LevelIndividual(common + uncommon[:len(uncommon)//2])
+            child_2 = LevelIndividual(common + uncommon[len(uncommon)//2:])
+            children.append(child_1)
+            children.append(child_2)
+        return children
+
+
     def mutationBlockNumber(self,individuals, n_mutations, max_difference):
         for a in range(n_mutations):
             n_blocks = random.randint(-max_difference, max_difference)

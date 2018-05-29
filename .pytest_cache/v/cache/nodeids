@@ -1,5 +1,6 @@
 [
   "test_operators.py::TestOperator::test_cross",
+  "test_operators.py::TestOperator::test_cross_common",
   "test_operators.py::TestOperator::test_fitness",
   "test_operators.py::TestOperator::test_merge_blocks",
   "test_operators.py::TestOperator::test_mutation",
