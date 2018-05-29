@@ -8,6 +8,7 @@ import random
 
 class TestOperator(unittest.TestCase):
     def setUp(self):
+        self.evolution = op.Evolution(game_path="", write_path="", read_path="")
         self.population_mock_1 = [LevelIndividual([]),LevelIndividual([]),LevelIndividual([]),LevelIndividual([])]
         self.population_mock_2 = [LevelIndividual([]),LevelIndividual([]),LevelIndividual([]),LevelIndividual([])]
         for n in range(len(self.population_mock_1)):
@@ -18,20 +19,21 @@ class TestOperator(unittest.TestCase):
         self.individual_1 = LevelIndividual([BlockGene(type=1, pos=[0,0], r=0),
                            BlockGene(type=1, pos=[0.42,0.42], r=0),
                            BlockGene(type=1, pos=[0.42,2.5], r=0),
-                           BlockGene(type=13, pos=[0.5,1.5], r=0)])
+                           BlockGene(type=7, pos=[0.5,1.5], r=2)])
         self.individual_2 = LevelIndividual([BlockGene(type=1, pos=[0,0], r=0),
                            BlockGene(type=1, pos=[0.42,0.42], r=0),
                            BlockGene(type=1, pos=[0.42,2.5], r=0),
-                           BlockGene(type=13, pos=[0.8,2.0], r=0)])
+                           BlockGene(type=7, pos=[0.8,2.0], r=2)])
         self.merged_blocks = [BlockGene(type=1, pos=[0,0], r=0),
                               BlockGene(type=1, pos=[0.42,0.42], r=0),
                               BlockGene(type=1, pos=[0.42,2.5], r=0),
-                              BlockGene(type=13, pos=[0.5,1.5], r=0),
-                              BlockGene(type=13, pos=[0.8,2.0], r=0)]
+                              BlockGene(type=7, pos=[0.5,1.5], r=2),
+                              BlockGene(type=7, pos=[0.8,2.0], r=2)]
 
 
     def test_replacement(self):
-        result = op.elitistReplacement(self.population_mock_1, self.population_mock_2, len(self.population_mock_1))
+        self.evolution.population = self.population_mock_1
+        result = self.evolution.elitistReplacement(self.population_mock_2, len(self.population_mock_1))
         self.assertEqual(result, self.population_mock_1, "Replacement working")
 
     def test_fitness(self): #???
@@ -45,9 +47,10 @@ class TestOperator(unittest.TestCase):
         self.assertEqual(merged, self.merged_blocks, "Unique blocks line is working")
 
     def test_cross(self):
+
         blocks = random.sample(self.merged_blocks, len(self.individual_1.blocks()))
         with mock.patch('random.sample', lambda x,v: blocks):
-            result = op.crossSampleNoDuplicate([self.individual_1, self.individual_2])[0]
+            result = self.evolution.crossSampleNoDuplicate([self.individual_1, self.individual_2])[0]
 
         self.assertTrue(np.all(np.asarray([x for x in result.blocks() if x in blocks])))
 
@@ -57,8 +60,9 @@ class TestOperator(unittest.TestCase):
     def test_selection(self):
         parents = [[self.population_mock_1[0], self.population_mock_2[0]],
                    [self.population_mock_1[1],self.population_mock_1[2]]]
+        self.evolution.population = self.population_mock_1+self.population_mock_2
         with mock.patch('random.sample', lambda x,v: parents.pop(0)):
-            result = op.selectionTournamentNoRepetition(self.population_mock_1+self.population_mock_2, 1)
+            result = self.evolution.selectionTournament(0.125)
 
         self.assertEqual([self.population_mock_1[0], self.population_mock_1[1]], result, "Selection tournament correct")
 

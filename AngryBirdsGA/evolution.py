@@ -55,14 +55,14 @@ class Evolution:
         self.population = []
 
         for i in range(number_of_individuals):
-            self.population.append(initialization_method(LevelIndividual([]),n_blocks=Random.randint(MIN_B, MAX_B)))
+            self.population.append(initialization_method(LevelIndividual([]),n_blocks=random.randint(MIN_B, MAX_B)))
 
         return self.population
 
     def selectionTournament(self, percentage_parents):
         parents = []
         for i in range(int(len(self.population) * percentage_parents) * 2):
-            candidate_1, candidate_2 = Random.sample(self.population, 2)
+            candidate_1, candidate_2 = random.sample(self.population, 2)
             parents.append(min(candidate_1, candidate_2, key=lambda x: x.fitness))
         return parents
 
@@ -70,7 +70,7 @@ class Evolution:
         children = []
         for i in range(0, len(parents), 2):
             child_n_blocks = min(len(parents[i].blocks()) + len(parents[i + 1].blocks()) // 2, MAX_B)
-            child_blocks = Random.sample(parents[i].blocks() + parents[i + 1].blocks(), child_n_blocks)
+            child_blocks = random.sample(parents[i].blocks() + parents[i + 1].blocks(), child_n_blocks)
             children.append(LevelIndividual(child_blocks))
         return children
 
@@ -83,71 +83,71 @@ class Evolution:
                       x not in common and (common.append(x) or True)]
             child_n_blocks = min(len(merged), min(len(parents[i].blocks()) + len(parents[i + 1].blocks()) // 2, MAX_B))
             assert len(merged) >= child_n_blocks, "Length is %r but the mean is %r" % (len(merged), child_n_blocks)
-            child_blocks = Random.sample(merged, child_n_blocks)
+            child_blocks = random.sample(merged, child_n_blocks)
             children.append(LevelIndividual(child_blocks))
         return children
 
     def mutationBlockNumber(self,individuals, n_mutations, max_difference):
         for a in range(n_mutations):
-            n_blocks = Random.randint(-max_difference, max_difference)
-            indv_mut = individuals[Random.randint(0, len(individuals)-1)]
+            n_blocks = random.randint(-max_difference, max_difference)
+            indv_mut = individuals[random.randint(0, len(individuals)-1)]
 
             if(n_blocks>0):
 
                 ny = math.floor((MAX_Y - MIN_Y) / SMALLEST_STEP)
                 nx = math.floor((MAX_X - MIN_X) / SMALLEST_STEP)
                 for b in range(n_blocks):
-                    x = Random.randint(0, nx)
-                    y = Random.randint(0, ny)
-                    block = BlockGene(type = Random.randint(1, len(BLOCKS) - 1),
+                    x = random.randint(0, nx)
+                    y = random.randint(0, ny)
+                    block = BlockGene(type = random.randint(1, len(BLOCKS) - 1),
                                       pos = (MIN_X + SMALLEST_STEP * x, MIN_Y + SMALLEST_STEP * y),
-                                      r = Random.randint(0, len(ROTATION) - 1))
+                                      r = random.randint(0, len(ROTATION) - 1))
                     indv_mut.appendBlock(block)
             else:
                 for b in range(-n_blocks):
-                    indv_mut.removeBlock(Random.randint(0,len(indv_mut.blocks())-1))
+                    indv_mut.removeBlock(random.randint(0,len(indv_mut.blocks())-1))
 
     def mutationBlockType(self,individuals, percentage_mutations):
-        sample = Random.sample(individuals, min(math.floor(len(individuals) * percentage_mutations), len(individuals)))
+        sample = random.sample(individuals, min(math.floor(len(individuals) * percentage_mutations), len(individuals)))
         for indv_mut in sample:
-            block_i = Random.randint(0, len(indv_mut.blocks()) - 1)
+            block_i = random.randint(0, len(indv_mut.blocks()) - 1)
             block = BlockGene(type=indv_mut.blocks()[block_i].type,
                               pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].y),
                               r=indv_mut.blocks()[block_i].rot)
-            block.type = (block.type+Random.choice([-1, 1]))%len(BLOCKS)
+            block.type = (block.type+random.choice([-1, 1]))%len(BLOCKS)
 
             indv_mut.updateBlock(block_i,block)
 
     def mutationBlockPositionX(self, individuals, percentage_mutations):
-        sample = Random.sample(individuals, min(math.floor(len(individuals) * percentage_mutations), len(individuals)))
+        sample = random.sample(individuals, min(math.floor(len(individuals) * percentage_mutations), len(individuals)))
         for indv_mut in sample:
-            block_i = Random.randint(0, len(indv_mut.blocks()) - 1)
+            block_i = random.randint(0, len(indv_mut.blocks()) - 1)
             block = BlockGene(type=indv_mut.blocks()[block_i].type,
                               pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].y),
                               r=indv_mut.blocks()[block_i].rot)
-            block.x = block.x+Random.choice([Random.uniform(-1,-0.01),Random.uniform(0.01,1)])
+            block.x = block.x+random.choice([random.uniform(-1,-0.01),random.uniform(0.01,1)])
 
             indv_mut.updateBlock(block_i,block)
 
     def mutationBlockPositionY(self, individuals, percentage_mutations):
-        sample = Random.sample(individuals, min(math.floor(len(individuals) * percentage_mutations), len(individuals)))
+        sample = random.sample(individuals, min(math.floor(len(individuals) * percentage_mutations), len(individuals)))
         for indv_mut in sample:
-            block_i = Random.randint(0, len(indv_mut.blocks()) - 1)
+            block_i = random.randint(0, len(indv_mut.blocks()) - 1)
             block = BlockGene(type=indv_mut.blocks()[block_i].type,
                               pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].y),
                               r=indv_mut.blocks()[block_i].rot)
-            block.y = block.y+Random.choice([Random.uniform(-1,-0.01),Random.uniform(0.01,1)])
+            block.y = block.y+random.choice([random.uniform(-1,-0.01),random.uniform(0.01,1)])
 
             indv_mut.updateBlock(block_i,block)
 
     def mutationBlockRotation(self, individuals, percentage_mutations):
-        sample = Random.sample(individuals,min(math.floor(len(individuals)*percentage_mutations), len(individuals)))
+        sample = random.sample(individuals,min(math.floor(len(individuals)*percentage_mutations), len(individuals)))
         for indv_mut in sample:
-            block_i = Random.randint(0, len(indv_mut.blocks()) - 1)
+            block_i = random.randint(0, len(indv_mut.blocks()) - 1)
             block = BlockGene(type=indv_mut.blocks()[block_i].type,
                               pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].y),
                               r=indv_mut.blocks()[block_i].rot)
-            block.rot = (block.rot+Random.choice([-1, 1]))%len(ROTATION)
+            block.rot = (block.rot+random.choice([-1, 1]))%len(ROTATION)
 
             indv_mut.updateBlock(block_i,block)
 
