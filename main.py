@@ -24,6 +24,8 @@ def main():
                            [config_param['percent_of_mutations_rotation']],
                            [config_param['percent_of_mutations_x']],
                            [config_param['percent_of_mutations_y']]]
+    ea.MAX_B = config_param['max_blocks']
+    ea.MIN_B = config_param['min_blocks']
 
     game_path = os.path.join(os.path.dirname(project_root), config_param['game_path'])
     write_path = os.path.join(os.path.dirname(project_root),config_param['write_path'])
@@ -67,7 +69,7 @@ def main():
             break
 
         last_generation_worst = max(population, key=lambda x: x.fitness).fitness
-        xml.writeXML(population[0], os.path.join(project_root, log_path + "/level-0-" +
+        xml.writeXML(population[0], os.path.join(project_root, log_path + "/level-0-"+ log_base_name  +
                                                      timestamp.strftime("%y%m%d_%H%M%S") + ".xml"))
     end = time.time()
     final_log = {'config': config_param,
@@ -75,7 +77,7 @@ def main():
                  'execution':log_object}
     f = open(os.path.join(project_root, log_path + "/" + log_base_name + timestamp.strftime("_%y%m%d_%H%M%S") + ".json"), 'w')
     json.dump(final_log, f , indent=2)
-    xml.writeXML(population[0], os.path.join(project_root, log_path + "/level-0-" +
+    xml.writeXML(population[0], os.path.join(project_root, log_path + "/level-0-" + log_base_name +
                                              timestamp.strftime("%y%m%d_%H%M%S") + ".xml"))
 
 if __name__ == "__main__":

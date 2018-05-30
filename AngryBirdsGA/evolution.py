@@ -46,6 +46,8 @@ class Evolution:
         for  mut,params in zip(self.mutation,mutation_params):
             mut(children,*params)
         fit_out = self.fitness(children, *fitness_params)
+        for l in self.population:
+            l.updateBaseFitness(fit_out)
         self.population = self.replacement(children, *replacement_params)
 
         return self.population, fit_out
