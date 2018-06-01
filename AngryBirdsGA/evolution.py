@@ -16,7 +16,7 @@ class Evolution:
             self.fitnessPopulationSkip(individuals=population,game_path=game_path, write_path=write_path,
                                        read_path=read_path, max_evaluated=worst_evaluated)
         self.selection = self.selectionTournament
-        self.cross = self.crossSampleNoDuplicate
+        self.cross = self.crossMaintainCommon
         self.mutation = [ self.mutationBlockType,
                           self.mutationBlockRotation,
                           self.mutationBlockPositionX,
@@ -93,11 +93,10 @@ class Evolution:
         children = []
         for i in range(0, len(parents), 2):
             common = [x for x in parents[i].blocks() if x in parents[i + 1].blocks()]
-            uncommon = random.shuffle([x for x in parents[i].blocks()+ parents[i+1].blocks() if x not in common ])
-            child_1 = LevelIndividual(common + uncommon[:len(uncommon)//2])
-            child_2 = LevelIndividual(common + uncommon[len(uncommon)//2:])
-            children.append(child_1)
-            children.append(child_2)
+            uncommon =[x for x in parents[i].blocks()+ parents[i+1].blocks() if x not in common ]
+            random.shuffle(uncommon)
+            children.append(LevelIndividual(common + uncommon[:len(uncommon)//2]))
+            children.append(LevelIndividual(common + uncommon[len(uncommon)//2:]))
         return children
 
 

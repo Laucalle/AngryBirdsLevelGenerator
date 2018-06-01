@@ -65,7 +65,7 @@ def main():
             same_generation_strike+=1
         else:
             same_generation_strike = 0
-        if same_generation_strike>10:
+        if same_generation_strike>10 or population[0].fitness < 0.01:
             break
 
         last_generation_worst = max(population, key=lambda x: x.fitness).fitness
