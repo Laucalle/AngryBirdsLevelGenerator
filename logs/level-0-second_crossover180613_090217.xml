@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><Level width="2">
+<Camera x="0" y="0" minWidth="20" maxWidth="25"  />
+<Birds>
+<Bird type="BirdRed" />
+<Bird type="BirdBlack" />
+<Bird type="BirdWhite" />
+</Birds>
+<Slingshot x="-5" y="-2.5" />
+<GameObjects>
+<Block type="RectTiny" material="wood" x="2.31" y="-3.386467862773414" rotation="90" id="0"/>
+<Block type="SquareTiny" material="wood" x="3.5237558307187147" y="-3.3849175216488034" rotation="90" id="1"/>
+<Block type="RectTiny" material="wood" x="3.93873302619788" y="-3.305459271086905" rotation="90" id="2"/>
+<Block type="SquareSmall" material="wood" x="0.84" y="-3.331445833357016" rotation="90" id="3"/>
+<Block type="RectTiny" material="wood" x="3.1154433154836982" y="-3.3423094908616973" rotation="90" id="4"/>
+</GameObjects>
+
+</Level>
