@@ -10,6 +10,7 @@ class LevelIndividual:
         self.fitness = None
         self.base_fitness = 0
         self.n_overlapping = self._initOverlappingBlocks()
+        self.broken_penalty = 0
 
         self._broken_blocks_penalty = 100
         self._overlapping_penalty = 10
@@ -82,6 +83,7 @@ class LevelIndividual:
 
     def calculateFitness(self, avg_vel):
         # This doesn't take into account pigs, since they are added later
+        self.broken_penalty = self._broken_blocks_penalty*(len(self._blocks)-len(avg_vel))
         if len(avg_vel)!=0 :
             #assert sum(avg_vel) / len(avg_vel) > 0, "Negative velocity %r" % avg_vel
             #assert self._broken_blocks_penalty*(len(self._blocks)-len(avg_vel))>= 0, "More blocks than expected, %r expected %r" % (len(self._blocks),len(avg_vel))

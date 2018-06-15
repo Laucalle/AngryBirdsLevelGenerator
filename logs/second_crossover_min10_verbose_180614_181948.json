@@ -1,0 +1,3221 @@
+{
+  "config": {
+    "population_size": 100,
+    "number_of_generations": 1000,
+    "percent_of_parents": 0.5,
+    "percent_of_mutations_type": 0.5,
+    "percent_of_mutations_rotation": 0.5,
+    "percent_of_mutations_x": 0.5,
+    "percent_of_mutations_y": 1,
+    "max_blocks": 40,
+    "min_blocks": 10,
+    "game_path": "abwin/win_build.exe",
+    "write_path": "abwin/win_build_Data/StreamingAssets/Levels",
+    "read_path": "abwin/win_build_Data/StreamingAssets/Output",
+    "log_dir": "logs",
+    "log_base_name": "second_crossover_min10_verbose"
+  },
+  "execution_time": 18289.69219994545,
+  "execution": {
+    "0000": {
+      "entropy": 4.685309542324644,
+      "best": 712.7344919,
+      "avg": 848.8895382007175,
+      "worst": 935.8404436333333,
+      "avg_overlapping_penalty": 131.8,
+      "avg_distance_penalty": 1.2801540847163906,
+      "avg_base_penalty": 701.5236347606683,
+      "avg_broken_penalty": 14.0
+    },
+    "0001": {
+      "entropy": 4.169459105737189,
+      "best": 712.7344919,
+      "avg": 890.7351259885016,
+      "worst": 939.398059,
+      "avg_overlapping_penalty": 74.2,
+      "avg_distance_penalty": 1.2972788131691515,
+      "avg_base_penalty": 792.7791172299992,
+      "avg_broken_penalty": 22.0
+    },
+    "0002": {
+      "entropy": 3.63833849829702,
+      "best": 522.66219,
+      "avg": 1226.3789844145397,
+      "worst": 1280.1728337,
+      "avg_overlapping_penalty": 45.2,
+      "avg_distance_penalty": 1.327712217207628,
+      "avg_base_penalty": 1140.1641920149984,
+      "avg_broken_penalty": 39.0
+    },
+    "0003": {
+      "entropy": 3.6654713174264097,
+      "best": 522.66219,
+      "avg": 1035.4213612325734,
+      "worst": 1083.0655299999999,
+      "avg_overlapping_penalty": 30.2,
+      "avg_distance_penalty": 1.4678582053263423,
+      "avg_base_penalty": 951.450942900002,
+      "avg_broken_penalty": 51.0
+    },
+    "0004": {
+      "entropy": 2.873608538568324,
+      "best": 522.66219,
+      "avg": 733.9693559322818,
+      "worst": 755.8404436333332,
+      "avg_overlapping_penalty": 22.2,
+      "avg_distance_penalty": 0.7616792243996842,
+      "avg_base_penalty": 672.8900170153349,
+      "avg_broken_penalty": 37.0
+    },
+    "0005": {
+      "entropy": 2.7165594723145263,
+      "best": 522.66219,
+      "avg": 1003.2825036421106,
+      "worst": 1044.297955,
+      "avg_overlapping_penalty": 15.4,
+      "avg_distance_penalty": 0.6582165470623393,
+      "avg_base_penalty": 879.0902413,
+      "avg_broken_penalty": 106.0
+    },
+    "0006": {
+      "entropy": 2.763072087926507,
+      "best": 515.9754653333333,
+      "avg": 989.6911419320371,
+      "worst": 1049.9557,
+      "avg_overlapping_penalty": 12.6,
+      "avg_distance_penalty": 0.52525780395471,
+      "avg_base_penalty": 793.0658890000002,
+      "avg_broken_penalty": 180.0
+    },
+    "0007": {
+      "entropy": 4.3950004493968144,
+      "best": 512.1913515285714,
+      "avg": 929.1518777886372,
+      "worst": 1042.7872863333332,
+      "avg_overlapping_penalty": 7.8,
+      "avg_distance_penalty": 0.7811467542211367,
+      "avg_base_penalty": 593.2166260733329,
+      "avg_broken_penalty": 321.0
+    },
+    "0008": {
+      "entropy": 5.8071812209206675,
+      "best": 310.2705024875,
+      "avg": 862.2915445934849,
+      "worst": 1038.846868333333,
+      "avg_overlapping_penalty": 2.8,
+      "avg_distance_penalty": 1.0333412790016634,
+      "avg_base_penalty": 397.3502786500002,
+      "avg_broken_penalty": 452.0
+    },
+    "0009": {
+      "entropy": 6.324114505264367,
+      "best": 310.2705024875,
+      "avg": 782.568206277388,
+      "worst": 1005.7566928449811,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.530785823034506,
+      "avg_base_penalty": 210.2275977165,
+      "avg_broken_penalty": 560.0
+    },
+    "0010": {
+      "entropy": 6.6438561897747395,
+      "best": 307.61105528366625,
+      "avg": 694.971042632763,
+      "worst": 925.39927,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 680.0
+    },
+    "0011": {
+      "entropy": 6.6438561897747395,
+      "best": 307.61105528366625,
+      "avg": 641.6208556325157,
+      "worst": 829.6190233333333,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 627.0
+    },
+    "0012": {
+      "entropy": 6.6438561897747395,
+      "best": 215.75355839,
+      "avg": 587.9001073268032,
+      "worst": 810.545725,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 574.0
+    },
+    "0013": {
+      "entropy": 6.6438561897747395,
+      "best": 215.75355839,
+      "avg": 547.8383763351181,
+      "worst": 716.3248557,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 534.0
+    },
+    "0014": {
+      "entropy": 6.6438561897747395,
+      "best": 215.75355839,
+      "avg": 523.6534413607922,
+      "worst": 711.7865296,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 510.0
+    },
+    "0015": {
+      "entropy": 6.6438561897747395,
+      "best": 215.75355839,
+      "avg": 497.2258510505386,
+      "worst": 616.8718025714286,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 484.0
+    },
+    "0016": {
+      "entropy": 6.6438561897747395,
+      "best": 215.75355839,
+      "avg": 474.0100756412041,
+      "worst": 611.3368263,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 461.0
+    },
+    "0017": {
+      "entropy": 6.6438561897747395,
+      "best": 208.69855155415758,
+      "avg": 451.66530157572276,
+      "worst": 520.37392005,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 439.0
+    },
+    "0018": {
+      "entropy": 6.6438561897747395,
+      "best": 206.24794966666667,
+      "avg": 440.141188691209,
+      "worst": 515.9754653333333,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 428.0
+    },
+    "0019": {
+      "entropy": 6.6438561897747395,
+      "best": 108.661796842,
+      "avg": 412.645801616515,
+      "worst": 512.5624593333333,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 401.0
+    },
+    "0020": {
+      "entropy": 6.6438561897747395,
+      "best": 108.661796842,
+      "avg": 396.651201838359,
+      "worst": 510.7587055116902,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 385.0
+    },
+    "0021": {
+      "entropy": 6.6438561897747395,
+      "best": 12.7019103616,
+      "avg": 367.0776270872243,
+      "worst": 508.1326241666667,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 355.0
+    },
+    "0022": {
+      "entropy": 6.6438561897747395,
+      "best": 12.7019103616,
+      "avg": 344.6446752632346,
+      "worst": 503.54194593333335,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 332.0
+    },
+    "0023": {
+      "entropy": 6.6438561897747395,
+      "best": 12.7019103616,
+      "avg": 336.9188462683745,
+      "worst": 416.0938975,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 325.0
+    },
+    "0024": {
+      "entropy": 6.6438561897747395,
+      "best": 12.7019103616,
+      "avg": 327.4808889541799,
+      "worst": 414.9271952142857,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 316.0
+    },
+    "0025": {
+      "entropy": 6.6438561897747395,
+      "best": 12.7019103616,
+      "avg": 316.10535714354705,
+      "worst": 412.9393154,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 305.0
+    },
+    "0026": {
+      "entropy": 6.6438561897747395,
+      "best": 12.7019103616,
+      "avg": 298.0828481054224,
+      "worst": 411.01638328571426,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 287.0
+    },
+    "0027": {
+      "entropy": 6.6438561897747395,
+      "best": 12.7019103616,
+      "avg": 283.2408094904388,
+      "worst": 408.1800265853347,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 272.0
+    },
+    "0028": {
+      "entropy": 6.6438561897747395,
+      "best": 12.7019103616,
+      "avg": 272.49192195409415,
+      "worst": 406.7697028273304,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 261.0
+    },
+    "0029": {
+      "entropy": 6.6438561897747395,
+      "best": 12.7019103616,
+      "avg": 256.3184072695442,
+      "worst": 315.2422050625,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 245.0
+    },
+    "0030": {
+      "entropy": 6.6438561897747395,
+      "best": 12.7019103616,
+      "avg": 245.71146623312256,
+      "worst": 312.948341325,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 235.0
+    },
+    "0031": {
+      "entropy": 6.6438561897747395,
+      "best": 9.800370974671946,
+      "avg": 233.49747394848052,
+      "worst": 311.7785592,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 223.0
+    },
+    "0032": {
+      "entropy": 6.6438561897747395,
+      "best": 9.800370974671946,
+      "avg": 221.48210041579256,
+      "worst": 310.96368013746127,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 211.0
+    },
+    "0033": {
+      "entropy": 6.6438561897747395,
+      "best": 9.800370974671946,
+      "avg": 215.373002322835,
+      "worst": 310.3457657846896,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 205.0
+    },
+    "0034": {
+      "entropy": 6.6438561897747395,
+      "best": 9.800370974671946,
+      "avg": 195.48929563118426,
+      "worst": 308.86780075,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 185.0
+    },
+    "0035": {
+      "entropy": 6.6438561897747395,
+      "best": 9.800370974671946,
+      "avg": 185.66601467909314,
+      "worst": 307.131513875,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 175.0
+    },
+    "0036": {
+      "entropy": 6.6438561897747395,
+      "best": 9.800370974671946,
+      "avg": 174.06486113779533,
+      "worst": 304.6621420242509,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 163.0
+    },
+    "0037": {
+      "entropy": 6.6438561897747395,
+      "best": 9.800370974671946,
+      "avg": 169.43944499155,
+      "worst": 215.26424,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 159.0
+    },
+    "0038": {
+      "entropy": 6.6438561897747395,
+      "best": 8.269320275132939,
+      "avg": 165.05974418518213,
+      "worst": 212.9338247111111,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 155.0
+    },
+    "0039": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 154.8118255552386,
+      "worst": 211.9867099888889,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 145.0
+    },
+    "0040": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 144.64474472588,
+      "worst": 210.94580844444445,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 135.0
+    },
+    "0041": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 134.49062012125606,
+      "worst": 210.117916754,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 125.0
+    },
+    "0042": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 120.36389988009905,
+      "worst": 209.2302409834889,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 111.0
+    },
+    "0043": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 111.35321112733301,
+      "worst": 208.43182545512713,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 102.0
+    },
+    "0044": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 91.72772268824089,
+      "worst": 205.5106021111111,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 82.0
+    },
+    "0045": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 82.70677073638002,
+      "worst": 114.71270060212034,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 73.0
+    },
+    "0046": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 80.24771948642623,
+      "worst": 112.29754445261094,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 71.0
+    },
+    "0047": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 76.05320637940184,
+      "worst": 111.11686648807985,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 67.0
+    },
+    "0048": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 73.99047368639357,
+      "worst": 110.53211793450001,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 65.0
+    },
+    "0049": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 72.97034131785081,
+      "worst": 110.37744634820197,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 64.0
+    },
+    "0050": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 68.9515715990529,
+      "worst": 110.0459139,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 60.0
+    },
+    "0051": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 59.8504468149382,
+      "worst": 108.85677461,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 51.0
+    },
+    "0052": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 55.8657379278784,
+      "worst": 108.59934789005096,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 47.0
+    },
+    "0053": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 53.811974045315026,
+      "worst": 108.4678440576098,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 45.0
+    },
+    "0054": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 41.08597226167593,
+      "worst": 107.7104900610604,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 32.0
+    },
+    "0055": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 38.21409240778971,
+      "worst": 107.60007694508721,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 29.0
+    },
+    "0056": {
+      "entropy": 6.6438561897747395,
+      "best": 4.1467772656513135,
+      "avg": 33.297928410565085,
+      "worst": 107.41047577,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 24.0
+    },
+    "0057": {
+      "entropy": 6.6438561897747395,
+      "best": 3.4801379111058584,
+      "avg": 20.521307433932655,
+      "worst": 106.49681158519309,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 11.0
+    },
+    "0058": {
+      "entropy": 6.6438561897747395,
+      "best": 3.4801379111058584,
+      "avg": 11.689873548666062,
+      "worst": 105.1746866452615,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 2.0
+    },
+    "0059": {
+      "entropy": 6.6438561897747395,
+      "best": 3.4801379111058584,
+      "avg": 9.538067301796922,
+      "worst": 14.683565140000002,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0060": {
+      "entropy": 6.62385618977474,
+      "best": 3.4801379111058584,
+      "avg": 9.063541783365453,
+      "worst": 12.7019103616,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0061": {
+      "entropy": 6.62385618977474,
+      "best": 3.4801379111058584,
+      "avg": 8.797454320819341,
+      "worst": 12.040313044480001,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0062": {
+      "entropy": 6.62385618977474,
+      "best": 3.4801379111058584,
+      "avg": 8.580320150161276,
+      "worst": 11.3413265,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0063": {
+      "entropy": 6.62385618977474,
+      "best": 3.4801379111058584,
+      "avg": 8.239906907213086,
+      "worst": 10.773997482397998,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0064": {
+      "entropy": 6.62385618977474,
+      "best": 3.4801379111058584,
+      "avg": 7.927003578949367,
+      "worst": 10.303683199547272,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0065": {
+      "entropy": 6.6438561897747395,
+      "best": 3.033347348456186,
+      "avg": 7.4565933831200395,
+      "worst": 9.826747287487873,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0066": {
+      "entropy": 6.6438561897747395,
+      "best": 3.033347348456186,
+      "avg": 7.035276366874351,
+      "worst": 9.280620014064981,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0067": {
+      "entropy": 6.6438561897747395,
+      "best": 3.033347348456186,
+      "avg": 6.900443734321912,
+      "worst": 9.110286370771503,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0068": {
+      "entropy": 6.6438561897747395,
+      "best": 3.033347348456186,
+      "avg": 6.596079190320052,
+      "worst": 8.636907259469476,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0069": {
+      "entropy": 6.6438561897747395,
+      "best": 3.033347348456186,
+      "avg": 6.480264792078572,
+      "worst": 8.563480884714698,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0070": {
+      "entropy": 6.6438561897747395,
+      "best": 3.033347348456186,
+      "avg": 6.182613771562077,
+      "worst": 7.876790769176838,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0071": {
+      "entropy": 6.6438561897747395,
+      "best": 3.033347348456186,
+      "avg": 5.8980209286630805,
+      "worst": 7.588256812119712,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0072": {
+      "entropy": 6.6438561897747395,
+      "best": 3.033347348456186,
+      "avg": 5.792897776843388,
+      "worst": 7.4149289501788305,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0073": {
+      "entropy": 6.6438561897747395,
+      "best": 2.423128371109257,
+      "avg": 5.554535237828116,
+      "worst": 7.1809909873325255,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0074": {
+      "entropy": 6.6438561897747395,
+      "best": 2.423128371109257,
+      "avg": 5.303480799647125,
+      "worst": 6.872242839999998,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0075": {
+      "entropy": 6.6438561897747395,
+      "best": 2.423128371109257,
+      "avg": 5.2331948908053105,
+      "worst": 6.822935140000001,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0076": {
+      "entropy": 6.6438561897747395,
+      "best": 2.1672237636325162,
+      "avg": 5.007412262047831,
+      "worst": 6.748582854505216,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0077": {
+      "entropy": 6.6438561897747395,
+      "best": 2.1672237636325162,
+      "avg": 4.764538975049762,
+      "worst": 6.41732304376022,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0078": {
+      "entropy": 6.6438561897747395,
+      "best": 2.1672237636325162,
+      "avg": 4.586577230569493,
+      "worst": 6.203920430000001,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0079": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 4.334274430783129,
+      "worst": 6.000581990000001,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0080": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 4.161219368955946,
+      "worst": 5.775374277872407,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0081": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 4.048328291713376,
+      "worst": 5.621736206668989,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0082": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 3.9605855496185116,
+      "worst": 5.244028744687623,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0083": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 3.818186278145929,
+      "worst": 5.1086069524445765,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0084": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 3.7189568069877708,
+      "worst": 4.936616642703584,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0085": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 3.6233872594603427,
+      "worst": 4.805302206398656,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0086": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 3.5017539488171394,
+      "worst": 4.493280582625829,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0087": {
+      "entropy": 6.62385618977474,
+      "best": 1.4725401382220482,
+      "avg": 3.440425797264936,
+      "worst": 4.248040844921327,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0088": {
+      "entropy": 6.62385618977474,
+      "best": 1.4725401382220482,
+      "avg": 3.377844443916641,
+      "worst": 4.193888013350113,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0089": {
+      "entropy": 6.62385618977474,
+      "best": 1.4725401382220482,
+      "avg": 3.332199674460586,
+      "worst": 4.146424897451,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0090": {
+      "entropy": 6.62385618977474,
+      "best": 1.4725401382220482,
+      "avg": 3.2356931358163554,
+      "worst": 4.062461701539665,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0091": {
+      "entropy": 6.62385618977474,
+      "best": 1.4725401382220482,
+      "avg": 3.1597832602941303,
+      "worst": 3.9446793512441403,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0092": {
+      "entropy": 6.62385618977474,
+      "best": 1.4725401382220482,
+      "avg": 3.0887405761651547,
+      "worst": 3.8118979362105003,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0093": {
+      "entropy": 6.62385618977474,
+      "best": 1.4725401382220482,
+      "avg": 3.0501225403650176,
+      "worst": 3.8071144470385994,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0094": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 2.9845440154625105,
+      "worst": 3.70315334551844,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0095": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 2.932253527694911,
+      "worst": 3.6517282021646005,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0096": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 2.898267626711325,
+      "worst": 3.6044432510188096,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0097": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 2.8387378438743918,
+      "worst": 3.5122394668791896,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0098": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 2.7891397851904913,
+      "worst": 3.4721523562813013,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0099": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 2.7542637549363094,
+      "worst": 3.44116253113,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0100": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 2.6487524007446996,
+      "worst": 3.3291306471062447,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0101": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 2.617719536687909,
+      "worst": 3.271391684929329,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0102": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 2.58420795324877,
+      "worst": 3.2437129820011004,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0103": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4725401382220482,
+      "avg": 2.5281872325066517,
+      "worst": 3.129346907798255,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0104": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4005699349958842,
+      "avg": 2.4803642170835696,
+      "worst": 3.1149917561492133,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0105": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4005699349958842,
+      "avg": 2.430294034265512,
+      "worst": 3.033347348456186,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0106": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4005699349958842,
+      "avg": 2.4167843348385913,
+      "worst": 3.01526879258131,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0107": {
+      "entropy": 6.6438561897747395,
+      "best": 1.4005699349958842,
+      "avg": 2.403977156929928,
+      "worst": 3.0033592864428744,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0108": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 2.3467647902998268,
+      "worst": 2.9201891980583015,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0109": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 2.326667513480474,
+      "worst": 2.88010003072737,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0110": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 2.2790620855988104,
+      "worst": 2.7969995023690104,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0111": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 2.263901548892378,
+      "worst": 2.7829314771008833,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0112": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 2.245810537300966,
+      "worst": 2.7702386699518584,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0113": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 2.215954175701815,
+      "worst": 2.7206246411822894,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0114": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 2.1790697878461973,
+      "worst": 2.6924818234594436,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0115": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 2.1346564719369727,
+      "worst": 2.659349679364437,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0116": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 2.082857197632827,
+      "worst": 2.606949241259721,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0117": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 2.0651979922042276,
+      "worst": 2.595310545568424,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0118": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 2.053348027657105,
+      "worst": 2.569267452385074,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0119": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 2.010735099989417,
+      "worst": 2.545952230326851,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0120": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 1.9794506711856599,
+      "worst": 2.4908884104807214,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0121": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 1.9337412213433642,
+      "worst": 2.4417022275751643,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0122": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 1.9235972332616071,
+      "worst": 2.4368164138383115,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0123": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 1.846927379402369,
+      "worst": 2.399570624317974,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0124": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 1.7998056499419695,
+      "worst": 2.3172947289490784,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0125": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 1.768449963410844,
+      "worst": 2.2252413131930906,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0126": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 1.7574247211680376,
+      "worst": 2.2160754751886733,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0127": {
+      "entropy": 6.6438561897747395,
+      "best": 0.5739995287414866,
+      "avg": 1.697318314263491,
+      "worst": 2.1653120254913953,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0128": {
+      "entropy": 6.62385618977474,
+      "best": 0.5739995287414866,
+      "avg": 1.6647441738247464,
+      "worst": 2.112414198147982,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0129": {
+      "entropy": 6.603856189774739,
+      "best": 0.5739995287414866,
+      "avg": 1.60663723127473,
+      "worst": 2.0576138106864303,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0130": {
+      "entropy": 6.603856189774739,
+      "best": 0.5739995287414866,
+      "avg": 1.5784154891404598,
+      "worst": 2.027632746402563,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0131": {
+      "entropy": 6.603856189774739,
+      "best": 0.5739995287414866,
+      "avg": 1.5441888919149962,
+      "worst": 1.9738140996013156,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0132": {
+      "entropy": 6.603856189774739,
+      "best": 0.5739995287414866,
+      "avg": 1.4735264638261694,
+      "worst": 1.8746835318950403,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0133": {
+      "entropy": 6.603856189774739,
+      "best": 0.5739995287414866,
+      "avg": 1.456071270571946,
+      "worst": 1.8531996145852543,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0134": {
+      "entropy": 6.603856189774739,
+      "best": 0.5739995287414866,
+      "avg": 1.4241472848105479,
+      "worst": 1.820900324317974,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0135": {
+      "entropy": 6.603856189774739,
+      "best": 0.5739995287414866,
+      "avg": 1.404247066690064,
+      "worst": 1.802864560301721,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0136": {
+      "entropy": 6.603856189774739,
+      "best": 0.5739995287414866,
+      "avg": 1.358374381562202,
+      "worst": 1.7062512984102391,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0137": {
+      "entropy": 6.603856189774739,
+      "best": 0.46132038858710595,
+      "avg": 1.3091631996333728,
+      "worst": 1.6276982526181476,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0138": {
+      "entropy": 6.603856189774739,
+      "best": 0.46132038858710595,
+      "avg": 1.2589555072697107,
+      "worst": 1.5688796032273178,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0139": {
+      "entropy": 6.603856189774739,
+      "best": 0.46132038858710595,
+      "avg": 1.2458266553486284,
+      "worst": 1.5609862385229702,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0140": {
+      "entropy": 6.603856189774739,
+      "best": 0.46132038858710595,
+      "avg": 1.2443439291058498,
+      "worst": 1.5556175643179742,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0141": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 1.2067546508964901,
+      "worst": 1.5417743719805244,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0142": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 1.177993364774252,
+      "worst": 1.5093947114779744,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0143": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 1.1631009798070873,
+      "worst": 1.4838388323681513,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0144": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 1.1626832738117165,
+      "worst": 1.4795013666666668,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0145": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 1.1443669112659767,
+      "worst": 1.4429037942926857,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0146": {
+      "entropy": 6.62385618977474,
+      "best": 0.3733894204871777,
+      "avg": 1.1216216789090532,
+      "worst": 1.4158645314644156,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0147": {
+      "entropy": 6.62385618977474,
+      "best": 0.3733894204871777,
+      "avg": 1.1109087013739265,
+      "worst": 1.4143608381310822,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0148": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 1.089118952626025,
+      "worst": 1.3772418737226877,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0149": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 1.0757678633942036,
+      "worst": 1.3616104892393521,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0150": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 1.0594156013330804,
+      "worst": 1.3431089736777817,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0151": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 1.0486457829782925,
+      "worst": 1.3367375876256877,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0152": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 1.026777072133825,
+      "worst": 1.3224864824636446,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0153": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 1.0179803459021577,
+      "worst": 1.3085595529297198,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0154": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 1.0033726223496908,
+      "worst": 1.2676405251937235,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0155": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 0.9942124054430107,
+      "worst": 1.2581749511848788,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0156": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 0.9841486230538744,
+      "worst": 1.2445744011333335,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0157": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 0.9731428454569911,
+      "worst": 1.2305421654280504,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0158": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 0.9560527862741004,
+      "worst": 1.193895763686638,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0159": {
+      "entropy": 6.603856189774739,
+      "best": 0.3733894204871777,
+      "avg": 0.9501699683232896,
+      "worst": 1.1878402045483822,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0160": {
+      "entropy": 6.583856189774739,
+      "best": 0.3733894204871777,
+      "avg": 0.9434075983024871,
+      "worst": 1.1799191187792042,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0161": {
+      "entropy": 6.583856189774739,
+      "best": 0.3733894204871777,
+      "avg": 0.9290351817555677,
+      "worst": 1.147843125329,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0162": {
+      "entropy": 6.583856189774739,
+      "best": 0.3733894204871777,
+      "avg": 0.9083813650957854,
+      "worst": 1.1334083481451678,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0163": {
+      "entropy": 6.583856189774739,
+      "best": 0.3733894204871777,
+      "avg": 0.9026232728496675,
+      "worst": 1.1242170719805245,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0164": {
+      "entropy": 6.583856189774739,
+      "best": 0.3733894204871777,
+      "avg": 0.8876640463934994,
+      "worst": 1.1068690535970265,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0165": {
+      "entropy": 6.583856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.8762451513636,
+      "worst": 1.0961839663608228,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0166": {
+      "entropy": 6.583856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.8670915275605491,
+      "worst": 1.0921292185302276,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0167": {
+      "entropy": 6.563856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.8566167414377466,
+      "worst": 1.079562254747993,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0168": {
+      "entropy": 6.563856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.8483745469009905,
+      "worst": 1.074244478840569,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0169": {
+      "entropy": 6.563856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.8434631736297432,
+      "worst": 1.0698430846508942,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0170": {
+      "entropy": 6.563856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.832327574938816,
+      "worst": 1.0373716324339544,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0171": {
+      "entropy": 6.563856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.830576952936819,
+      "worst": 1.0341844492404877,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0172": {
+      "entropy": 6.563856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.8222130038337336,
+      "worst": 1.0175103517575423,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0173": {
+      "entropy": 6.563856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.8193989759932043,
+      "worst": 1.009126216142091,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0174": {
+      "entropy": 6.543856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.8140403723049091,
+      "worst": 1.0041834841574244,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0175": {
+      "entropy": 6.543856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.8078705856055656,
+      "worst": 0.9983958410009678,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0176": {
+      "entropy": 6.543856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7993827068480769,
+      "worst": 0.9761042387167755,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0177": {
+      "entropy": 6.543856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7985863401677217,
+      "worst": 0.9740410310650363,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0178": {
+      "entropy": 6.543856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7976728853218313,
+      "worst": 0.9722584740330358,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0179": {
+      "entropy": 6.563856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7955675684525897,
+      "worst": 0.9691242193256178,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0180": {
+      "entropy": 6.563856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7874944509850629,
+      "worst": 0.9680647657701008,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0181": {
+      "entropy": 6.563856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7847506297507287,
+      "worst": 0.9673607177777779,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0182": {
+      "entropy": 6.583856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7766703976445224,
+      "worst": 0.962584591377946,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0183": {
+      "entropy": 6.583856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7640137674563146,
+      "worst": 0.9545337718939617,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0184": {
+      "entropy": 6.583856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7600884765514786,
+      "worst": 0.9517968366443301,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0185": {
+      "entropy": 6.583856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7468849815705738,
+      "worst": 0.9411853022707842,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0186": {
+      "entropy": 6.583856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7468849815705738,
+      "worst": 0.9411853022707842,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0187": {
+      "entropy": 6.583856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7436116442198666,
+      "worst": 0.9276799045483821,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0188": {
+      "entropy": 6.583856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.740316528854615,
+      "worst": 0.9271548964248064,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0189": {
+      "entropy": 6.583856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7395716478761244,
+      "worst": 0.9229613477218995,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0190": {
+      "entropy": 6.583856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7344359222713183,
+      "worst": 0.9202783611590635,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0191": {
+      "entropy": 6.583856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7318811576558821,
+      "worst": 0.9173087040943378,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0192": {
+      "entropy": 6.583856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7274092390072505,
+      "worst": 0.9153569487846567,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0193": {
+      "entropy": 6.583856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7223505624216463,
+      "worst": 0.9138652926285182,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0194": {
+      "entropy": 6.583856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7212847578368273,
+      "worst": 0.912875571464416,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0195": {
+      "entropy": 6.583856189774739,
+      "best": 0.31480008800324444,
+      "avg": 0.7159761328390207,
+      "worst": 0.9073492605781291,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0196": {
+      "entropy": 6.583856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.7092162333313697,
+      "worst": 0.8964675706812587,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0197": {
+      "entropy": 6.583856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.7045870621909096,
+      "worst": 0.8871729143462022,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0198": {
+      "entropy": 6.583856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.697850883577181,
+      "worst": 0.8836839610986601,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0199": {
+      "entropy": 6.563856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6931743456106624,
+      "worst": 0.8794149457107678,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0200": {
+      "entropy": 6.543856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6835101304539559,
+      "worst": 0.8670096113927912,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0201": {
+      "entropy": 6.543856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6833696182232214,
+      "worst": 0.8638822659734746,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0202": {
+      "entropy": 6.543856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6777064116953977,
+      "worst": 0.8600886647835189,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0203": {
+      "entropy": 6.563856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6726126502813935,
+      "worst": 0.8552523039989922,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0204": {
+      "entropy": 6.563856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6726126502813935,
+      "worst": 0.8552523039989922,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0205": {
+      "entropy": 6.563856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6726126502813935,
+      "worst": 0.8552523039989922,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0206": {
+      "entropy": 6.563856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6611037673332664,
+      "worst": 0.850613697265038,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0207": {
+      "entropy": 6.563856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6611037673332664,
+      "worst": 0.850613697265038,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0208": {
+      "entropy": 6.563856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6582274461503104,
+      "worst": 0.842292835916289,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0209": {
+      "entropy": 6.563856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6537216371987309,
+      "worst": 0.8380505040306632,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0210": {
+      "entropy": 6.563856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6506005295482076,
+      "worst": 0.8279043230101111,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0211": {
+      "entropy": 6.563856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6445646555171487,
+      "worst": 0.8163107817333909,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0212": {
+      "entropy": 6.583856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.636796795354012,
+      "worst": 0.8084555427097266,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0213": {
+      "entropy": 6.583856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6309706021059661,
+      "worst": 0.8056870740699655,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0214": {
+      "entropy": 6.583856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6268582069224059,
+      "worst": 0.801387568842362,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0215": {
+      "entropy": 6.583856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6268582069224059,
+      "worst": 0.801387568842362,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0216": {
+      "entropy": 6.583856189774739,
+      "best": 0.23135930981303302,
+      "avg": 0.6268582069224059,
+      "worst": 0.801387568842362,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0217": {
+      "entropy": 6.583856189774739,
+      "best": 0.21115426274908777,
+      "avg": 0.6208727981771931,
+      "worst": 0.7980528299094166,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0218": {
+      "entropy": 6.563856189774739,
+      "best": 0.21115426274908777,
+      "avg": 0.617386147634403,
+      "worst": 0.7973802681787723,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0219": {
+      "entropy": 6.563856189774739,
+      "best": 0.21115426274908777,
+      "avg": 0.6094969188928245,
+      "worst": 0.7923348573756683,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0220": {
+      "entropy": 6.543856189774739,
+      "best": 0.21115426274908777,
+      "avg": 0.5998462312137022,
+      "worst": 0.7641628063240187,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0221": {
+      "entropy": 6.543856189774739,
+      "best": 0.21115426274908777,
+      "avg": 0.5998462312137022,
+      "worst": 0.7641628063240187,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0222": {
+      "entropy": 6.543856189774739,
+      "best": 0.21115426274908777,
+      "avg": 0.5983828825879338,
+      "worst": 0.762560533809609,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0223": {
+      "entropy": 6.543856189774739,
+      "best": 0.21115426274908777,
+      "avg": 0.5942108785925059,
+      "worst": 0.7575432487751694,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0224": {
+      "entropy": 6.543856189774739,
+      "best": 0.21115426274908777,
+      "avg": 0.593381525654357,
+      "worst": 0.7559614332424539,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0225": {
+      "entropy": 6.543856189774739,
+      "best": 0.21115426274908777,
+      "avg": 0.5918083547977744,
+      "worst": 0.746297260710709,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0226": {
+      "entropy": 6.543856189774739,
+      "best": 0.21115426274908777,
+      "avg": 0.5896856234169033,
+      "worst": 0.743019222565074,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0227": {
+      "entropy": 6.543856189774739,
+      "best": 0.21115426274908777,
+      "avg": 0.5874611629959255,
+      "worst": 0.7424950765206255,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0228": {
+      "entropy": 6.543856189774739,
+      "best": 0.21115426274908777,
+      "avg": 0.586080931304518,
+      "worst": 0.7400569547822681,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0229": {
+      "entropy": 6.543856189774739,
+      "best": 0.21115426274908777,
+      "avg": 0.5767338116018965,
+      "worst": 0.738438017096678,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0230": {
+      "entropy": 6.563856189774739,
+      "best": 0.21115426274908777,
+      "avg": 0.5750498950014714,
+      "worst": 0.7383896990654535,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0231": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.5689889484965317,
+      "worst": 0.73594364720724,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0232": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.5689889484965317,
+      "worst": 0.73594364720724,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0233": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.5569226142161688,
+      "worst": 0.73027155821094,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0234": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.5499187302572366,
+      "worst": 0.7193338804301422,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0235": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.5478303967783829,
+      "worst": 0.7142708655403379,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0236": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.5453198301683365,
+      "worst": 0.7131925966677944,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0237": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.5434492050268239,
+      "worst": 0.7015686349146555,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0238": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.5401107155319366,
+      "worst": 0.699998718657982,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0239": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.5391094232369009,
+      "worst": 0.6996264317682498,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0240": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.5345022890666732,
+      "worst": 0.6936826423366821,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0241": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.533296460647111,
+      "worst": 0.6903593419112409,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0242": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.533296460647111,
+      "worst": 0.6903593419112409,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0243": {
+      "entropy": 6.543856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.5280724697369776,
+      "worst": 0.6862737961733228,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0244": {
+      "entropy": 6.543856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.5213639141178047,
+      "worst": 0.6713377914703305,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0245": {
+      "entropy": 6.543856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.5111147887412574,
+      "worst": 0.6692050495595434,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0246": {
+      "entropy": 6.543856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.5033722988636149,
+      "worst": 0.6578235592311732,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0247": {
+      "entropy": 6.543856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4970786988890002,
+      "worst": 0.6528519030397867,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0248": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.49245531386155794,
+      "worst": 0.649404362359422,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0249": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4882347951406308,
+      "worst": 0.6400577571889807,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0250": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.48575374539393296,
+      "worst": 0.6390333415627055,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0251": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.48058169198189155,
+      "worst": 0.6358467716438444,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0252": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.47707338359523915,
+      "worst": 0.6332501342599545,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0253": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4721426428071072,
+      "worst": 0.632761208145965,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0254": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4706185393500216,
+      "worst": 0.6284036187778523,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0255": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4695451695453491,
+      "worst": 0.6271680467711188,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0256": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4670224526677073,
+      "worst": 0.6255942854489928,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0257": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4670224526677073,
+      "worst": 0.6255942854489928,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0258": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.45839141421770285,
+      "worst": 0.6131224245708824,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0259": {
+      "entropy": 6.583856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4563110245311294,
+      "worst": 0.6114117315627833,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0260": {
+      "entropy": 6.583856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4563110245311294,
+      "worst": 0.6114117315627833,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0261": {
+      "entropy": 6.583856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4453523249143769,
+      "worst": 0.5998694891544101,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0262": {
+      "entropy": 6.583856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4447878173214848,
+      "worst": 0.598168368023231,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0263": {
+      "entropy": 6.583856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.437628284085159,
+      "worst": 0.5793775071269545,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0264": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4314746792283783,
+      "worst": 0.5739995287414866,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0265": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4314746792283783,
+      "worst": 0.5739995287414866,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0266": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.42822498021951766,
+      "worst": 0.5700463570541621,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0267": {
+      "entropy": 6.563856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4245405508196551,
+      "worst": 0.5682429559301156,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0268": {
+      "entropy": 6.543856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4212691248340066,
+      "worst": 0.5656217219625976,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0269": {
+      "entropy": 6.543856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4212691248340066,
+      "worst": 0.5656217219625976,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0270": {
+      "entropy": 6.543856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4179931028937985,
+      "worst": 0.561754101303419,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0271": {
+      "entropy": 6.543856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.4179931028937985,
+      "worst": 0.561754101303419,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0272": {
+      "entropy": 6.543856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.41564965798557457,
+      "worst": 0.5594484539044171,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0273": {
+      "entropy": 6.543856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.40178967956337763,
+      "worst": 0.54938725664894,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0274": {
+      "entropy": 6.543856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.3996382058745411,
+      "worst": 0.5465903501302347,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0275": {
+      "entropy": 6.543856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.3928651913909812,
+      "worst": 0.5434187298652038,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0276": {
+      "entropy": 6.543856189774739,
+      "best": 0.13229504857148344,
+      "avg": 0.3912968771823123,
+      "worst": 0.5340241226236055,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0277": {
+      "entropy": 6.543856189774739,
+      "best": 0.131146864045303,
+      "avg": 0.38490002586578387,
+      "worst": 0.5261092746544231,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0278": {
+      "entropy": 6.543856189774739,
+      "best": 0.131146864045303,
+      "avg": 0.37962333467812465,
+      "worst": 0.5237811341212224,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0279": {
+      "entropy": 6.543856189774739,
+      "best": 0.131146864045303,
+      "avg": 0.37879194449087294,
+      "worst": 0.521066638310601,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0280": {
+      "entropy": 6.543856189774739,
+      "best": 0.131146864045303,
+      "avg": 0.3769932649987823,
+      "worst": 0.520573180467295,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0281": {
+      "entropy": 6.543856189774739,
+      "best": 0.131146864045303,
+      "avg": 0.3722509702549961,
+      "worst": 0.5180544145984712,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0282": {
+      "entropy": 6.543856189774739,
+      "best": 0.131146864045303,
+      "avg": 0.37043453090533407,
+      "worst": 0.514681057955611,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0283": {
+      "entropy": 6.543856189774739,
+      "best": 0.131146864045303,
+      "avg": 0.36699729238408396,
+      "worst": 0.5102157842424201,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0284": {
+      "entropy": 6.543856189774739,
+      "best": 0.131146864045303,
+      "avg": 0.36447444654110783,
+      "worst": 0.5076200616527135,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0285": {
+      "entropy": 6.563856189774739,
+      "best": 0.131146864045303,
+      "avg": 0.36421150064459495,
+      "worst": 0.5075803355629478,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0286": {
+      "entropy": 6.563856189774739,
+      "best": 0.131146864045303,
+      "avg": 0.3629623278712494,
+      "worst": 0.5058889446125446,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0287": {
+      "entropy": 6.563856189774739,
+      "best": 0.131146864045303,
+      "avg": 0.35748053677157593,
+      "worst": 0.4959976900044522,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0288": {
+      "entropy": 6.563856189774739,
+      "best": 0.131146864045303,
+      "avg": 0.35748053677157593,
+      "worst": 0.4959976900044522,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0289": {
+      "entropy": 6.563856189774739,
+      "best": 0.070015639756599,
+      "avg": 0.3532207162690974,
+      "worst": 0.4928775885113533,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0290": {
+      "entropy": 6.563856189774739,
+      "best": 0.070015639756599,
+      "avg": 0.35069646507589375,
+      "worst": 0.4871341204802252,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0291": {
+      "entropy": 6.563856189774739,
+      "best": 0.070015639756599,
+      "avg": 0.344167386479662,
+      "worst": 0.481325472001431,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0292": {
+      "entropy": 6.543856189774739,
+      "best": 0.070015639756599,
+      "avg": 0.3403706154405581,
+      "worst": 0.47732385837512115,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0293": {
+      "entropy": 6.543856189774739,
+      "best": 0.070015639756599,
+      "avg": 0.33859656619743234,
+      "worst": 0.47443951546137,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0294": {
+      "entropy": 6.5238561897747385,
+      "best": 0.070015639756599,
+      "avg": 0.33597440798820977,
+      "worst": 0.4729935341135312,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0295": {
+      "entropy": 6.5238561897747385,
+      "best": 0.070015639756599,
+      "avg": 0.33307462407208793,
+      "worst": 0.47206506731394693,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0296": {
+      "entropy": 6.5238561897747385,
+      "best": 0.070015639756599,
+      "avg": 0.32972746904849165,
+      "worst": 0.4702008225481468,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0297": {
+      "entropy": 6.5238561897747385,
+      "best": 0.070015639756599,
+      "avg": 0.3292335113838189,
+      "worst": 0.4701168392311733,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0298": {
+      "entropy": 6.5238561897747385,
+      "best": 0.070015639756599,
+      "avg": 0.32726458619722587,
+      "worst": 0.46820017548307125,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0299": {
+      "entropy": 6.5238561897747385,
+      "best": 0.070015639756599,
+      "avg": 0.32726458619722587,
+      "worst": 0.46820017548307125,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0300": {
+      "entropy": 6.5238561897747385,
+      "best": 0.070015639756599,
+      "avg": 0.32226842250204785,
+      "worst": 0.46410370371977333,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0301": {
+      "entropy": 6.5238561897747385,
+      "best": 0.070015639756599,
+      "avg": 0.31959948280287703,
+      "worst": 0.46132038858710595,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0302": {
+      "entropy": 6.5238561897747385,
+      "best": 0.070015639756599,
+      "avg": 0.31664887195524,
+      "worst": 0.45499438844919116,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0303": {
+      "entropy": 6.5238561897747385,
+      "best": 0.070015639756599,
+      "avg": 0.3129816899142668,
+      "worst": 0.4410067841708162,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0304": {
+      "entropy": 6.5238561897747385,
+      "best": 0.070015639756599,
+      "avg": 0.3120478872832173,
+      "worst": 0.4330936703027531,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0305": {
+      "entropy": 6.5238561897747385,
+      "best": 0.070015639756599,
+      "avg": 0.3120478872832173,
+      "worst": 0.4330936703027531,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0306": {
+      "entropy": 6.5238561897747385,
+      "best": 0.070015639756599,
+      "avg": 0.3120478872832173,
+      "worst": 0.4330936703027531,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0307": {
+      "entropy": 6.5238561897747385,
+      "best": 0.070015639756599,
+      "avg": 0.3115781514602684,
+      "worst": 0.4310731790540634,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0308": {
+      "entropy": 6.5238561897747385,
+      "best": 0.070015639756599,
+      "avg": 0.30432448408447416,
+      "worst": 0.42571909278250414,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0309": {
+      "entropy": 6.5238561897747385,
+      "best": 0.05539697124442311,
+      "avg": 0.30022379635151875,
+      "worst": 0.42080505608086494,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0310": {
+      "entropy": 6.5238561897747385,
+      "best": 0.05539697124442311,
+      "avg": 0.29937279248575654,
+      "worst": 0.4201442687180967,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0311": {
+      "entropy": 6.503856189774739,
+      "best": 0.05539697124442311,
+      "avg": 0.29667033809614946,
+      "worst": 0.4194159926337597,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0312": {
+      "entropy": 6.503856189774739,
+      "best": 0.05539697124442311,
+      "avg": 0.2942806585098656,
+      "worst": 0.41379649074805014,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0313": {
+      "entropy": 6.503856189774739,
+      "best": 0.05539697124442311,
+      "avg": 0.29104894669991416,
+      "worst": 0.411618406028325,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0314": {
+      "entropy": 6.503856189774739,
+      "best": 0.05539697124442311,
+      "avg": 0.2900698023656972,
+      "worst": 0.4035675468684022,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0315": {
+      "entropy": 6.503856189774739,
+      "best": 0.05539697124442311,
+      "avg": 0.28883566702394975,
+      "worst": 0.4016990637381221,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0316": {
+      "entropy": 6.503856189774739,
+      "best": 0.05539697124442311,
+      "avg": 0.28140737355170603,
+      "worst": 0.39444755571394774,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0317": {
+      "entropy": 6.503856189774739,
+      "best": 0.05539697124442311,
+      "avg": 0.2811371900261269,
+      "worst": 0.3896490209120821,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0318": {
+      "entropy": 6.503856189774739,
+      "best": 0.05539697124442311,
+      "avg": 0.27891802238829083,
+      "worst": 0.3861200880078658,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    },
+    "0319": {
+      "entropy": 6.503856189774739,
+      "best": 8.946181567000001e-06,
+      "avg": 0.2750569109700278,
+      "worst": 0.3855167444797121,
+      "avg_overlapping_penalty": 0.0,
+      "avg_distance_penalty": 0.0,
+      "avg_base_penalty": 0.0,
+      "avg_broken_penalty": 0.0
+    }
+  }
+}

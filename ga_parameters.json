@@ -7,10 +7,10 @@
 "percent_of_mutations_x" : 0.5,
 "percent_of_mutations_y" : 1,
   "max_blocks" : 40,
-  "min_blocks" : 5,
+  "min_blocks" : 10,
 "game_path": "abwin/win_build.exe",
 "write_path": "abwin/win_build_Data/StreamingAssets/Levels",
 "read_path": "abwin/win_build_Data/StreamingAssets/Output",
 "log_dir": "logs",
-"log_base_name": "second_crossover_min10_"
+"log_base_name": "second_crossover_min10_verbose"
 }
