@@ -2,15 +2,13 @@ import xml.etree.ElementTree as ET
 from AngryBirdsGA import *
 
 def initXMLLevel():
+    """ Returns a list of strings containing the structure of the XML Level definition """
     root = ET.Element("Level")
     tree = ET.ElementTree(root)
     root.set('width', '2')
 
     camera = ET.SubElement(root, 'Camera')
-    # camera.set('x', '0')
-    # camera.set('y', '0')
-    # camera.set('minWidth', '20')
-    # camera.set('maxWidth', '25')
+
 
     birds = ET.SubElement(root, 'Birds')
     ET.SubElement(birds, 'Bird').set('type', 'BirdRed')
@@ -22,19 +20,13 @@ def initXMLLevel():
     slingshot.set('y', '-2.5')
 
     gameObject = ET.SubElement(root, 'GameObjects')
-    # for b in individual.blocks:
-    #    e = ET.SubElement(gameObject, constants.getTag(b.type))
-    #    e.set('type', constants.block_names[str(b.type)])
-    #    e.set('material', constants.materials[b.mat])
-    #    e.set('x', str(b.x))
-    #    e.set('y', str(b.y))
-    #    e.set('rotation', str(b.rot))
 
     s_xml = ET.tostring(root, encoding='unicode', method='xml')
     return s_xml.replace('>', '>\n')
 
 
 def writeXML(individual, filename):
+    """ Writes the XML Level representation of individual to the file filename """
     global STRING_XML
     if STRING_XML == "":
         STRING_XML = initXMLLevel()
@@ -65,11 +57,11 @@ def writeXML(individual, filename):
 
     f.write(''.join(final_xml))
 
-    #tree.write(f, xml_declaration=True, encoding='unicode', method="xml")
     f.close()
 
 
 def readXML(filename):
+    """ Reads the filename containing the XML output of the simulation and returns the list of velocities"""
     tree = ET.parse(filename)
     root = tree.getroot()
     game_objects = root.find('GameObjects')

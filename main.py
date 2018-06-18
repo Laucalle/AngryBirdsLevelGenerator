@@ -13,7 +13,7 @@ def cleanDirectory(path):
 def main():
     timestamp = datetime.datetime.today()
     init = time.time()
-    #ea.Random = ea.random_set_seed(1526992711.6456888)
+
     project_root = os.getcwd()
     config_file = open(os.path.join(project_root, sys.argv[1]), 'r')
     config_param = json.load(config_file)
@@ -58,13 +58,7 @@ def main():
             "entropy" : ea.informationEntropy(population, 4),
             "best" : population[0].fitness,
             "avg" : (sum(map(lambda x: x.fitness, population)) / len(population)),
-            "worst" : max(population, key=lambda x: x.fitness).fitness,
-            "avg_overlapping_penalty": (sum(map(lambda x: x._overlapping_penalty * x.numberOverlappingBlocks(), population)) / len(population)),
-            "avg_distance_penalty": (
-            sum(map(lambda x: (x._distance_penalty * x.distanceToGround()) if x.distanceToGround() > x._distance_threshold else 0, population)) / len(population)),
-            "avg_base_penalty": (sum(map(lambda x: x.base_fitness if x.base_fitness is not -1 else 0, population)) / len(population)),
-            "avg_broken_penalty": (sum(map(lambda x: x.broken_penalty, population)) / len(population))
-
+            "worst" : max(population, key=lambda x: x.fitness).fitness
         }
         print(log_object[str(generation).zfill(fill)])
         if max(population, key=lambda x: x.fitness).fitness == last_generation_worst:

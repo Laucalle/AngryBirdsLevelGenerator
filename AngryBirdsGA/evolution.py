@@ -23,24 +23,14 @@ class Evolution:
                           self.mutationBlockPositionY]
         self.replacement = self.elitistReplacement
 
-
-    def registerSelection(self, selection):
-        self.selection = selection
-
-    def registerCross(self, cross):
-        self.cross = cross
-
     def initEvolution(self, population_size, initialization_method, fitness_params ):
-        assert self.fitness is not None, "Fitness function required"
+        """ Sets the initial population and its fitness and returns it"""
         self.population = self.initPopulation(population_size, initialization_method)
         return self.fitness(self.population,*fitness_params)
 
     def runGeneration(self, fitness_params, selection_params, mutation_params, replacement_params):
+        """ Runs a generation: selection, crossover, mutation and replacement. Returns the population and base penalty """
         assert self.population is not [], "Before executing a generation you need to initialize the evolution"
-        assert self.selection is not None, "Selection function required"
-        assert self.mutation is not None, "Mutation(s) function required"
-        assert self.replacement is not None, "Replacement function required"
-        assert self.cross is not None, "Cross function required"
         parents = self.selection(*selection_params)
         children = self.cross(parents)
         for  mut,params in zip(self.mutation,mutation_params):
@@ -54,6 +44,7 @@ class Evolution:
 
 
     def initPopulation(self,number_of_individuals, initialization_method):
+        """ Initializes the population with a number of LevelIndividual (number_of_individuals) using the initialization method """
         self.population = []
 
         for i in range(number_of_individuals):
@@ -62,6 +53,7 @@ class Evolution:
         return self.population
 
     def selectionTournament(self, percentage_parents):
+        """ Returns percentage_of_parents pairs of LevelIndividual from population selected with a binary tournament """
         parents = []
         for i in range(int(len(self.population) * percentage_parents) * 2):
             candidate_1, candidate_2 = random.sample(self.population, 2)
@@ -69,6 +61,7 @@ class Evolution:
         return parents
 
     def crossSample(self, parents):
+        """ Crossover operator. It samples the blocks from each two parents from the list of parents. One new individual per pair """
         children = []
         for i in range(0, len(parents), 2):
             child_n_blocks = min(len(parents[i].blocks()) + len(parents[i + 1].blocks()) // 2, MAX_B)
@@ -77,6 +70,7 @@ class Evolution:
         return children
 
     def crossSampleNoDuplicate(self, parents):
+        """ Crossover operator. It samples the blocks (without duplicates) from each two parents from the list of parents. One new individual per pair """
         children = []
         for i in range(0, len(parents), 2):
             common = []
@@ -90,6 +84,7 @@ class Evolution:
         return children
 
     def crossMaintainCommon(self, parents):
+        """ Crossover operator. It blocks present in both parents pass on to the children, the rest are split between the two children """
         children = []
         for i in range(0, len(parents), 2):
             common = [x for x in parents[i].blocks() if x in parents[i + 1].blocks()]
@@ -101,6 +96,7 @@ class Evolution:
 
 
     def mutationBlockNumber(self,individuals, n_mutations, max_difference):
+        """ Mutates n_mutations individuals and it adds or removes up to max_difference blocks """
         for a in range(n_mutations):
             n_blocks = random.randint(-max_difference, max_difference)
             indv_mut = individuals[random.randint(0, len(individuals)-1)]
@@ -121,6 +117,7 @@ class Evolution:
                     indv_mut.removeBlock(random.randint(0,len(indv_mut.blocks())-1))
 
     def mutationBlockType(self,individuals, percentage_mutations):
+        """ Mutates a percentage of individuals by changing the block type of one of their blocks"""
         sample = random.sample(individuals, min(math.floor(len(individuals) * percentage_mutations), len(individuals)))
         for indv_mut in sample:
             block_i = random.randint(0, len(indv_mut.blocks()) - 1)
@@ -132,6 +129,7 @@ class Evolution:
             indv_mut.updateBlock(block_i,block)
 
     def mutationBlockPositionX(self, individuals, percentage_mutations):
+        """ Mutates a percentage of individuals by adding a value from [-1,0)(0,1] to the x coordinate of one of their blocks"""
         sample = random.sample(individuals, min(math.floor(len(individuals) * percentage_mutations), len(individuals)))
         for indv_mut in sample:
             block_i = random.randint(0, len(indv_mut.blocks()) - 1)
@@ -143,6 +141,7 @@ class Evolution:
             indv_mut.updateBlock(block_i,block)
 
     def mutationBlockPositionY(self, individuals, percentage_mutations):
+        """ Mutates a percentage of individuals by adding a value from [-1,0)(0,1] to the y coordinate of one of their blocks"""
         sample = random.sample(individuals, min(math.floor(len(individuals) * percentage_mutations), len(individuals)))
         for indv_mut in sample:
             block_i = random.randint(0, len(indv_mut.blocks()) - 1)
@@ -154,6 +153,7 @@ class Evolution:
             indv_mut.updateBlock(block_i,block)
 
     def mutationBlockRotation(self, individuals, percentage_mutations):
+        """ Mutates a percentage of individuals by adding 45 or -45 to the rotation of one of their blocks"""
         sample = random.sample(individuals,min(math.floor(len(individuals)*percentage_mutations), len(individuals)))
         for indv_mut in sample:
             block_i = random.randint(0, len(indv_mut.blocks()) - 1)
@@ -165,10 +165,11 @@ class Evolution:
             indv_mut.updateBlock(block_i,block)
 
     def elitistReplacement(self, new, n_new):
+        """ Returns the n_best best individuals from both population and offspring(new) """
         return sorted((self.population + new), key=lambda a: a.fitness, reverse=False)[:n_new]
 
     def fitnessPopulationSkip(self,individuals, game_path, write_path, read_path, max_evaluated):
-
+        """ Computes the fitness value for the individuals. It launches the simulation but skips levels with penalty """
         fill = len(str(len(individuals)))
         evaluated = []
         # generate xml for all potentially suitable levels
@@ -181,7 +182,6 @@ class Evolution:
 
         # run game
         if len(evaluated) > 0:
-            print("Run Game")
             os.system(game_path)
 
         # parse all xml and update worst value obtained by in game evaluation
@@ -201,57 +201,12 @@ class Evolution:
 
         return max_evaluated
 
-
-#
-# def initPopulationCheckOverlapping(number_of_individuals):
-#     population = []
-#
-#     for i in range(number_of_individuals):
-#         population.append(LevelIndividual([]).initNoOverlapping(n_blocks=Random.randint(MIN_B, MAX_B)))
-#
-#     return population
-
-# def initPopulationDiscretePos(number_of_individuals):
-#     population = []
-#     for i in range(number_of_individuals):
-#         population.append(LevelIndividual([]).initDiscrete(n_blocks = Random.randint(MIN_B, MAX_B)))
-#
-#     return population
-#
-# def initPopulationCheckOverlappingDiscretePos(number_of_individuals):
-#     population = []
-#
-#     print("Initializing population 0/" + str(number_of_individuals) + "\r", end="", flush=True)
-#     for i in range(number_of_individuals):
-#         print("Initializing population " + str(i) + "/" + str(number_of_individuals)+ "\r", end="", flush=True)
-#         population.append(LevelIndividual([]).initDiscreteNoOverlapping(n_blocks = Random.randint(MIN_B, MAX_B)))
-#
-#     print("Initializing population completed")
-#     return population
-
-
-# def fitnessPopulation(population, game_path, write_path, read_path):
-#     # generate all xml
-#     for i in range(len(population)):
-#         xml.writeXML(population[i], os.path.join(write_path, "level-"+str(i)+".xml"))
-#
-#     # run game
-#     os.system(game_path)
-#
-#     # parse all xml
-#     for i in range(len(population)):
-#         averageVelocity = xml.readXML(os.path.join(read_path,"level-"+str(i)+".xml"))
-#         # assign fitness
-#         population[i].calculateFitness(averageVelocity)
-
-
-
 def informationEntropy(population, prec):
+    """ Returns Shannon's entropy on the fitness """
     c = Counter([round(p.fitness,prec) for p in population])
     k = 1
     for i in range(prec):
         k/=10
-    #k = round((max(population, key=lambda x: x.fitness).fitness - min(population, key=lambda x: x.fitness).fitness)/k)
     k = len(population)
     h = - sum( [(f/k)*math.log(f/k,2) for e,f in c.most_common()])
     return h

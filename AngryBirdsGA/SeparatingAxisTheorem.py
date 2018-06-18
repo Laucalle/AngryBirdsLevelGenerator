@@ -8,6 +8,7 @@ axes[2]= axes[2]/np.linalg.norm(axes[2])
 axes[3]= axes[3]/np.linalg.norm(axes[3])
 
 def projectOntoAxis(vertices, axis):
+    """ Projects the shape defined by the vertices into the given axis """
     min= np.dot(axis,vertices[0])
     max= min
     for i in range(len(vertices)):
@@ -17,6 +18,7 @@ def projectOntoAxis(vertices, axis):
     return min,max
 
 def sat(vertices0, vertices1):
+    """ Returns true if the rectangles overlap using Separating Axes Theorem """
     for axis in axes:
         min1, max1 = projectOntoAxis(vertices0, axis)
         min2,max2 = projectOntoAxis(vertices1, axis)
