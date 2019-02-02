@@ -61,6 +61,7 @@ def main():
             "worst" : max(population, key=lambda x: x.fitness).fitness
         }
         print(log_object[str(generation).zfill(fill)])
+        #print("best --> base " + str(population[0].base_fitness) + " overlapping " + str(population[0].n_overlapping) + " fit " + str(population[0].fitness) + "\n")
         if max(population, key=lambda x: x.fitness).fitness == last_generation_worst:
             same_generation_strike+=1
         else:
@@ -69,8 +70,8 @@ def main():
             break
 
         last_generation_worst = max(population, key=lambda x: x.fitness).fitness
-        xml.writeXML(population[0], os.path.join(project_root, log_path + "/level-0-"+ log_base_name  +
-                                                     timestamp.strftime("%y%m%d_%H%M%S") + ".xml"))
+        #xml.writeXML(population[0], os.path.join(project_root, log_path + "/level-0-"+ log_base_name  +
+        #                                             timestamp.strftime("%y%m%d_%H%M%S") + ".xml"))
     end = time.time()
     final_log = {'config': config_param,
                  'execution_time': (end - init),

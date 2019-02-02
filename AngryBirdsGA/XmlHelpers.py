@@ -79,7 +79,7 @@ def writePlain(individual, filename):
         text.append(' '.join([str(b.x),str(b.y), str(BLOCKS[str(b.type)][0]/2), 
             str(BLOCKS[str(b.type)][1]/2), ROTATION[b.rot], str(FRICTION[MATERIALS[b.mat]])]))
 
-    f.write("\n".join(text))
+    f.write("\n".join(text) + "\n")
 
     f.close()
 
