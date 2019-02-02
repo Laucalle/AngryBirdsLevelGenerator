@@ -1,0 +1,16 @@
+{
+"population_size": 100,
+"number_of_generations" : 1000,
+"percent_of_parents" : 0.5,
+"percent_of_mutations_type" : 0.5,
+"percent_of_mutations_rotation" : 0.5,
+"percent_of_mutations_x" : 0.5,
+"percent_of_mutations_y" : 1,
+  "max_blocks" : 40,
+  "min_blocks" : 10,
+"game_path": "AngryBirdsLevelGenerator/AngryBirdsGA/simulation_exec",
+"write_path": "AngryBirdsLevelGenerator/temp_levels",
+"read_path": "AngryBirdsLevelGenerator/temp_levels",
+"log_dir": "logs",
+"log_base_name": "second_round_exp_"
+}

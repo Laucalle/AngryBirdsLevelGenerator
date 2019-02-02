@@ -4,9 +4,10 @@ from AngryBirdsGA import *
 from AngryBirdsGA.BlockGene import BlockGene
 from AngryBirdsGA.LevelIndividual import LevelIndividual
 import AngryBirdsGA.SeparatingAxisTheorem as SAT
-import AngryBirdsGA.XMLHelpers as xml
+import AngryBirdsGA.XmlHelpers as xml
 import numpy as np
 from collections import Counter
+import subprocess
 
 class Evolution:
 
@@ -176,20 +177,25 @@ class Evolution:
         for i in range(len(individuals)):
             individuals[i].calculatePreFitness()
             if individuals[i].fitness == 0:
-                xml.writeXML(individuals[i],
-                             os.path.join(write_path, "level-" + str(len(evaluated)).zfill(fill) + ".xml"))
+                xml.writePlain(individuals[i],
+                             os.path.join(write_path, "level_raw_" + str(i).zfill(fill) + ".txt"))
+                
                 evaluated.append(i)
+        #run simulation 
+        for i in evaluated:
+            proc = subprocess.Popen([game_path, os.path.join(write_path, "level_raw_" + str(i).zfill(fill) + ".txt")], stdout = subprocess.PIPE)
+            average_velocity = []
+            # parse all files and update worst value obtained by in game evaluation
+            while True:
+                line = proc.stdout.readline()
+                if line:
+                    #print(repr(line))
+                    average_velocity.append(float(line))
+                else:
+                    break
+            individuals[i].calculateFitness(average_velocity)
+            max_evaluated = max(individuals[i].fitness, max_evaluated)
 
-        # run game
-        if len(evaluated) > 0:
-            os.system(game_path)
-
-        # parse all xml and update worst value obtained by in game evaluation
-        for i in range(len(evaluated)):
-            average_velocity = xml.readXML(os.path.join(read_path, "level-" + str(i) + ".xml"))
-            # assign fitness
-            individuals[evaluated[i]].calculateFitness(average_velocity)
-            max_evaluated = max(individuals[evaluated[i]].fitness, max_evaluated)
 
         # to make sure all levels not evaluated in game have worse fitness value
         for i in range(len(individuals)):

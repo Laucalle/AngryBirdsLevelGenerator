@@ -22,6 +22,7 @@ BLOCK_NAMES = {'0':"SquareHole", '1':"RectFat", '2':"SquareSmall",
                '6':"RectMedium", '7':"RectBig"}
 
 MATERIALS = ["wood", "stone", "ice"]
+FRICTION = {"wood": 4, "stone": 4, "ice": 0.75}
 
 ABSOLUTE_GROUND = -3.3 #Real -3.5
 # desirable number of blocks

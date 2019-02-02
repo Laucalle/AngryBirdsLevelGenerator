@@ -71,3 +71,15 @@ def readXML(filename):
         velocity.append(float(element.attrib['aVelocity']))
 
     return velocity
+
+def writePlain(individual, filename):
+    f = open(filename, "w")
+    text = []
+    for b in individual.blocks():
+        text.append(' '.join([str(b.x),str(b.y), str(BLOCKS[str(b.type)][0]/2), 
+            str(BLOCKS[str(b.type)][1]/2), ROTATION[b.rot], str(FRICTION[MATERIALS[b.mat]])]))
+
+    f.write("\n".join(text))
+
+    f.close()
+
