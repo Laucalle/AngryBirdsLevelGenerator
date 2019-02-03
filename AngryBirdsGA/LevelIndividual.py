@@ -74,7 +74,7 @@ class LevelIndividual:
 
     def initPreMadeDiscrete(self,n_blocks):
         """ Populates the list of BlockGene with 1 prefixed block and n_blocks -1  random blocks using _initDiscreteBlock """
-        prebuilt = PREFIXED_INIT[Random.randint(0,len(PREFIXED_INIT))]
+        prebuilt = PREFIXED_INIT[Random.randint(0,len(PREFIXED_INIT)-1)]
         for b in prebuilt:
             block = copy.deepcopy(b)
             block.mat = Random.randint(0, len(MATERIALS) - 1)

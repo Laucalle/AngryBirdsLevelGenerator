@@ -6,11 +6,12 @@
 "percent_of_mutations_rotation" : 0.5,
 "percent_of_mutations_x" : 0.5,
 "percent_of_mutations_y" : 1,
+"percent_of_mutations_mat" : 0.5,
   "max_blocks" : 40,
   "min_blocks" : 10,
 "game_path": "AngryBirdsLevelGenerator/AngryBirdsGA/simulation_exec",
 "write_path": "AngryBirdsLevelGenerator/temp_levels",
 "read_path": "AngryBirdsLevelGenerator/temp_levels",
 "log_dir": "logs",
-"log_base_name": "_sim_full_"
+"log_base_name": "_sim_second_"
 }
