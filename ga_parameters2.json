@@ -12,5 +12,5 @@
 "write_path": "AngryBirdsLevelGenerator/temp_levels",
 "read_path": "AngryBirdsLevelGenerator/temp_levels",
 "log_dir": "logs",
-"log_base_name": "second_round_exp_"
+"log_base_name": "_sim_full_"
 }

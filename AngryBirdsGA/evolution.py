@@ -14,14 +14,15 @@ class Evolution:
     def __init__(self, game_path, write_path, read_path):
         self.population = []
         self.fitness = lambda population, worst_evaluated: \
-            self.fitnessPopulationSkip(individuals=population,game_path=game_path, write_path=write_path,
+            self.fitnessPopulationSkipV2(individuals=population,game_path=game_path, write_path=write_path,
                                        read_path=read_path, max_evaluated=worst_evaluated)
         self.selection = self.selectionTournament
         self.cross = self.crossMaintainCommon
         self.mutation = [ self.mutationBlockType,
                           self.mutationBlockRotation,
                           self.mutationBlockPositionX,
-                          self.mutationBlockPositionY]
+                          self.mutationBlockPositionY,
+                          self.mutationBlockMaterial]
         self.replacement = self.elitistReplacement
 
     def initEvolution(self, population_size, initialization_method, fitness_params ):
@@ -136,9 +137,10 @@ class Evolution:
             block_i = random.randint(0, len(indv_mut.blocks()) - 1)
             block = BlockGene(type=indv_mut.blocks()[block_i].type,
                               pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].y),
-                              r=indv_mut.blocks()[block_i].rot)
+                              r=indv_mut.blocks()[block_i].rot, m = indv_mut.blocks()[block_i].mat)
             block.x = block.x+random.choice([random.uniform(-1,-0.01),random.uniform(0.01,1)])
-
+            block.x = block.x if block.x < MAX_X else MAX_X
+            block.x = block.x if block.x > MIN_X else MIN_X
             indv_mut.updateBlock(block_i,block)
 
     def mutationBlockPositionY(self, individuals, percentage_mutations):
@@ -148,9 +150,10 @@ class Evolution:
             block_i = random.randint(0, len(indv_mut.blocks()) - 1)
             block = BlockGene(type=indv_mut.blocks()[block_i].type,
                               pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].y),
-                              r=indv_mut.blocks()[block_i].rot)
+                              r=indv_mut.blocks()[block_i].rot,m = indv_mut.blocks()[block_i].mat)
             block.y = block.y+random.choice([random.uniform(-1,-0.01),random.uniform(0.01,1)])
-
+            block.y = block.y if block.y < MAX_Y else MAX_Y
+            block.y = block.y if block.y > MIN_Y else MIN_Y
             indv_mut.updateBlock(block_i,block)
 
     def mutationBlockRotation(self, individuals, percentage_mutations):
@@ -160,8 +163,20 @@ class Evolution:
             block_i = random.randint(0, len(indv_mut.blocks()) - 1)
             block = BlockGene(type=indv_mut.blocks()[block_i].type,
                               pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].y),
-                              r=indv_mut.blocks()[block_i].rot)
+                              r=indv_mut.blocks()[block_i].rot, m = indv_mut.blocks()[block_i].mat)
             block.rot = (block.rot+random.choice([-1, 1]))%len(ROTATION)
+
+            indv_mut.updateBlock(block_i,block)
+
+    def mutationBlockMaterial(self, individuals, percentage_mutations):
+        """ Mutates a percentage of individuals by changing the material of one of their blocks"""
+        sample = random.sample(individuals,min(math.floor(len(individuals)*percentage_mutations), len(individuals)))
+        for indv_mut in sample:
+            block_i = random.randint(0, len(indv_mut.blocks()) - 1)
+            block = BlockGene(type=indv_mut.blocks()[block_i].type,
+                              pos=(indv_mut.blocks()[block_i].x, indv_mut.blocks()[block_i].y),
+                              r=indv_mut.blocks()[block_i].rot, m = indv_mut.blocks()[block_i].mat)
+            block.mat = random.randint(0, len(MATERIALS)-1)
 
             indv_mut.updateBlock(block_i,block)
 
@@ -205,6 +220,43 @@ class Evolution:
             else:
                 individuals[i].base_fitness = -1  # mark in game evaluated levels
 
+        return max_evaluated
+
+    def fitnessPopulationSkipV2(self,individuals, game_path, write_path, read_path, max_evaluated):
+        """ Computes the fitness value for the individuals. It launches the simulation but skips levels with penalty """
+        fill = len(str(len(individuals)))
+        evaluated = []
+        # generate xml for all potentially suitable levels
+        for i in range(len(individuals)):
+            individuals[i].calculatePreFitnessV2()
+            if individuals[i].fitness == 0:
+                xml.writePlain(individuals[i],
+                             os.path.join(write_path, "level_raw_" + str(i).zfill(fill) + ".txt"))
+                evaluated.append(i)
+
+        for i in evaluated:  
+            proc = subprocess.Popen([game_path, os.path.join(write_path, "level_raw_" + str(i).zfill(fill) + ".txt")], stdout = subprocess.PIPE)
+            average_velocity = []
+            # parse all files and update worst value obtained by in game evaluation
+            while True:
+                line = proc.stdout.readline()
+                if line:
+                    #print(repr(line))
+                    average_velocity.append(float(line))
+                else:
+                    break
+            individuals[i].calculateFitnessV2(average_velocity)
+            #individuals[i].fitness += individuals[i].totalSpaceY() * individuals[i]._distance_penalty
+            max_evaluated = max(individuals[i].fitness, max_evaluated)
+
+        for i in range(len(individuals)):
+            if i not in evaluated:
+                individuals[i].base_fitness = max_evaluated
+                individuals[i].fitness += max_evaluated
+            else:
+                individuals[i].base_fitness = -1  # mark in game evaluated levels
+
+            
         return max_evaluated
 
 def informationEntropy(population, prec):

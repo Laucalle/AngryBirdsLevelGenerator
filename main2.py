@@ -23,7 +23,8 @@ def main():
     number_of_mutations = [[config_param['percent_of_mutations_type']],
                            [config_param['percent_of_mutations_rotation']],
                            [config_param['percent_of_mutations_x']],
-                           [config_param['percent_of_mutations_y']]]
+                           [config_param['percent_of_mutations_y']],
+                           [config_param['percent_of_mutations_mat']]]
     ea.MAX_B = config_param['max_blocks']
     ea.MIN_B = config_param['min_blocks']
 
@@ -38,7 +39,7 @@ def main():
 
     worst_evaluated = 0
     worst_evaluated = evolution.initEvolution(population_size= population_size,
-                                            initialization_method=ea.LevelIndividual.initDiscrete,
+                                            initialization_method=ea.LevelIndividual.initPreMadeDiscrete,
                                             fitness_params=[worst_evaluated])
 
     cleanDirectory(write_path)

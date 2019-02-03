@@ -1,7 +1,26 @@
 from math import floor
+import copy
 from AngryBirdsGA import *
 import AngryBirdsGA.SeparatingAxisTheorem as SAT
 from AngryBirdsGA.BlockGene import BlockGene
+
+
+PREFIXED_INIT = [[BlockGene(type=7,pos=((MIN_X+MAX_X)/2,     MIN_Y+0.11),r=0),
+                  BlockGene(type=7,pos=((MIN_X+MAX_X)/2,     MIN_Y+2.39),r=0),
+                  BlockGene(type=7,pos=((MIN_X+MAX_X)/2-0.92,MIN_Y+1.23),r=2),
+                  BlockGene(type=7,pos=((MIN_X+MAX_X)/2+0.92,MIN_Y+1.23),r=2)],
+                 [BlockGene(type=7,pos=((MIN_X+MAX_X)/2,     MIN_Y+2.17),r=0),
+                  BlockGene(type=7,pos=((MIN_X+MAX_X)/2-0.92,MIN_Y+1.06),r=2),
+                  BlockGene(type=7,pos=((MIN_X+MAX_X)/2+0.92,MIN_Y+1.06),r=2),
+                  BlockGene(type=7,pos=((MIN_X+MAX_X)/2,     MIN_Y+1.06),r=2)],
+                 [BlockGene(type=7,pos=((MIN_X+MAX_X)/2,     MIN_Y+2.17),r=0),
+                  BlockGene(type=7,pos=((MIN_X+MAX_X)/2-0.92,MIN_Y+1.06),r=2),
+                  BlockGene(type=7,pos=((MIN_X+MAX_X)/2+0.92,MIN_Y+1.06),r=2)],
+                 [BlockGene(type=7,pos=((MIN_X+MAX_X)/2+0.73,MIN_Y+1.23),r=2),
+                  BlockGene(type=7,pos=((MIN_X+MAX_X)/2-0.73,MIN_Y+1.23),r=2),
+                  BlockGene(type=6,pos=((MIN_X+MAX_X)/2,     MIN_Y+0.11),r=0),
+                  BlockGene(type=6,pos=((MIN_X+MAX_X)/2,     MIN_Y+2.39),r=0)],
+                ]
 
 class LevelIndividual:
 
@@ -20,7 +39,7 @@ class LevelIndividual:
         """ Returns a randomly initialized BlockGene """
         return BlockGene(type=Random.randint(1, len(BLOCKS) - 1),
                          pos=(Random.uniform(MIN_X, MAX_X), Random.uniform(MIN_Y, MAX_Y)),
-                         r=Random.randint(0, len(ROTATION) - 1))
+                         r=Random.randint(0, len(ROTATION) - 1), m=Random.randint(0, len(MATERIALS) - 1))
 
     def _initDiscreteBlock(self):
         """ Returns a randomly initialized BlockGene positioned in the grid given by the smallest Block size """
@@ -30,7 +49,7 @@ class LevelIndividual:
         y = Random.randint(0, ny)
         return BlockGene(type = Random.randint(1, len(BLOCKS)-1),
                          pos = (MIN_X + SMALLEST_STEP * x, MIN_Y + SMALLEST_STEP * y),
-                         r = Random.randint(0, len(ROTATION) - 1))
+                         r = Random.randint(0, len(ROTATION) - 1), m=Random.randint(0, len(MATERIALS) - 1))
 
     def initRandom(self, n_blocks):
         """ Populates the list of BlockGene with n_blocks random blocks """
@@ -51,6 +70,20 @@ class LevelIndividual:
         for n in range(n_blocks):
             block = self._initDiscreteBlock()
             self.appendBlock(block)
+        return self
+
+    def initPreMadeDiscrete(self,n_blocks):
+        """ Populates the list of BlockGene with 1 prefixed block and n_blocks -1  random blocks using _initDiscreteBlock """
+        prebuilt = PREFIXED_INIT[Random.randint(0,len(PREFIXED_INIT))]
+        for b in prebuilt:
+            block = copy.deepcopy(b)
+            block.mat = Random.randint(0, len(MATERIALS) - 1)
+            self.appendBlock(block)
+        
+        n_blocks-=len(prebuilt)
+        if n_blocks > 0:
+            self.initDiscrete(n_blocks)
+        
         return self
 
     def initDiscreteNoOverlapping(self,n_blocks):
@@ -99,10 +132,21 @@ class LevelIndividual:
         else:
             self.fitness =  self._broken_blocks_penalty*(len(self._blocks))
 
+    def calculateFitnessV2(self, avg_vel):
+        """ Computes the fitness value given a list of average velocities as the higher value"""
+        # This doesn't take into account pigs, since they are added later
+        self.fitness = max(avg_vel)
+
     def calculatePreFitness(self):
         """ Computes the penalty. It is formed by overlapping blocks and distance to the ground penalization """
         self.fitness = self._overlapping_penalty * self.numberOverlappingBlocks()
         min_y = self.distanceToGround()
+        self.fitness+= (self._distance_penalty * min_y) if min_y > self._distance_threshold else 0
+
+    def calculatePreFitnessV2(self):
+        """ Computes the penalty. It is formed by overlapping blocks and distance to the ground penalization """
+        self.fitness = self._overlapping_penalty * self.numberOverlappingBlocks()
+        min_y = self.distanceToGround() + self.totalSpaceY()
         self.fitness+= (self._distance_penalty * min_y) if min_y > self._distance_threshold else 0
 
     def updateBaseFitness(self, new_base):
@@ -136,6 +180,28 @@ class LevelIndividual:
     def distanceToGround(self):
         """ Returns the distance to the ground of the lowest block in the list of BlockGene """
         return abs(ABSOLUTE_GROUND - min(self._blocks, key=lambda b: b.y).y)
+
+    def totalSpaceY(self):
+        point = self.distanceToGround()
+        total = 0
+        segments = []
+        for b in self._blocks:
+            init, end = SAT.projectOntoAxis(b.corners(), SAT.axes[0])
+            segments.append([init,end])
+
+        segments.append([MAX_Y,MIN_Y])
+        segments.sort()
+        for s in segments:
+            if s[0] == MAX_Y:
+                total += abs(s[0]-point)
+                break
+            if point < s[0]:
+                total += abs(s[0]-point)
+                point = s[1]
+            elif point < s[1]:
+                point = s[1]
+
+        return total
 
     def toString(self):
         return '\nFITNESS '+str(self.fitness)+'( base '+str(self.base_fitness)+')\n'#+strblocks

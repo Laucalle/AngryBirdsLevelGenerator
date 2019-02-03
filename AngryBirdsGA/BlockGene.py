@@ -4,12 +4,12 @@ import numpy as np
 
 
 class BlockGene:
-    def __init__(self, type, pos, r):
+    def __init__(self, type, pos, r, m=0):
         self.type = type
         self.x = pos[0]
         self.y = pos[1]
         self.rot = r
-        self.mat = 0
+        self.mat = m
         self._corners = None
 
     def __eq__(self, other):

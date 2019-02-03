@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?><Level width="2">
+<Camera x="0" y="0" minWidth="20" maxWidth="25"  />
+<Birds>
+<Bird type="BirdRed" />
+<Bird type="BirdBlack" />
+<Bird type="BirdWhite" />
+</Birds>
+<Slingshot x="-5" y="-2.5" />
+<GameObjects>
+<Block type="RectBig" material="wood" x="4.251352339393203" y="-0.3804464934736088" rotation="90" id="0"/>
+<Block type="RectFat" material="wood" x="4.939003661343607" y="-3.3" rotation="90" id="1"/>
+<Block type="RectFat" material="wood" x="4.939003661343607" y="-3.3" rotation="90" id="2"/>
+<Block type="RectBig" material="wood" x="3.460535878508791" y="1.1090389140597923" rotation="45" id="3"/>
+<Block type="SquareSmall" material="wood" x="1.4433339137667858" y="-3.3" rotation="0" id="4"/>
+<Block type="SquareSmall" material="wood" x="1.4433339137667858" y="-2.3215797055037695" rotation="0" id="5"/>
+<Block type="RectFat" material="wood" x="4.939003661343607" y="-2.4322232242172412" rotation="90" id="6"/>
+<Block type="SquareSmall" material="wood" x="3.43814991838594" y="-3.1942814311431844" rotation="135" id="7"/>
+<Block type="SquareSmall" material="wood" x="0.63" y="-3.3" rotation="45" id="8"/>
+<Block type="RectBig" material="wood" x="4.368038068437469" y="-2.4944840488478173" rotation="90" id="9"/>
+<Block type="RectTiny" material="wood" x="1.05" y="-3.3" rotation="90" id="10"/>
+<Block type="RectTiny" material="wood" x="4.100346684742551" y="-3.3" rotation="90" id="11"/>
+<Block type="RectBig" material="wood" x="2.94" y="-2.897976892162603" rotation="90" id="12"/>
+<Block type="RectFat" material="wood" x="2.4523117455797427" y="-3.3" rotation="90" id="13"/>
+<Block type="RectTiny" material="wood" x="0" y="-3.3" rotation="90" id="14"/>
+<Block type="SquareSmall" material="wood" x="1.4433339137667858" y="-2.8246521053403417" rotation="0" id="15"/>
+</GameObjects>
+
+</Level>
