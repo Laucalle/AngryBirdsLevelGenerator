@@ -47,7 +47,7 @@ def main():
     log_object = {}
     fill = len(str(number_of_generations))
     same_generation_strike = 0
-    last_generation_worst = None
+    last_generation_entropy = None
     for generation in range(number_of_generations):
         population, max_evaluated = evolution.runGeneration(fitness_params=[worst_evaluated],
                                                             mutation_params=number_of_mutations,
@@ -55,22 +55,24 @@ def main():
                                                             replacement_params=[population_size])
         cleanDirectory(write_path)
         cleanDirectory(read_path)
+        entropy = ea.informationEntropy(population, 4)
         log_object[str(generation).zfill(fill)] = {
-            "entropy" : ea.informationEntropy(population, 4),
+            "entropy" : entropy,
             "best" : population[0].fitness,
             "avg" : (sum(map(lambda x: x.fitness, population)) / len(population)),
             "worst" : max(population, key=lambda x: x.fitness).fitness
         }
         print(log_object[str(generation).zfill(fill)])
         #print("best --> base " + str(population[0].base_fitness) + " overlapping " + str(population[0].n_overlapping) + " fit " + str(population[0].fitness) + "\n")
-        if max(population, key=lambda x: x.fitness).fitness == last_generation_worst:
+        if max(population, key=lambda x: x.fitness).fitness == last_generation_entropy:
             same_generation_strike+=1
         else:
             same_generation_strike = 0
-        if same_generation_strike>10 or population[0].fitness < 0.01:
+        if same_generation_strike>(number_of_generations*0.3) or population[0].fitness < 0.01:
             break
 
-        last_generation_worst = max(population, key=lambda x: x.fitness).fitness
+        last_generation_entropy = entropy
+        #max(population, key=lambda x: x.fitness).fitness
         #xml.writeXML(population[0], os.path.join(project_root, log_path + "/level-0-"+ log_base_name  +
         #                                             timestamp.strftime("%y%m%d_%H%M%S") + ".xml"))
     end = time.time()

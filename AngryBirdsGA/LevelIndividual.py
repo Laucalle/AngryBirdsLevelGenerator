@@ -135,7 +135,10 @@ class LevelIndividual:
     def calculateFitnessV2(self, avg_vel):
         """ Computes the fitness value given a list of average velocities as the higher value"""
         # This doesn't take into account pigs, since they are added later
-        self.fitness = max(avg_vel)
+        if len(avg_vel)!=0 :
+            self.fitness = max(avg_vel) + self._broken_blocks_penalty*(len(self._blocks)-len(avg_vel))
+        else:
+            self.fitness =  self._broken_blocks_penalty*(len(self._blocks))
 
     def calculatePreFitness(self):
         """ Computes the penalty. It is formed by overlapping blocks and distance to the ground penalization """

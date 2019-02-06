@@ -1,5 +1,5 @@
 {
-"population_size": 100,
+"population_size": 500,
 "number_of_generations" : 1000,
 "percent_of_parents" : 0.5,
 "percent_of_mutations_type" : 0.5,
@@ -13,5 +13,5 @@
 "write_path": "AngryBirdsLevelGenerator/temp_levels",
 "read_path": "AngryBirdsLevelGenerator/temp_levels",
 "log_dir": "logs",
-"log_base_name": "_sim_second_"
+"log_base_name": "_sim_sixth_"
 }

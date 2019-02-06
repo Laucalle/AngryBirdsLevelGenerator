@@ -96,9 +96,11 @@ def main():
 
     for file_name in os.listdir("./logs"):
         #if file_name.endswith(".json") and file_name.startswith("base") and not file_name.startswith("base_large"):
-        if file_name.endswith(".json") and file_name.startswith("base_large"):
-        #if file_name.endswith(".json") and file_name.startswith("second") and not file_name.startswith("second_crossover_min"):
-        #if file_name.endswith(".json") and file_name.startswith("second_crossover_min"):
+        #if file_name.endswith(".json") and file_name.startswith("base_large"):
+        #if file_name.endswith(".json") and file_name.startswith("second_crossover_1") and not file_name.startswith("second_crossover_min"):
+        if file_name.endswith(".json") and file_name.startswith("second_crossover_min"):
+        #if file_name.endswith(".json") and file_name.startswith("_sim_full"):
+        #if file_name.endswith(".json") and file_name.startswith("_sim_sixth"):
 
             #print(file_name)
             file = open(os.path.join("./logs", file_name), "r")
@@ -123,7 +125,13 @@ def main():
     g =(sum(max_gen)/len(max_gen))
 
 
-    print(g) 
+
+
+    print("time  "+str(t)+ "("+str(st.stdev(times))+")") 
+    print("best  "+str(b)+ "("+str(st.stdev(best))+")") 
+    print("avg   "+str(a)+ "("+str(st.stdev(avg))+")") 
+    print("worst "+str(w)+ "("+str(st.stdev(worst))+")") 
+    print("ngen  "+str(g)+ "("+str(st.stdev(max_gen))+")") 
     
     #scatterPlot(max_gen, best, "Number of Generations versus fitness of the solution")
 
@@ -131,28 +139,28 @@ def main():
     #plotEvolutionWithSummary([x for x in line_data if len(x)< g], "Evolution of the worst individual over generations")
     #plotEvolution([x for x in line_data if len(x)< g/2], "Evolution of the worst individual over generations")
     
-    plt.style.use('seaborn-darkgrid')
-    n, bins, patches =plt.hist(max_gen, bins=[0, 50,150,800])
-    print(n)
-    print(bins)
-    print(patches)
-    plt.show()
-    for i in range(1,len(bins)):
-        plotdata = [x for x in line_data if bins[i-1]<len(x)< bins[i]]
-        if len(plotdata) is not 0:
-            if i == 3 :
-                plt.subplot2grid( (2,2),(1,0),colspan = 2)
-                plt.xlabel("Generation")
-                plt.ylabel("Best fitness")
-    
-            if i == 1:
-                plt.ylabel("Best fitness")
-                plt.subplot2grid( (2,2),(0,0))
-            if i == 2:
-                plt.subplot2grid( (2,2),(0,1))
-            plt.ylim(-10,610)
-            plotEvolution(plotdata, str(len(plotdata))+" runs, max "+ str(bins[i-1])+ " - " +str(bins[i]))
-    plt.show()
+    #plt.style.use('seaborn-darkgrid')
+    #n, bins, patches =plt.hist(max_gen, bins=[0, 50,150,800])
+    #print(n)
+    #print(bins)
+    #print(patches)
+    #plt.show()
+    #for i in range(1,len(bins)):
+    #    plotdata = [x for x in line_data if bins[i-1]<len(x)< bins[i]]
+    #    if len(plotdata) is not 0:
+    #        if i == 3 :
+    #            plt.subplot2grid( (2,2),(1,0),colspan = 2)
+    #            plt.xlabel("Generation")
+    #            plt.ylabel("Best fitness")
+    #
+    #        if i == 1:
+    #            plt.ylabel("Best fitness")
+    #            plt.subplot2grid( (2,2),(0,0))
+    #        if i == 2:
+    #            plt.subplot2grid( (2,2),(0,1))
+    #        plt.ylim(-10,610)
+    #        plotEvolution(plotdata, str(len(plotdata))+" runs, max "+ str(bins[i-1])+ " - " +str(bins[i]))
+    #plt.show()
 
 
     #print("std of best" + str(st.stdev(best)) )
@@ -196,4 +204,4 @@ def  stages_graph():
 
 
 if __name__ == '__main__':
-    stages_graph()
+    main()
