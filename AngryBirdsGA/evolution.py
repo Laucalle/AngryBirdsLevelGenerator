@@ -14,7 +14,7 @@ class Evolution:
     def __init__(self, game_path, write_path, read_path):
         self.population = []
         self.fitness = lambda population, worst_evaluated: \
-            self.fitnessPopulationSkipV2(individuals=population,game_path=game_path, write_path=write_path,
+            self.fitnessPopulationSkip(individuals=population,game_path=game_path, write_path=write_path,
                                        read_path=read_path, max_evaluated=worst_evaluated)
         self.selection = self.selectionTournament
         self.cross = self.crossMaintainCommon

@@ -39,7 +39,7 @@ def main():
 
     worst_evaluated = 0
     worst_evaluated = evolution.initEvolution(population_size= population_size,
-                                            initialization_method=ea.LevelIndividual.initPreMadeDiscrete,
+                                            initialization_method=ea.LevelIndividual.initDiscrete,
                                             fitness_params=[worst_evaluated])
 
     cleanDirectory(write_path)
